@@ -3,32 +3,36 @@ name: Deploy Hugo site to GitHub Pages
 on:
   push:
     branches:
-      - main  # 当 main 分支有 push 时触发
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout source
-      uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          submodules: true  # 如果你用主题子模块，确保拉下来
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: 'latest'
-        extended: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
 
-    - name: Build site
-      run: hugo --minify
-    - name: Show git status
-      run: |
-        git status
-        git remote -v
+      - name: Build site
+        run: hugo --minify
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
-        publish_branch: gh-pages
+      - name: Show git status and remote
+        run: |
+          git status
+          git remote -v
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          force_orphan: true      # 强制用全新孤儿分支，避免冲突
