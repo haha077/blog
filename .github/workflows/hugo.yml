@@ -21,6 +21,10 @@ jobs:
 
     - name: Build site
       run: hugo --minify
+    - name: Show git status
+      run: |
+        git status
+        git remote -v
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
