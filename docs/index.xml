@@ -6,8 +6,15 @@
     <description>Recent content on blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 01 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Jul 2025 04:06:44 -0400</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo&#43;github搭建自己的blog</title>
+      <link>https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/</link>
+      <pubDate>Tue, 01 Jul 2025 04:06:44 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/</guid>
+      <description>&lt;p&gt;在debian上安装&lt;/p&gt;&#xA;&lt;p&gt;wget &lt;a href=&#34;https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz&#34;&gt;https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz&lt;/a&gt;&#xA;tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz&lt;/p&gt;&#xA;&lt;p&gt;sudo mv hugo /usr/local/bin/&lt;/p&gt;&#xA;&lt;p&gt;hugo version&lt;/p&gt;&#xA;&lt;p&gt;初始化&lt;/p&gt;&#xA;&lt;p&gt;hugo new site blog&#xA;cd blog&lt;/p&gt;&#xA;&lt;p&gt;去hugo官网找一个自己喜欢的theme，然后安装&lt;/p&gt;&#xA;&lt;p&gt;git init  # 如果还没 git init&#xA;git submodule add &lt;a href=&#34;https://github.com/knadh/hugo-ink.git&#34;&gt;https://github.com/knadh/hugo-ink.git&lt;/a&gt; themes/ink&lt;/p&gt;&#xA;&lt;p&gt;配置主题hugo.toml文件&lt;/p&gt;&#xA;&lt;p&gt;baseURL = &amp;ldquo;&lt;a href=&#34;https://haha077.github.io/blog/%22&#34;&gt;https://haha077.github.io/blog/&amp;quot;&lt;/a&gt;&#xA;title = &amp;ldquo;我的博客&amp;rdquo;&#xA;theme = &amp;ldquo;ink&amp;rdquo;&#xA;languageCode = &amp;ldquo;zh-cn&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;paginate = 10&lt;/p&gt;&#xA;&lt;p&gt;[params]&#xA;subtitle = &amp;ldquo;一个极简 Hugo 博客&amp;rdquo;&#xA;author = &amp;ldquo;haha077&amp;rdquo;&#xA;mode = &amp;ldquo;dark&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;写文章&lt;/p&gt;&#xA;&lt;p&gt;hugo new posts/hello.md&lt;/p&gt;&#xA;&lt;p&gt;编辑生成的文件 &lt;code&gt;content/posts/hello.md&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;本地局域网预览写好的文章&lt;/p&gt;&#xA;&lt;p&gt;hugo server -D &amp;ndash;bind 192.168.x.x &amp;ndash;baseURL &lt;a href=&#34;http://192.168.x.x:1313/&#34;&gt;http://192.168.x.x:1313/&lt;/a&gt; &amp;ndash;appendPort=false&lt;/p&gt;</description>
+    </item>
     <item>
       <title>TWRP 模式下无法充电</title>
       <link>https://haha077.github.io/blog/posts/twrp%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%97%A0%E6%B3%95%E5%85%85%E7%94%B5/</link>
