@@ -1,0 +1,11 @@
+baseURL = "https://haha077.github.io/blog/"
+title = "blog"
+theme = "ink"
+languageCode = "zh-cn"
+[pagination]
+  pagerSize = 10
+
+[params]
+  subtitle = "haha's technical blog"
+  author = "haha077"
+  mode = "auto"  # 可选: light / dark / auto

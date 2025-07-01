@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog</title>
+    <link>https://haha077.github.io/blog/</link>
+    <description>Recent content on blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 01 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://haha077.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TWRP 模式下无法充电</title>
+      <link>https://haha077.github.io/blog/posts/twrp%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%97%A0%E6%B3%95%E5%85%85%E7%94%B5/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://haha077.github.io/blog/posts/twrp%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%97%A0%E6%B3%95%E5%85%85%E7%94%B5/</guid>
+      <description>&lt;p&gt;nexus5x下亲测twrp模式下无法充电&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
