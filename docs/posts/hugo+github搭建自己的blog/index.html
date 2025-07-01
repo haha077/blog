@@ -24,7 +24,7 @@ hugo new posts/hello.md
 hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
   <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
-  <meta itemprop="wordCount" content="323"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
+  <meta itemprop="wordCount" content="478"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
   <meta property="og:site_name" content="blog">
   <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
   <meta property="og:description" content="在debian上安装
@@ -318,6 +318,124 @@ git push
 <h2 id="-几分钟后访问你的博客">✅ 几分钟后访问你的博客：</h2>
 <p>👉 <a href="https://haha077.github.io/blog/">https://haha077.github.io/blog/</a></p>
 <p>即可看到刚发布的文章！</p>
+<p>快速在另外一台，比如Windows电脑上同步hugo项目，写blog</p>
+<h2 id="-一次性准备步骤在新电脑上操作">✅ 一次性准备步骤（在新电脑上操作）</h2>
+<h3 id="step-1安装-hugo">Step 1：安装 Hugo</h3>
+<ol>
+<li>下载 Hugo 可执行文件：
+👉 <a href="https://github.com/gohugoio/hugo/releases">https://github.com/gohugoio/hugo/releases</a></li>
+<li>选择 <code>hugo_extended_X.X.X_windows-amd64.zip</code>（不要选不带 extended 的）</li>
+<li>解压后，把 <code>hugo.exe</code> 放入任意路径（建议加入系统环境变量）</li>
+<li>打开命令行（CMD / PowerShell），验证安装：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo version
+</code></pre><hr>
+<h3 id="step-2安装-git如未安装">Step 2：安装 Git（如未安装）</h3>
+<p>👉 <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
+<hr>
+<h3 id="step-3克隆你的博客仓库">Step 3：克隆你的博客仓库</h3>
+<p>打开 PowerShell 或 CMD，执行：</p>
+<pre tabindex="0"><code>bash复制代码git clone https://github.com/haha077/blog.git
+cd blog
+</code></pre><blockquote>
+<p>📦 这一步会下载你博客的全部源码（含 <code>docs/</code> 输出目录）</p></blockquote>
+<hr>
+<h2 id="-每次写博客时的流程可复用">✅ 每次写博客时的流程（可复用）</h2>
+<ol>
+<li>进入博客目录：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+cd blog
+</code></pre><ol>
+<li>创建新文章：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo new posts/你的文章标题.md
+</code></pre><ol>
+<li>编辑文章（可用 VSCode、Notepad++、Typora 等 Markdown 工具）</li>
+</ol>
+<p>文件在：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+content/posts/你的文章标题.md
+</code></pre><ol>
+<li>构建站点：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo
+</code></pre><p>这会输出到 <code>docs/</code> 文件夹</p>
+<ol>
+<li>推送到 GitHub：</li>
+</ol>
+<pre tabindex="0"><code>bash复制代码git add .
+git commit -m &#34;新增文章：XXX&#34;
+git push
+</code></pre><ol>
+<li>等几分钟，访问博客查看：</li>
+</ol>
+<p>👉 <code>https://haha077.github.io/blog/</code></p>
+<p>写好的文章，如需要修改，操作如下：</p>
+<p>你可以像编辑本地文档一样修改已发布的 Hugo 博客文章，<strong>操作流程非常简单</strong>：</p>
+<hr>
+<h2 id="-修改已发布文章的完整流程">✅ 修改已发布文章的完整流程</h2>
+<h3 id="-打开你博客的本地项目目录">① 打开你博客的本地项目目录</h3>
+<p>例如：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+cd ~/blog
+</code></pre><p>或在 Windows 上双击打开你的 <code>blog/</code> 文件夹。</p>
+<hr>
+<h3 id="-找到你要修改的文章文件">② 找到你要修改的文章文件</h3>
+<p>路径通常是：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+content/posts/xxx.md
+</code></pre><p>例如你要修改这篇文章：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+content/posts/twrp无法充电.md
+</code></pre><hr>
+<h3 id="-修改-markdown-内容">③ 修改 Markdown 内容</h3>
+<p>用你喜欢的编辑器打开修改（例如：VSCode、Typora、Notepad++ 等）
+修改完成后保存。</p>
+<hr>
+<h3 id="-重新生成静态网页">④ 重新生成静态网页</h3>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo
+</code></pre><p>这一步会把新内容重新输出到 <code>docs/</code>（如果你使用的是 <code>publishDir = &quot;docs&quot;</code> 模式）</p>
+<hr>
+<h3 id="-推送到-github-发布">⑤ 推送到 GitHub 发布</h3>
+<pre tabindex="0"><code>bash复制代码
+git add .
+git commit -m &#34;修改文章：TWRP 无法充电&#34;
+git push
+</code></pre><p>几分钟后，GitHub Pages 会自动刷新部署，浏览器访问：</p>
+<p>👉 <code>https://haha077.github.io/blog/posts/twrp无法充电/</code></p>
+<p>即可看到修改后的内容！</p>
 
 			</div>
 

@@ -296,3 +296,192 @@ git push
 👉 https://haha077.github.io/blog/
 
 即可看到刚发布的文章！
+
+
+
+快速在另外一台，比如Windows电脑上同步hugo项目，写blog
+
+## ✅ 一次性准备步骤（在新电脑上操作）
+
+### Step 1：安装 Hugo
+
+1. 下载 Hugo 可执行文件：
+    👉 https://github.com/gohugoio/hugo/releases
+2. 选择 `hugo_extended_X.X.X_windows-amd64.zip`（不要选不带 extended 的）
+3. 解压后，把 `hugo.exe` 放入任意路径（建议加入系统环境变量）
+4. 打开命令行（CMD / PowerShell），验证安装：
+
+```
+bash
+
+
+复制代码
+hugo version
+```
+
+------
+
+### Step 2：安装 Git（如未安装）
+
+👉 https://git-scm.com/download/win
+
+------
+
+### Step 3：克隆你的博客仓库
+
+打开 PowerShell 或 CMD，执行：
+
+```
+bash复制代码git clone https://github.com/haha077/blog.git
+cd blog
+```
+
+> 📦 这一步会下载你博客的全部源码（含 `docs/` 输出目录）
+
+------
+
+## ✅ 每次写博客时的流程（可复用）
+
+1. 进入博客目录：
+
+```
+bash
+
+
+复制代码
+cd blog
+```
+
+1. 创建新文章：
+
+```
+bash
+
+
+复制代码
+hugo new posts/你的文章标题.md
+```
+
+1. 编辑文章（可用 VSCode、Notepad++、Typora 等 Markdown 工具）
+
+文件在：
+
+```
+bash
+
+
+复制代码
+content/posts/你的文章标题.md
+```
+
+1. 构建站点：
+
+```
+bash
+
+
+复制代码
+hugo
+```
+
+这会输出到 `docs/` 文件夹
+
+1. 推送到 GitHub：
+
+```
+bash复制代码git add .
+git commit -m "新增文章：XXX"
+git push
+```
+
+1. 等几分钟，访问博客查看：
+
+👉 `https://haha077.github.io/blog/`
+
+
+
+
+
+写好的文章，如需要修改，操作如下：
+
+你可以像编辑本地文档一样修改已发布的 Hugo 博客文章，**操作流程非常简单**：
+
+------
+
+## ✅ 修改已发布文章的完整流程
+
+### ① 打开你博客的本地项目目录
+
+例如：
+
+```
+bash
+
+
+复制代码
+cd ~/blog
+```
+
+或在 Windows 上双击打开你的 `blog/` 文件夹。
+
+------
+
+### ② 找到你要修改的文章文件
+
+路径通常是：
+
+```
+bash
+
+
+复制代码
+content/posts/xxx.md
+```
+
+例如你要修改这篇文章：
+
+```
+bash
+
+
+复制代码
+content/posts/twrp无法充电.md
+```
+
+------
+
+### ③ 修改 Markdown 内容
+
+用你喜欢的编辑器打开修改（例如：VSCode、Typora、Notepad++ 等）
+ 修改完成后保存。
+
+------
+
+### ④ 重新生成静态网页
+
+```
+bash
+
+
+复制代码
+hugo
+```
+
+这一步会把新内容重新输出到 `docs/`（如果你使用的是 `publishDir = "docs"` 模式）
+
+------
+
+### ⑤ 推送到 GitHub 发布
+
+```
+bash复制代码
+git add .
+git commit -m "修改文章：TWRP 无法充电"
+git push
+```
+
+几分钟后，GitHub Pages 会自动刷新部署，浏览器访问：
+
+👉 `https://haha077.github.io/blog/posts/twrp无法充电/`
+
+即可看到修改后的内容！
