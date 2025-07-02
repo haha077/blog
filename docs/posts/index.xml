@@ -6,8 +6,15 @@
     <description>Recent content in Posts on blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 01 Jul 2025 04:06:44 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 02 Jul 2025 00:01:45 -0400</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux系统开启ssh</title>
+      <link>https://haha077.github.io/blog/posts/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%90%AFssh/</link>
+      <pubDate>Wed, 02 Jul 2025 00:01:45 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%90%AFssh/</guid>
+      <description>&lt;p&gt;如果提示访问被拒绝&lt;/p&gt;&#xA;&lt;p&gt;sudo nano /etc/ssh/sshd_config&lt;/p&gt;&#xA;&lt;p&gt;确保以下几项&lt;/p&gt;&#xA;&lt;p&gt;PubkeyAuthentication yes   # 允许公钥认证（默认开启）&#xA;PasswordAuthentication yes  # 允许密码登录（必须设为 yes）&#xA;ChallengeResponseAuthentication yes  # 允许交互式认证（可选）&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Hugo&#43;github搭建自己的blog</title>
       <link>https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/</link>
