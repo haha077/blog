@@ -389,7 +389,7 @@ hugo
 1. 推送到 GitHub：
 
 ```
-bash复制代码git add .
+git add .
 git commit -m "新增文章：XXX"
 git push
 ```
