@@ -1,11 +1,9 @@
----
++++
+date = '2025-07-03T04:27:59-04:00'
+draft = flase
+title = 'nic.eu.org注册域名与绑定cloudflare dns解析'
 
-title: "TWRP 模式下无法充电"
-date: 2025-07-01
-
----
-
-
++++
 
 1：注册账号
 
