@@ -6,8 +6,15 @@
     <description>Recent content on blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 02 Jul 2025 00:01:45 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 03 Jul 2025 04:27:59 -0400</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nic.eu.org注册域名与绑定cloudflare dns解析</title>
+      <link>https://haha077.github.io/blog/posts/nic.eu.org%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D%E4%B8%8E%E7%BB%91%E5%AE%9Acloudflare-dns%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Thu, 03 Jul 2025 04:27:59 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/nic.eu.org%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D%E4%B8%8E%E7%BB%91%E5%AE%9Acloudflare-dns%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;p&gt;1：注册账号&lt;/p&gt;&#xA;&lt;p&gt;2：登录，左上角new domain进入注册域名&lt;/p&gt;&#xA;&lt;p&gt;3：&lt;img src=&#34;C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20250703152231793.png&#34; alt=&#34;image-20250703152231793&#34;&gt;填入自己需要的，点击回车确认是否被注册&lt;/p&gt;&#xA;&lt;p&gt;4：添加ns服务器&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://am.zdmimg.com/202308/27/64eb5aef2743f81.png_e1080.jpg&#34; alt=&#34;免费申请注册eu.org二级域名&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;登录cloudflare，把刚才那个需要注册的域名添加到cf的站点上，把cf的ns服务器填写到https://nic.eu.org/的name1和name2那里，然后可以提交submit注册了，像下面这样就是提交成功的&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20250703151231291.png&#34; alt=&#34;image-20250703151231291&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;5：接下来就是耐心等待cf的邮件确认和nic的审核。通常nic审核会比较久……&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Linux系统开启ssh</title>
       <link>https://haha077.github.io/blog/posts/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%90%AFssh/</link>
@@ -21,13 +28,6 @@
       <pubDate>Tue, 01 Jul 2025 04:06:44 -0400</pubDate>
       <guid>https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/</guid>
       <description>&lt;p&gt;在debian上安装&lt;/p&gt;&#xA;&lt;p&gt;wget &lt;a href=&#34;https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz&#34;&gt;https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz&lt;/a&gt;&#xA;tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz&lt;/p&gt;&#xA;&lt;p&gt;sudo mv hugo /usr/local/bin/&lt;/p&gt;&#xA;&lt;p&gt;hugo version&lt;/p&gt;&#xA;&lt;p&gt;初始化&lt;/p&gt;&#xA;&lt;p&gt;hugo new site blog&#xA;cd blog&lt;/p&gt;&#xA;&lt;p&gt;去hugo官网找一个自己喜欢的theme，然后安装&lt;/p&gt;&#xA;&lt;p&gt;git init  # 如果还没 git init&#xA;git submodule add &lt;a href=&#34;https://github.com/knadh/hugo-ink.git&#34;&gt;https://github.com/knadh/hugo-ink.git&lt;/a&gt; themes/ink&lt;/p&gt;&#xA;&lt;p&gt;配置主题hugo.toml文件&lt;/p&gt;&#xA;&lt;p&gt;baseURL = &amp;ldquo;&lt;a href=&#34;https://haha077.github.io/blog/%22&#34;&gt;https://haha077.github.io/blog/&amp;quot;&lt;/a&gt;&#xA;title = &amp;ldquo;我的博客&amp;rdquo;&#xA;theme = &amp;ldquo;ink&amp;rdquo;&#xA;languageCode = &amp;ldquo;zh-cn&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;paginate = 10&lt;/p&gt;&#xA;&lt;p&gt;[params]&#xA;subtitle = &amp;ldquo;一个极简 Hugo 博客&amp;rdquo;&#xA;author = &amp;ldquo;haha077&amp;rdquo;&#xA;mode = &amp;ldquo;dark&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;写文章&lt;/p&gt;&#xA;&lt;p&gt;hugo new posts/hello.md&lt;/p&gt;&#xA;&lt;p&gt;编辑生成的文件 &lt;code&gt;content/posts/hello.md&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;本地局域网预览写好的文章&lt;/p&gt;&#xA;&lt;p&gt;hugo server -D &amp;ndash;bind 192.168.x.x &amp;ndash;baseURL &lt;a href=&#34;http://192.168.x.x:1313/&#34;&gt;http://192.168.x.x:1313/&lt;/a&gt; &amp;ndash;appendPort=false&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>TWRP 模式下无法充电</title>
-      <link>https://haha077.github.io/blog/posts/nic.eu.org%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D%E4%B8%8E%E7%BB%91%E5%AE%9Acloudflare-dns%E8%A7%A3%E6%9E%90/</link>
-      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>https://haha077.github.io/blog/posts/nic.eu.org%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D%E4%B8%8E%E7%BB%91%E5%AE%9Acloudflare-dns%E8%A7%A3%E6%9E%90/</guid>
-      <description>&lt;p&gt;1：注册账号&lt;/p&gt;&#xA;&lt;p&gt;2：登录，左上角new domain进入注册域名&lt;/p&gt;&#xA;&lt;p&gt;3：&lt;img src=&#34;C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20250703152231793.png&#34; alt=&#34;image-20250703152231793&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;填入自己需要的，点击回车确认是否被注册&lt;/p&gt;&#xA;&lt;p&gt;4：添加ns服务器&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://am.zdmimg.com/202308/27/64eb5aef2743f81.png_e1080.jpg&#34; alt=&#34;免费申请注册eu.org二级域名&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;登录cloudflare，把刚才那个需要注册的域名添加到cf的站点上，把cf的ns服务器填写到https://nic.eu.org/的name1和name2那里，然后可以提交submit注册了，像下面这样就是提交成功的&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20250703151231291.png&#34; alt=&#34;image-20250703151231291&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;5：接下来就是耐心等待cf的邮件确认和nic的审核。通常nic审核会比较久……&lt;/p&gt;</description>
     </item>
     <item>
       <title>TWRP 模式下无法充电</title>

@@ -1,6 +1,6 @@
 +++
 date = '2025-07-03T04:27:59-04:00'
-draft = flase
+draft = false
 title = 'nic.eu.org注册域名与绑定cloudflare dns解析'
 
 +++
@@ -9,9 +9,7 @@ title = 'nic.eu.org注册域名与绑定cloudflare dns解析'
 
 2：登录，左上角new domain进入注册域名
 
-3：![image-20250703152231793](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250703152231793.png)
-
-填入自己需要的，点击回车确认是否被注册
+3：![image-20250703152231793](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250703152231793.png)填入自己需要的，点击回车确认是否被注册
 
 4：添加ns服务器
 
