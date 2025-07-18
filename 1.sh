@@ -1,5 +1,5 @@
 #!/bin/bash
 hugo
 git add .
-git commit -m "¸üĞÂ"
+git commit -m "new"
 git push
