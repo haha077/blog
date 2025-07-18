@@ -1,6 +1,6 @@
 +++
 date = '2025-07-11T04:20:23-04:00'
-draft = true
+draft = false
 title = '给virtualbox下debian系统安装增强包实现文件与宿主机共享'
 +++
 

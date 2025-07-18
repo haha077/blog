@@ -6,8 +6,22 @@
     <description>Recent content on blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 03 Jul 2025 04:27:59 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 11 Jul 2025 04:20:23 -0400</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>给virtualbox下debian系统安装增强包实现文件与宿主机共享</title>
+      <link>https://haha077.github.io/blog/posts/%E7%BB%99virtualbox%E4%B8%8Bdebian%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%A2%9E%E5%BC%BA%E5%8C%85%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB/</link>
+      <pubDate>Fri, 11 Jul 2025 04:20:23 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E7%BB%99virtualbox%E4%B8%8Bdebian%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%A2%9E%E5%BC%BA%E5%8C%85%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB/</guid>
+      <description>&lt;p&gt;在 Debian 系统中安装 &lt;strong&gt;VirtualBox 增强功能（Guest Additions）&lt;/strong&gt;，可以带来如下好处：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;自动调整分辨率&lt;/li&gt;&#xA;&lt;li&gt;剪贴板共享（主机与虚拟机之间）&lt;/li&gt;&#xA;&lt;li&gt;拖放文件支持&lt;/li&gt;&#xA;&lt;li&gt;更好的鼠标集成&lt;/li&gt;&#xA;&lt;li&gt;共享文件夹功能&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;-1-安装依赖包&#34;&gt;✅ 1. 安装依赖包&lt;/h3&gt;&#xA;&lt;p&gt;打开虚拟机中的终端，运行：&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bash复制代码sudo apt update&#xA;sudo apt install build-essential dkms linux-headers-$(uname -r)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;&#xA;&lt;h3 id=&#34;-2-插入-guest-additions-光盘&#34;&gt;✅ 2. 插入 Guest Additions 光盘&lt;/h3&gt;&#xA;&lt;p&gt;在 VirtualBox 菜单栏中（&lt;strong&gt;虚拟机运行时&lt;/strong&gt;）：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;设备（Devices） &amp;gt; 安装增强功能（Insert Guest Additions CD Image）&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;在纯命令行下，输入&lt;/p&gt;&#xA;&lt;p&gt;lsblk&lt;/p&gt;&#xA;&lt;p&gt;ls /media&lt;/p&gt;&#xA;&lt;p&gt;ls /media/$USER&lt;/p&gt;&#xA;&lt;p&gt;验证后，一般从输出可以看出：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;虚拟光驱设备 &lt;code&gt;/dev/sr0&lt;/code&gt; 已存在，大小为 &lt;code&gt;58.5M&lt;/code&gt;，说明增强功能镜像已经成功加载。&lt;/li&gt;&#xA;&lt;li&gt;但 &lt;strong&gt;没有自动挂载到 &lt;code&gt;/media/&lt;/code&gt; 下任何位置&lt;/strong&gt;（&lt;code&gt;/media/debian&lt;/code&gt; 目录不存在），所以你看到 &lt;code&gt;cdrom0&lt;/code&gt; 是空的。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-解决方法手动挂载增强功能光盘&#34;&gt;✅ 解决方法：手动挂载增强功能光盘&lt;/h2&gt;&#xA;&lt;p&gt;请按以下步骤操作：&lt;/p&gt;&#xA;&lt;h3 id=&#34;-step-1-创建挂载点&#34;&gt;🔧 Step 1: 创建挂载点&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bash&#xA;&#xA;&#xA;复制代码&#xA;sudo mkdir -p /mnt/cdrom&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;-step-2-挂载-cd-镜像&#34;&gt;🔧 Step 2: 挂载 CD 镜像&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bash&#xA;&#xA;&#xA;复制代码&#xA;sudo mount /dev/sr0 /mnt/cdrom&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果提示只读文件系统，可忽略。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>新ip优选</title>
+      <link>https://haha077.github.io/blog/posts/%E6%96%B0ip%E4%BC%98%E9%80%89/</link>
+      <pubDate>Tue, 08 Jul 2025 00:00:32 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E6%96%B0ip%E4%BC%98%E9%80%89/</guid>
+      <description>&lt;p&gt;目前用的cfnat优选工具；要偷懒的话也可以用这个在线的https://stock.hostmonit.com/CloudFlareYes&lt;/p&gt;&#xA;&lt;p&gt;cm大佬的经验之谈：移动/广电用户设置数据中心HKG直接起飞！电信/联通用户设置SJC,LAX！&lt;/p&gt;&#xA;&lt;p&gt;实测使用了优选的ip之后，速度直接起飞！真的有用&lt;/p&gt;&#xA;&lt;p&gt;v2rayn上面的address填入优选的ip地址即可&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;./blog/static/image-20250708150018657-1751958525790-1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>nic.eu.org注册域名与绑定cloudflare dns解析</title>
       <link>https://haha077.github.io/blog/posts/nic.eu.org%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D%E4%B8%8E%E7%BB%91%E5%AE%9Acloudflare-dns%E8%A7%A3%E6%9E%90/</link>
