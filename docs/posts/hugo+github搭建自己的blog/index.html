@@ -24,7 +24,7 @@ hugo new posts/hello.md
 hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
   <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
-  <meta itemprop="wordCount" content="478"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
+  <meta itemprop="wordCount" content="527"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
   <meta property="og:site_name" content="blog">
   <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
   <meta property="og:description" content="在debian上安装
@@ -436,6 +436,39 @@ git push
 </code></pre><p>几分钟后，GitHub Pages 会自动刷新部署，浏览器访问：</p>
 <p>👉 <code>https://haha077.github.io/blog/posts/twrp无法充电/</code></p>
 <p>即可看到修改后的内容！</p>
+<p>++++++++++++++</p>
+<p>markdown插入图片，本地与服务器同步显示（虚拟机版本）</p>
+<p><a href="https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg">https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg</a>这样就能显示</p>
+<p>但是./blog/static/image-20250708150018657-1751958525790-1.png这样就无法显示，只需定义好对应关系就行</p>
+<p>1：首先是检查hugo.toml文件</p>
+<p>在 <code>toml</code> 中添加或修改这一行：</p>
+<pre tabindex="0"><code>toml
+
+
+复制代码
+baseURL = &#34;https://haha077.github.io/blog/&#34;
+</code></pre><p>2：✅ 正确图片引用方式（不需要写 static）</p>
+<p>你的 Hugo 项目结构像这样：</p>
+<pre tabindex="0"><code>arduino复制代码blog/
+├── static/
+│   └── image-xxx.png
+├── content/
+│   └── posts/
+│       └── your-post.md
+</code></pre><p><strong>在 Markdown 中你应该这样引用</strong>：</p>
+<pre tabindex="0"><code>markdown
+
+
+复制代码
+![示意图](/blog/image-20250708150018657-1751958525790-1.png)
+</code></pre><h3 id="-不能写成">❗ 不能写成：</h3>
+<pre tabindex="0"><code>markdown复制代码![×](/blog/static/image-2025xxxx.png) ❌
+![×](./blog/static/xxxx.png) ❌
+</code></pre><p><img src="/blog/image-20250718173932985.png" alt="image-20250718173932985"></p>
+<p>偏好设置的图片路径要设置为virtualbox和debian的共享文件夹的挂载路径，注意debian要打通和宿主机的文件夹共享，需要安装要virtualbox的增强包才行哦</p>
+<p><img src="/blog/image-20250718174340680.png" alt="image-20250718174340680"></p>
+<p>然后再手动修改（）的图片路径格式为/blog/即可</p>
+<p>这样git push后，就能正常显示图片了</p>
 
 			</div>
 

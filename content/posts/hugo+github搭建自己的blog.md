@@ -485,3 +485,65 @@ git push
 👉 `https://haha077.github.io/blog/posts/twrp无法充电/`
 
 即可看到修改后的内容！
+
+
+
+++++++++++++++
+
+markdown插入图片，本地与服务器同步显示（虚拟机版本）
+
+https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg这样就能显示
+
+但是./blog/static/image-20250708150018657-1751958525790-1.png这样就无法显示，只需定义好对应关系就行
+
+1：首先是检查hugo.toml文件
+
+在 `toml` 中添加或修改这一行：
+
+```
+toml
+
+
+复制代码
+baseURL = "https://haha077.github.io/blog/"
+```
+
+2：✅ 正确图片引用方式（不需要写 static）
+
+你的 Hugo 项目结构像这样：
+
+```
+arduino复制代码blog/
+├── static/
+│   └── image-xxx.png
+├── content/
+│   └── posts/
+│       └── your-post.md
+```
+
+**在 Markdown 中你应该这样引用**：
+
+```
+markdown
+
+
+复制代码
+![示意图](/blog/image-20250708150018657-1751958525790-1.png)
+```
+
+### ❗ 不能写成：
+
+```
+markdown复制代码![×](/blog/static/image-2025xxxx.png) ❌
+![×](./blog/static/xxxx.png) ❌
+```
+
+![image-20250718173932985](/blog/image-20250718173932985.png)
+
+偏好设置的图片路径要设置为virtualbox和debian的共享文件夹的挂载路径，注意debian要打通和宿主机的文件夹共享，需要安装要virtualbox的增强包才行哦
+
+![image-20250718174340680](/blog/image-20250718174340680.png)
+
+然后再手动修改（）的图片路径格式为/blog/即可
+
+这样git push后，就能正常显示图片了
