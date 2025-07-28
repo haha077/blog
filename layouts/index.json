@@ -1,8 +1,7 @@
-{{- /* layouts/index.json */ -}}
 [
   {{- $pages := where .Site.RegularPages "Type" "in" site.Params.mainSections -}}
-  {{- range $index, $page := $pages -}}
-    {{- if gt $index 0 }},{{ end }}
+  {{- range $i, $p := $pages -}}
+    {{- if $i }},{{ end }}
     {
       "title": {{ .Title | jsonify }},
       "description": {{ (.Params.description | default .Summary) | jsonify }},

@@ -40,10 +40,6 @@
 	<nav class="nav">
 		<ul class="flat">
 			
-			<li>
-				<a href="/blog/search/">搜索</a>
-			</li>
-			
 		</ul>
 	</nav>
 </div>
@@ -53,6 +49,10 @@
 			<div class="posts">
 				
 				
+				<div id="search-box" style="margin-bottom: 2em;">
+  <input type="text" id="searchInput" placeholder="🔍 输入关键词搜索..." style="width: 100%; padding: 0.6em; font-size: 1.1em;">
+  <div id="searchResults" style="margin-top: 1em;"></div>
+</div>
 				
 					<div class="post">
 						<div class="post-header">
@@ -234,5 +234,7 @@ wget https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0
 </div>
 
 
+	<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>

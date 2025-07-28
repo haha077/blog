@@ -16,8 +16,4 @@ publishDir = "docs"
 [outputs]
 home = ["HTML", "RSS", "JSON"]
 
-[[menu.main]]
-name = "搜索"
-url = "/search/"
-weight = 30
   
