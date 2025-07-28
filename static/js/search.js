@@ -1,20 +1,22 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log("🔍 search.js loaded");
+
   const baseurl = window.__baseurl || "/";
-  let pages = [];
-
-  try {
-    const res = await fetch(baseurl + "index.json");
-    pages = await res.json();
-  } catch (err) {
-    console.error("加载 index.json 失败：", err);
-    return;
-  }
-
   const input = document.getElementById("searchInput");
   const resultsContainer = document.getElementById("searchResults");
 
   if (!input || !resultsContainer) {
-    console.warn("搜索框或结果容器未找到");
+    console.warn("❌ DOM 元素未找到");
+    return;
+  }
+
+  let pages = [];
+  try {
+    const res = await fetch(baseurl + "index.json");
+    pages = await res.json();
+    console.log("✅ 索引加载成功:", pages.length);
+  } catch (err) {
+    console.error("❌ 索引加载失败:", err);
     return;
   }
 
@@ -24,12 +26,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   function performSearch(query) {
+    console.log("🔍 搜索关键词:", query);
     resultsContainer.innerHTML = "";
-
     if (!query) return;
 
     const results = fuse.search(query);
-
     if (results.length === 0) {
       resultsContainer.innerHTML = "<p>未找到匹配内容。</p>";
       return;
@@ -37,20 +38,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     results.forEach(({ item }) => {
       const el = document.createElement("div");
-      el.innerHTML = `
-        <div style="margin-bottom: 1em;">
-          <a href="${item.url}" style="font-weight: bold; font-size: 1.1em;">${item.title}</a>
-          <p style="margin: 0.3em 0;">${item.description}</p>
-        </div>`;
+      el.innerHTML = `<div>
+        <a href="${item.url}">${item.title}</a><br>
+        <p>${item.description}</p>
+      </div>`;
       resultsContainer.appendChild(el);
     });
   }
 
-  input.addEventListener("input", () => {
-    performSearch(input.value.trim());
-  });
-
   input.addEventListener("keydown", (e) => {
+    console.log("键盘事件:", e.key);
     if (e.key === "Enter") {
       e.preventDefault();
       performSearch(input.value.trim());
