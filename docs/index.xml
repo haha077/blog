@@ -6,8 +6,15 @@
     <description>Recent content on blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 11 Jul 2025 04:20:23 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 27 Jul 2025 23:54:20 -0400</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OLED防烧屏</title>
+      <link>https://haha077.github.io/blog/posts/oled%E9%98%B2%E7%83%A7%E5%B1%8F/</link>
+      <pubDate>Sun, 27 Jul 2025 23:54:20 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/oled%E9%98%B2%E7%83%A7%E5%B1%8F/</guid>
+      <description>&lt;p&gt;OLED 烧屏（Burn-in）是指屏幕上的某些像素长时间显示同一内容而老化不均，最终形成“残影”或“印痕”。要防止或减缓 OLED 屏幕烧屏，可以采取以下 &lt;strong&gt;系统级、软件级和使用习惯&lt;/strong&gt; 的综合措施：&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-一日常使用注意事项最关键&#34;&gt;✅ 一、日常使用注意事项（最关键）&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-降低屏幕亮度&#34;&gt;1. &lt;strong&gt;降低屏幕亮度&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;高亮度会加速 OLED 像素老化。&lt;/li&gt;&#xA;&lt;li&gt;建议开启自动亮度调节功能。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-缩短屏幕息屏时间&#34;&gt;2. &lt;strong&gt;缩短屏幕息屏时间&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;将“自动息屏”时间设置为 30 秒～1 分钟。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-避免长时间显示静态画面&#34;&gt;3. &lt;strong&gt;避免长时间显示静态画面&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;尤其是状态栏、导航栏、App图标等高亮静态区域。&lt;/li&gt;&#xA;&lt;li&gt;看视频或玩游戏时尽量全屏，避免上下黑边长时间停留。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;4-使用深色模式--暗黑主题&#34;&gt;4. &lt;strong&gt;使用深色模式 / 暗黑主题&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;深色背景下，OLED 屏的像素发光强度更低，有助于延长寿命。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-二系统软件层面的优化&#34;&gt;✅ 二、系统/软件层面的优化&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-开启屏幕元素位移功能&#34;&gt;1. &lt;strong&gt;开启屏幕元素位移功能&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;很多手机系统（如三星、Pixel、小米 HyperOS）支持 &lt;strong&gt;图标位移、防烧屏保护器等功能&lt;/strong&gt;，会微移静态 UI 元素，防止局部老化。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-使用动态壁纸或纯黑壁纸&#34;&gt;2. &lt;strong&gt;使用动态壁纸或纯黑壁纸&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;黑色像素在 OLED 上几乎不发光，可延缓烧屏。（另外这也是oled屏幕黑色显示更纯粹的原因）&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;避免长期使用亮色、带 Logo 的壁纸。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-设置自动隐藏导航栏或状态栏&#34;&gt;3. &lt;strong&gt;设置自动隐藏导航栏或状态栏&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;安卓用户可以启用“手势导航”代替三键导航。&lt;/li&gt;&#xA;&lt;li&gt;iPhone 用户尽量避免长时间静态显示“刘海”或状态栏高亮内容。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;推荐app：屏幕工具箱（软件体积小，但实用强大）&lt;/p&gt;</description>
+    </item>
     <item>
       <title>给virtualbox下debian系统安装增强包实现文件与宿主机共享</title>
       <link>https://haha077.github.io/blog/posts/%E7%BB%99virtualbox%E4%B8%8Bdebian%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%A2%9E%E5%BC%BA%E5%8C%85%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB/</link>
