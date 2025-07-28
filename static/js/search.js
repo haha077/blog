@@ -10,8 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     threshold: 0.3,
   });
 
-  input.addEventListener("input", () => {
-    const query = input.value.trim();
+  function performSearch(query) {
     resultsContainer.innerHTML = "";
 
     if (!query) return;
@@ -27,5 +26,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>`;
       resultsContainer.appendChild(el);
     });
+  }
+
+  // 实时搜索
+  input.addEventListener("input", () => {
+    const query = input.value.trim();
+    performSearch(query);
+  });
+
+  // 按回车键时执行搜索
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const query = input.value.trim();
+      performSearch(query);
+      e.preventDefault(); // 防止回车刷新页面或提交表单
+    }
   });
 });
