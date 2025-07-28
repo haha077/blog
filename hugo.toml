@@ -11,3 +11,13 @@ publishDir = "docs"
   subtitle = "haha's technical blog"
   author = "haha077"
   mode = "auto"  # 可选: light / dark / auto
+  mainSections = ["posts", "blog"]
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[[menu.main]]
+name = "搜索"
+url = "/search/"
+weight = 30
+  
