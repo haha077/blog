@@ -1,9 +1,22 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const res = await fetch("/index.json");
-  const pages = await res.json();
+  const baseurl = window.__baseurl || "/";
+  let pages = [];
+
+  try {
+    const res = await fetch(baseurl + "index.json");
+    pages = await res.json();
+  } catch (err) {
+    console.error("加载 index.json 失败：", err);
+    return;
+  }
 
   const input = document.getElementById("searchInput");
   const resultsContainer = document.getElementById("searchResults");
+
+  if (!input || !resultsContainer) {
+    console.warn("搜索框或结果容器未找到");
+    return;
+  }
 
   const fuse = new Fuse(pages, {
     keys: ["title", "description", "content"],
@@ -17,6 +30,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const results = fuse.search(query);
 
+    if (results.length === 0) {
+      resultsContainer.innerHTML = "<p>未找到匹配内容。</p>";
+      return;
+    }
+
     results.forEach(({ item }) => {
       const el = document.createElement("div");
       el.innerHTML = `
@@ -28,18 +46,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // 实时搜索
   input.addEventListener("input", () => {
-    const query = input.value.trim();
-    performSearch(query);
+    performSearch(input.value.trim());
   });
 
-  // 按回车键时执行搜索
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      const query = input.value.trim();
-      performSearch(query);
-      e.preventDefault(); // 防止回车刷新页面或提交表单
+      e.preventDefault();
+      performSearch(input.value.trim());
     }
   });
 });
