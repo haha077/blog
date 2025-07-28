@@ -13,6 +13,13 @@ publishDir = "docs"
   mode = "auto"  # 可选: light / dark / auto
   mainSections = ["posts", "blog"]
 
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    baseName = "index"
+    isPlainText = true
+    notAlternative = true
+
 [outputs]
 home = ["HTML", "RSS", "JSON"]
 
