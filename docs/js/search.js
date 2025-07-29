@@ -1,28 +1,24 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const input = document.getElementById("searchInput");
-  const resultsContainer = document.getElementById("searchResults");
+async function initSearch() {
+  const response = await fetch(`${window.__baseurl}index.json`);
+  const data = await response.json();
+  const options = {
+    keys: ['title', 'summary'],
+    threshold: 0.3,
+  };
+  const fuse = new Fuse(data, options);
 
-  if (!input) return;
+  const input = document.getElementById('searchInput');
+  const resultsBox = document.getElementById('searchResults');
 
-  fetch(window.__baseurl + "index.json")
-    .then((res) => res.json())
-    .then((data) => {
-      const fuse = new Fuse(data, {
-        keys: ["title", "content"],
-        threshold: 0.3,
-      });
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      const results = fuse.search(input.value);
+      resultsBox.innerHTML = results.map(r => {
+        const item = r.item;
+        return `<div><a href="${item.permalink}">${item.title}</a><p>${item.summary}</p></div>`;
+      }).join('') || '<p>没有找到匹配结果。</p>';
+    }
+  });
+}
 
-      input.addEventListener("input", function () {
-        const keyword = input.value.trim();
-        resultsContainer.innerHTML = "";
-        if (!keyword) return;
-
-        const results = fuse.search(keyword);
-        results.slice(0, 10).forEach(({ item }) => {
-          const el = document.createElement("div");
-          el.innerHTML = `<a href="${item.permalink}">${item.title}</a>`;
-          resultsContainer.appendChild(el);
-        });
-      });
-    });
-});
+document.addEventListener('DOMContentLoaded', initSearch);

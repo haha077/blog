@@ -12,4 +12,7 @@ publishDir = "docs"
   author = "haha077"
   mode = "auto"  # 可选: light / dark / auto
 
+[outputs]
+  home = ["HTML", "JSON"]
+
   
