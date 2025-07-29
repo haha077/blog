@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Hugo&#43;github搭建自己的blog - blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Hugo&#43;github搭建自己的blog - Haha&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	
   <meta itemprop="name" content="Hugo&#43;github搭建自己的blog">
   <meta itemprop="description" content="在debian上安装
@@ -25,7 +25,7 @@ hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –append
   <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="wordCount" content="527"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
-  <meta property="og:site_name" content="blog">
+  <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
   <meta property="og:description" content="在debian上安装
 wget https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz
@@ -69,24 +69,24 @@ hugo new posts/hello.md
 编辑生成的文件 content/posts/hello.md
 本地局域网预览写好的文章
 hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
-<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://haha077.github.io/blog/css/dark.css" />
-
-	<script src="https://haha077.github.io/blog/js/feather.min.js"></script>
-	
-		<script src="https://haha077.github.io/blog/js/main.js"></script>
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="https://haha077.github.io/blog/css/dark.css" />
+	<script src="https://haha077.github.io/blog/js/main.js"></script>
 </head>
 
+
 <body>
+
+
+	
 	<div class="container wrapper">
 		<div class="header">
 	
-	<h1 class="site-title"><a href="https://haha077.github.io/blog/">blog</a></h1>
-	<div class="site-description"><p>haha&rsquo;s technical blog</p><nav class="nav social">
-			<ul class="flat"><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
+	<h1 class="site-title"><a href="https://haha077.github.io/blog/">Haha&#39;s Blog</a></h1>
+	<div class="site-description"><p>Haha&rsquo;s Technical Blog</p><nav class="nav social">
+			<ul class="flat"><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></ul>
 		</nav>
 	</div>
 
@@ -99,22 +99,24 @@ hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –append
 
 
 		<div class="post">
-			<div class="post-header">
-				
-					<div class="meta">
-						<div class="date">
-							<span class="day">01</span>
-							<span class="rest">Jul 2025</span>
-						</div>
-					</div>
-				
-				<div class="matter">
-					<h1 class="title">Hugo&#43;github搭建自己的blog</h1>
-				</div>
-			</div>
-					
-			<div class="markdown">
-				<p>在debian上安装</p>
+    <div class="post-header">
+    
+    <div class="meta">
+        <div class="date">
+            <span class="day">01</span>
+            <span class="rest">Jul 2025</span>
+        </div>
+    </div>
+    
+    <div class="matter">
+        <h1 class="title">Hugo&#43;github搭建自己的blog</h1>
+    </div>
+</div>
+
+
+    
+    
+    <p>在debian上安装</p>
 <p>wget <a href="https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz">https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz</a>
 tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz</p>
 <p>sudo mv hugo /usr/local/bin/</p>
@@ -464,26 +466,49 @@ baseURL = &#34;https://haha077.github.io/blog/&#34;
 </code></pre><h3 id="-不能写成">❗ 不能写成：</h3>
 <pre tabindex="0"><code>markdown复制代码![×](/blog/static/image-2025xxxx.png) ❌
 ![×](./blog/static/xxxx.png) ❌
-</code></pre><p><img src="/blog/image-20250718173932985.png" alt="image-20250718173932985"></p>
+</code></pre><p>
+  <img src="/blog/image-20250718173932985.png" alt="image-20250718173932985">
+
+</p>
 <p>偏好设置的图片路径要设置为virtualbox和debian的共享文件夹的挂载路径，注意debian要打通和宿主机的文件夹共享，需要安装要virtualbox的增强包才行哦</p>
-<p><img src="/blog/image-20250718174340680.png" alt="image-20250718174340680"></p>
+<p>
+  <img src="/blog/image-20250718174340680.png" alt="image-20250718174340680">
+
+</p>
 <p>然后再手动修改（）的图片路径格式为/blog/即可</p>
 <p>这样git push后，就能正常显示图片了</p>
 
-			</div>
-
-			<div class="tags">
-				
-					
-				
-			</div></div>
-	</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div>2025  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
+    <hr class="footer-separator" />
+<div class="tags">
+    
+    
+    
 </div>
 
 
+
+<div class="back">
+    <a href="https://haha077.github.io/blog/"><span aria-hidden="true">← Back</span></a>
+</div>
+
+
+<div class="back">
+    
+</div>
+
+</div>
+
+	</div>
+	
+
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2025 </div>
+		
+	</nav>
+</div>
+
+	
 </body>
+
 </html>

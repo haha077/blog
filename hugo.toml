@@ -1,6 +1,6 @@
 baseURL = "https://haha077.github.io/blog/"
-title = "blog"
-theme = "ink"
+title = "Haha's Blog"
+theme = "ink-free"
 languageCode = "zh-cn"
 publishDir = "docs"
 
@@ -8,13 +8,8 @@ publishDir = "docs"
   pagerSize = 10
 
 [params]
-  subtitle = "haha's technical blog"
+  subtitle = "Haha's Technical Blog"
   author = "haha077"
   mode = "auto"  # 可选: light / dark / auto
-  mainSections = ["posts", "blog"]
-
-
-[outputs]
-home = ["HTML", "RSS", "JSON"]
 
   
