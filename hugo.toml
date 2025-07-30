@@ -11,7 +11,7 @@ publishDir = "docs"
   subtitle = "勤思、反思、三思；勤动、无为、恬淡"
   author = "haha077"
   mode = "auto"  # 可选: light / dark / auto
-  avatar = "avatar.png"
+  avatar = "/blog/avatar.png"
 
 [outputs]
   home = ["HTML", "JSON"]
