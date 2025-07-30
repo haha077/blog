@@ -8,9 +8,10 @@ publishDir = "docs"
   pagerSize = 10
 
 [params]
-  subtitle = "Haha's Technical Blog"
+  subtitle = "勤思、反思、三思；勤动、无为、恬淡"
   author = "haha077"
   mode = "auto"  # 可选: light / dark / auto
+  avatar = "avatar.png"
 
 [outputs]
   home = ["HTML", "JSON"]
