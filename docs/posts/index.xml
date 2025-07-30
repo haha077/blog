@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Haha&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 27 Jul 2025 23:54:20 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 30 Jul 2025 02:34:24 -0400</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>非必要不要折腾水冷</title>
+      <link>https://haha077.github.io/blog/posts/%E9%9D%9E%E5%BF%85%E8%A6%81%E4%B8%8D%E8%A6%81%E6%8A%98%E8%85%BE%E6%B0%B4%E5%86%B7/</link>
+      <pubDate>Wed, 30 Jul 2025 02:34:24 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E9%9D%9E%E5%BF%85%E8%A6%81%E4%B8%8D%E8%A6%81%E6%8A%98%E8%85%BE%E6%B0%B4%E5%86%B7/</guid>
+      <description>&lt;p&gt;对于我这种的懒人来说，水冷的维护成本和需要投入的时间精力太多&lt;/p&gt;&#xA;&lt;p&gt;水冷管道和水冷液基本上一年左右都要进行清理和维护，否则散热能力会大幅度下降；相比之下风量就省事多了，基本只需要定期拿出来，吹一下灰尘即可！真的太省事了，&lt;/p&gt;&#xA;&lt;p&gt;而且实测铜片+7921/7890硅脂风冷方案；石墨烯垫片+风冷的方案基本和水冷的散热效果不相伯仲&lt;/p&gt;</description>
+    </item>
     <item>
       <title>OLED防烧屏</title>
       <link>https://haha077.github.io/blog/posts/oled%E9%98%B2%E7%83%A7%E5%B1%8F/</link>
