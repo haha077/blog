@@ -547,3 +547,56 @@ markdown复制代码![×](/blog/static/image-2025xxxx.png) ❌
 然后再手动修改（）的图片路径格式为/blog/即可
 
 这样git push后，就能正常显示图片了
+
+
+
+# 备份博客
+
+Hugo 是静态网站生成器，在 Debian 下备份 Hugo 博客（例如 `/home/debian/blog`）并转移到另一台主机，**只需要打包整个博客目录即可**。不需要数据库，所有内容都在文件里。
+
+## 一、你应该备份的内容（完整博客源码）
+
+只需打包 **博客源文件**，不需要打包 Hugo 生成的输出文件（即 `public/` 和 `docs/`，这两个通常是生成后的静态站点）。
+
+### **推荐备份以下内容：**
+
+- 所有内容，**排除 `public/` 和 `docs/`（如果是 GitHub Pages 用的也可以保留）**
+
+### 建议目录结构打包如下：
+
+```
+bash复制代码cd /home/debian/blog
+tar --exclude=public --exclude=docs -czvf blog-src.tar.gz *
+```
+
+这个命令说明：
+
+- `--exclude=public`：不打包 Hugo 构建产物
+- `--exclude=docs`：同上，很多人用于 GitHub Pages
+- `*`：打包当前目录下所有源文件
+
+这样可以确保你转移的是**可重建的博客源码**，而不是构建后的 HTML。
+
+## 二、迁移后在新主机上使用
+
+### 1. 安装 Hugo
+
+```
+bash复制代码sudo apt update
+sudo apt install hugo
+```
+
+> 如果你之前用的是 Hugo 的 extended 版本（用于 SCSS），请告诉我，我可以给你 `.deb` 下载链接。
+
+------
+
+### 2. 解压博客文件
+
+假设压缩包在 `/home/user/` 目录下：
+
+```
+bash复制代码cd /home/user
+mkdir blog
+tar -xzvf blog-src.tar.gz -C blog
+cd blog
+```

@@ -24,7 +24,7 @@ hugo new posts/hello.md
 hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
   <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
-  <meta itemprop="wordCount" content="527"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
+  <meta itemprop="wordCount" content="605"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
   <meta property="og:description" content="在debian上安装
@@ -482,7 +482,38 @@ baseURL = &#34;https://haha077.github.io/blog/&#34;
 </p>
 <p>然后再手动修改（）的图片路径格式为/blog/即可</p>
 <p>这样git push后，就能正常显示图片了</p>
-
+<h1 id="备份博客">备份博客</h1>
+<p>Hugo 是静态网站生成器，在 Debian 下备份 Hugo 博客（例如 <code>/home/debian/blog</code>）并转移到另一台主机，<strong>只需要打包整个博客目录即可</strong>。不需要数据库，所有内容都在文件里。</p>
+<h2 id="一你应该备份的内容完整博客源码">一、你应该备份的内容（完整博客源码）</h2>
+<p>只需打包 <strong>博客源文件</strong>，不需要打包 Hugo 生成的输出文件（即 <code>public/</code> 和 <code>docs/</code>，这两个通常是生成后的静态站点）。</p>
+<h3 id="推荐备份以下内容"><strong>推荐备份以下内容：</strong></h3>
+<ul>
+<li>所有内容，<strong>排除 <code>public/</code> 和 <code>docs/</code>（如果是 GitHub Pages 用的也可以保留）</strong></li>
+</ul>
+<h3 id="建议目录结构打包如下">建议目录结构打包如下：</h3>
+<pre tabindex="0"><code>bash复制代码cd /home/debian/blog
+tar --exclude=public --exclude=docs -czvf blog-src.tar.gz *
+</code></pre><p>这个命令说明：</p>
+<ul>
+<li><code>--exclude=public</code>：不打包 Hugo 构建产物</li>
+<li><code>--exclude=docs</code>：同上，很多人用于 GitHub Pages</li>
+<li><code>*</code>：打包当前目录下所有源文件</li>
+</ul>
+<p>这样可以确保你转移的是<strong>可重建的博客源码</strong>，而不是构建后的 HTML。</p>
+<h2 id="二迁移后在新主机上使用">二、迁移后在新主机上使用</h2>
+<h3 id="1-安装-hugo">1. 安装 Hugo</h3>
+<pre tabindex="0"><code>bash复制代码sudo apt update
+sudo apt install hugo
+</code></pre><blockquote>
+<p>如果你之前用的是 Hugo 的 extended 版本（用于 SCSS），请告诉我，我可以给你 <code>.deb</code> 下载链接。</p></blockquote>
+<hr>
+<h3 id="2-解压博客文件">2. 解压博客文件</h3>
+<p>假设压缩包在 <code>/home/user/</code> 目录下：</p>
+<pre tabindex="0"><code>bash复制代码cd /home/user
+mkdir blog
+tar -xzvf blog-src.tar.gz -C blog
+cd blog
+</code></pre>
     <hr class="footer-separator" />
 <div class="tags">
     
