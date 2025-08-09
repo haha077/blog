@@ -1,0 +1,44 @@
+.big-bang {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.big-bang span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: bang 3s ease-out infinite;
+}
+
+@keyframes bang {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.big-bang span:nth-child(odd) {
+  background: #fff9c4;
+}
+.big-bang span:nth-child(even) {
+  background: #bbdefb;
+}
