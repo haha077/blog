@@ -1,50 +1,85 @@
-.big-bang {
+body::before {
+  content: "";
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 100%;
-  height: 100%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.big-bang span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  background: white;
+  width: 0;
+  height: 0;
   border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, transparent 80%);
+  filter: drop-shadow(0 0 30px #fff);
   opacity: 0;
-  animation: bang 3s ease-out infinite;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: -10;
 }
 
-@keyframes bang {
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -11;
+  background-repeat: no-repeat;
+  opacity: 0;
+  background-image:
+    radial-gradient(4px 4px at 50% 50%, red, transparent),
+    radial-gradient(4px 4px at 50% 50%, orange, transparent),
+    radial-gradient(4px 4px at 50% 50%, yellow, transparent),
+    radial-gradient(4px 4px at 50% 50%, green, transparent),
+    radial-gradient(4px 4px at 50% 50%, blue, transparent),
+    radial-gradient(4px 4px at 50% 50%, indigo, transparent),
+    radial-gradient(4px 4px at 50% 50%, violet, transparent);
+  background-position: 50% 50%;
+}
+
+body.explode::before {
+  animation: pulse 1.5s ease-out;
+  opacity: 1;
+}
+
+body.explode::after {
+  animation: explode 1.5s ease-out forwards;
+  opacity: 1;
+}
+
+@keyframes pulse {
   0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-  70% {
+    width: 0;
+    height: 0;
     opacity: 1;
   }
   100% {
-    transform: translate(var(--tx), var(--ty)) scale(0.5);
+    width: 600px;
+    height: 600px;
     opacity: 0;
   }
 }
 
-/* 生成随机粒子方向与颜色 */
-.big-bang span:nth-child(odd) {
-  background: #fff9c4;
-}
-.big-bang span:nth-child(even) {
-  background: #bbdefb;
-}
-
-.big-bang span {
-  --tx: calc(200px - 400px * random());
-  --ty: calc(200px - 400px * random());
+@keyframes explode {
+  0% {
+    background-position:
+      50% 50%, 
+      50% 50%, 
+      50% 50%, 
+      50% 50%, 
+      50% 50%, 
+      50% 50%, 
+      50% 50%;
+    opacity: 1;
+  }
+  100% {
+    background-position:
+      10% 10%,
+      90% 20%,
+      20% 90%,
+      80% 80%,
+      15% 60%,
+      85% 40%,
+      50% 100%;
+    opacity: 0;
+  }
 }
