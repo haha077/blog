@@ -70,20 +70,14 @@ hugo
 1. 生成 SSH 密钥：
 
 ```
-bash
 
-
-复制代码
 ssh-keygen -t ed25519 -C "haha077@github.com"
 ```
 
 一路回车。生成后查看公钥：
 
 ```
-bash
 
-
-复制代码
 cat ~/.ssh/id_ed25519.pub
 ```
 
@@ -93,20 +87,20 @@ cat ~/.ssh/id_ed25519.pub
 3. 然后切换远程地址为 SSH：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 git remote set-url origin git@github.com:haha077/blog.git
 ```
 
 1. 再次 push：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 git push -u origin main
 ```
 
@@ -131,14 +125,14 @@ git push -u origin main
 编辑 `hugo.toml` 或 `config.toml`，添加或修改以下内容：
 
 ```
-toml复制代码baseURL = "https://haha077.github.io/blog/"
+toml baseURL = "https://haha077.github.io/blog/"
 publishDir = "docs"
 ```
 
 > 👆 如果你用的是 `hugo.yaml`，请改写成：
 >
 > ```
-> yaml复制代码baseURL: "https://haha077.github.io/blog/"
+> yaml baseURL: "https://haha077.github.io/blog/"
 > publishDir: "docs"
 > ```
 
@@ -147,7 +141,7 @@ publishDir = "docs"
 ## ✅ 第二步：重新构建网站输出到 `docs/`
 
 ```
-bash复制代码cd ~/blog
+  cd ~/blog
 hugo
 ```
 
@@ -158,7 +152,7 @@ hugo
 ## ✅ 第三步：提交 `docs/` 到 main 分支
 
 ```
-bash复制代码git add docs
+  git add docs
 git commit -m "构建 Hugo 博客到 docs 文件夹，用于 GitHub Pages"
 git push
 ```
@@ -194,20 +188,20 @@ git push
 在博客根目录执行：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 hugo new posts/twrp无法充电.md
 ```
 
 这会自动在 `content/posts/` 下创建一个 Markdown 文件，例如：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 content/posts/twrp无法充电.md
 ```
 
@@ -218,17 +212,17 @@ content/posts/twrp无法充电.md
 打开刚生成的文件：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 nano content/posts/twrp无法充电.md
 ```
 
 默认内容像这样：
 
 ```
-markdown复制代码---
+markdown ---
 title: "TWRP 模式无法充电"
 date: 2025-07-01T10:00:00+08:00
 draft: true
@@ -253,7 +247,7 @@ draft: true
 yaml
 
 
-复制代码
+ 
 draft: true
 ```
 
@@ -263,7 +257,7 @@ draft: true
 yaml
 
 
-复制代码
+ 
 draft: false
 ```
 
@@ -274,17 +268,17 @@ draft: false
 ### Step 4：重新构建博客
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 hugo    # 会输出到 docs/
 ```
 
 ### Step 5：推送到 GitHub（发布）
 
 ```
-bash复制代码git add .
+git add .
 git commit -m "新增文章：TWRP 模式无法充电"
 git push
 ```
@@ -299,7 +293,9 @@ git push
 
 
 
-快速在另外一台，比如Windows电脑上同步hugo项目，写blog
+# 快速在另外一台，比如Windows电脑上同步hugo项目，写blog
+
+
 
 ## ✅ 一次性准备步骤（在新电脑上操作）
 
@@ -312,10 +308,10 @@ git push
 4. 打开命令行（CMD / PowerShell），验证安装：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 hugo version
 ```
 
@@ -332,11 +328,11 @@ hugo version
 打开 PowerShell 或 CMD，执行：
 
 ```
-bash复制代码git clone https://github.com/haha077/blog.git
+git clone https://github.com/haha077/blog.git
 cd blog
 ```
 
-> 📦 这一步会下载你博客的全部源码（含 `docs/` 输出目录）
+> 📦 ***这一步会下载你博客的全部源码（含 `docs/` 输出目录），注意这一步非常重要，尤其是在一台新的设备上，这行命令会吧已发布的所有文章git下来，这样你后面push的时候，才不会丢失！切记***
 
 ------
 
@@ -345,20 +341,20 @@ cd blog
 1. 进入博客目录：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 cd blog
 ```
 
 1. 创建新文章：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 hugo new posts/你的文章标题.md
 ```
 
@@ -367,20 +363,20 @@ hugo new posts/你的文章标题.md
 文件在：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 content/posts/你的文章标题.md
 ```
 
 1. 构建站点：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 hugo
 ```
 
@@ -415,10 +411,10 @@ git push
 例如：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 cd ~/blog
 ```
 
@@ -431,20 +427,20 @@ cd ~/blog
 路径通常是：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 content/posts/xxx.md
 ```
 
 例如你要修改这篇文章：
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 content/posts/twrp无法充电.md
 ```
 
@@ -460,10 +456,10 @@ content/posts/twrp无法充电.md
 ### ④ 重新生成静态网页
 
 ```
-bash
+ 
 
 
-复制代码
+ 
 hugo
 ```
 
@@ -474,7 +470,7 @@ hugo
 ### ⑤ 推送到 GitHub 发布
 
 ```
-bash复制代码
+
 git add .
 git commit -m "修改文章：TWRP 无法充电"
 git push
@@ -504,7 +500,7 @@ https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg这样就能显示
 toml
 
 
-复制代码
+ 
 baseURL = "https://haha077.github.io/blog/"
 ```
 
@@ -513,7 +509,7 @@ baseURL = "https://haha077.github.io/blog/"
 你的 Hugo 项目结构像这样：
 
 ```
-arduino复制代码blog/
+arduino blog/
 ├── static/
 │   └── image-xxx.png
 ├── content/
@@ -527,14 +523,14 @@ arduino复制代码blog/
 markdown
 
 
-复制代码
+ 
 ![示意图](/blog/image-20250708150018657-1751958525790-1.png)
 ```
 
 ### ❗ 不能写成：
 
 ```
-markdown复制代码![×](/blog/static/image-2025xxxx.png) ❌
+markdown ![×](/blog/static/image-2025xxxx.png) ❌
 ![×](./blog/static/xxxx.png) ❌
 ```
 
@@ -547,3 +543,56 @@ markdown复制代码![×](/blog/static/image-2025xxxx.png) ❌
 然后再手动修改（）的图片路径格式为/blog/即可
 
 这样git push后，就能正常显示图片了
+
+
+
+# 备份博客
+
+Hugo 是静态网站生成器，在 Debian 下备份 Hugo 博客（例如 `/home/debian/blog`）并转移到另一台主机，**只需要打包整个博客目录即可**。不需要数据库，所有内容都在文件里。
+
+## 一、你应该备份的内容（完整博客源码）
+
+只需打包 **博客源文件**，不需要打包 Hugo 生成的输出文件（即 `public/` 和 `docs/`，这两个通常是生成后的静态站点）。
+
+### **推荐备份以下内容：**
+
+- 所有内容，**排除 `public/` 和 `docs/`（如果是 GitHub Pages 用的也可以保留）**
+
+### 建议目录结构打包如下：
+
+```
+cd /home/debian/blog
+tar --exclude=public --exclude=docs -czvf blog-src.tar.gz *
+```
+
+这个命令说明：
+
+- `--exclude=public`：不打包 Hugo 构建产物
+- `--exclude=docs`：同上，很多人用于 GitHub Pages
+- `*`：打包当前目录下所有源文件
+
+这样可以确保你转移的是**可重建的博客源码**，而不是构建后的 HTML。
+
+## 二、迁移后在新主机上使用
+
+### 1. 安装 Hugo
+
+```
+sudo apt update
+sudo apt install hugo
+```
+
+> 如果你之前用的是 Hugo 的 extended 版本（用于 SCSS），请告诉我，我可以给你 `.deb` 下载链接。
+
+------
+
+### 2. 解压博客文件
+
+假设压缩包在 `/home/user/` 目录下：
+
+```
+cd /home/user
+mkdir blog
+tar -xzvf blog-src.tar.gz -C blog
+cd blog
+```

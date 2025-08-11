@@ -100,4 +100,4 @@ reboot
 
 这样配置完之后，就可以在virtualbox配置共享文件夹了
 
-![image-20250711163408358](./blog/static/image-20250711163408358.png)
+![image-20250711163408358](/blog/image-20250711163408358.png)
