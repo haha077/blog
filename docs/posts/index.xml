@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Haha&#39;s Blog</title>
+    <link>https://haha077.github.io/blog/posts/</link>
+    <description>Recent content in Posts on Haha&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 Jul 2025 02:34:24 -0400</lastBuildDate>
+    <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>非必要不要折腾水冷</title>
+      <link>https://haha077.github.io/blog/posts/%E9%9D%9E%E5%BF%85%E8%A6%81%E4%B8%8D%E8%A6%81%E6%8A%98%E8%85%BE%E6%B0%B4%E5%86%B7/</link>
+      <pubDate>Wed, 30 Jul 2025 02:34:24 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E9%9D%9E%E5%BF%85%E8%A6%81%E4%B8%8D%E8%A6%81%E6%8A%98%E8%85%BE%E6%B0%B4%E5%86%B7/</guid>
+      <description>&lt;p&gt;对于我这种的懒人来说，水冷的维护成本和需要投入的时间精力太多&lt;/p&gt;&#xA;&lt;p&gt;水冷管道和水冷液基本上一年左右都要进行清理和维护，否则散热能力会大幅度下降；相比之下风量就省事多了，基本只需要定期拿出来，吹一下灰尘即可！真的太省事了，&lt;/p&gt;&#xA;&lt;p&gt;而且实测铜片+7921/7890硅脂风冷方案；石墨烯垫片+风冷的方案基本和水冷的散热效果不相伯仲&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OLED防烧屏</title>
+      <link>https://haha077.github.io/blog/posts/oled%E9%98%B2%E7%83%A7%E5%B1%8F/</link>
+      <pubDate>Sun, 27 Jul 2025 23:54:20 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/oled%E9%98%B2%E7%83%A7%E5%B1%8F/</guid>
+      <description>&lt;p&gt;OLED 烧屏（Burn-in）是指屏幕上的某些像素长时间显示同一内容而老化不均，最终形成“残影”或“印痕”。要防止或减缓 OLED 屏幕烧屏，可以采取以下 &lt;strong&gt;系统级、软件级和使用习惯&lt;/strong&gt; 的综合措施：&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-一日常使用注意事项最关键&#34;&gt;✅ 一、日常使用注意事项（最关键）&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-降低屏幕亮度&#34;&gt;1. &lt;strong&gt;降低屏幕亮度&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;高亮度会加速 OLED 像素老化。&lt;/li&gt;&#xA;&lt;li&gt;建议开启自动亮度调节功能。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-缩短屏幕息屏时间&#34;&gt;2. &lt;strong&gt;缩短屏幕息屏时间&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;将“自动息屏”时间设置为 30 秒～1 分钟。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-避免长时间显示静态画面&#34;&gt;3. &lt;strong&gt;避免长时间显示静态画面&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;尤其是状态栏、导航栏、App图标等高亮静态区域。&lt;/li&gt;&#xA;&lt;li&gt;看视频或玩游戏时尽量全屏，避免上下黑边长时间停留。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;4-使用深色模式--暗黑主题&#34;&gt;4. &lt;strong&gt;使用深色模式 / 暗黑主题&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;深色背景下，OLED 屏的像素发光强度更低，有助于延长寿命。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-二系统软件层面的优化&#34;&gt;✅ 二、系统/软件层面的优化&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-开启屏幕元素位移功能&#34;&gt;1. &lt;strong&gt;开启屏幕元素位移功能&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;很多手机系统（如三星、Pixel、小米 HyperOS）支持 &lt;strong&gt;图标位移、防烧屏保护器等功能&lt;/strong&gt;，会微移静态 UI 元素，防止局部老化。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-使用动态壁纸或纯黑壁纸&#34;&gt;2. &lt;strong&gt;使用动态壁纸或纯黑壁纸&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;黑色像素在 OLED 上几乎不发光，可延缓烧屏。（另外这也是oled屏幕黑色显示更纯粹的原因）&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;避免长期使用亮色、带 Logo 的壁纸。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-设置自动隐藏导航栏或状态栏&#34;&gt;3. &lt;strong&gt;设置自动隐藏导航栏或状态栏&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;安卓用户可以启用“手势导航”代替三键导航。&lt;/li&gt;&#xA;&lt;li&gt;iPhone 用户尽量避免长时间静态显示“刘海”或状态栏高亮内容。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;推荐app：屏幕工具箱（软件体积小，但实用强大）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给virtualbox下debian系统安装增强包实现文件与宿主机共享</title>
+      <link>https://haha077.github.io/blog/posts/%E7%BB%99virtualbox%E4%B8%8Bdebian%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%A2%9E%E5%BC%BA%E5%8C%85%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB/</link>
+      <pubDate>Fri, 11 Jul 2025 04:20:23 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E7%BB%99virtualbox%E4%B8%8Bdebian%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%A2%9E%E5%BC%BA%E5%8C%85%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB/</guid>
+      <description>&lt;p&gt;在 Debian 系统中安装 &lt;strong&gt;VirtualBox 增强功能（Guest Additions）&lt;/strong&gt;，可以带来如下好处：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;自动调整分辨率&lt;/li&gt;&#xA;&lt;li&gt;剪贴板共享（主机与虚拟机之间）&lt;/li&gt;&#xA;&lt;li&gt;拖放文件支持&lt;/li&gt;&#xA;&lt;li&gt;更好的鼠标集成&lt;/li&gt;&#xA;&lt;li&gt;共享文件夹功能&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;-1-安装依赖包&#34;&gt;✅ 1. 安装依赖包&lt;/h3&gt;&#xA;&lt;p&gt;打开虚拟机中的终端，运行：&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bash复制代码sudo apt update&#xA;sudo apt install build-essential dkms linux-headers-$(uname -r)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;&#xA;&lt;h3 id=&#34;-2-插入-guest-additions-光盘&#34;&gt;✅ 2. 插入 Guest Additions 光盘&lt;/h3&gt;&#xA;&lt;p&gt;在 VirtualBox 菜单栏中（&lt;strong&gt;虚拟机运行时&lt;/strong&gt;）：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;设备（Devices） &amp;gt; 安装增强功能（Insert Guest Additions CD Image）&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;在纯命令行下，输入&lt;/p&gt;&#xA;&lt;p&gt;lsblk&lt;/p&gt;&#xA;&lt;p&gt;ls /media&lt;/p&gt;&#xA;&lt;p&gt;ls /media/$USER&lt;/p&gt;&#xA;&lt;p&gt;验证后，一般从输出可以看出：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;虚拟光驱设备 &lt;code&gt;/dev/sr0&lt;/code&gt; 已存在，大小为 &lt;code&gt;58.5M&lt;/code&gt;，说明增强功能镜像已经成功加载。&lt;/li&gt;&#xA;&lt;li&gt;但 &lt;strong&gt;没有自动挂载到 &lt;code&gt;/media/&lt;/code&gt; 下任何位置&lt;/strong&gt;（&lt;code&gt;/media/debian&lt;/code&gt; 目录不存在），所以你看到 &lt;code&gt;cdrom0&lt;/code&gt; 是空的。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-解决方法手动挂载增强功能光盘&#34;&gt;✅ 解决方法：手动挂载增强功能光盘&lt;/h2&gt;&#xA;&lt;p&gt;请按以下步骤操作：&lt;/p&gt;&#xA;&lt;h3 id=&#34;-step-1-创建挂载点&#34;&gt;🔧 Step 1: 创建挂载点&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bash&#xA;&#xA;&#xA;复制代码&#xA;sudo mkdir -p /mnt/cdrom&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;-step-2-挂载-cd-镜像&#34;&gt;🔧 Step 2: 挂载 CD 镜像&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bash&#xA;&#xA;&#xA;复制代码&#xA;sudo mount /dev/sr0 /mnt/cdrom&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果提示只读文件系统，可忽略。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>新ip优选</title>
+      <link>https://haha077.github.io/blog/posts/%E6%96%B0ip%E4%BC%98%E9%80%89/</link>
+      <pubDate>Tue, 08 Jul 2025 00:00:32 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E6%96%B0ip%E4%BC%98%E9%80%89/</guid>
+      <description>&lt;p&gt;目前用的cfnat优选工具；要偷懒的话也可以用这个在线的https://stock.hostmonit.com/CloudFlareYes&lt;/p&gt;&#xA;&lt;p&gt;cm大佬的经验之谈：移动/广电用户设置数据中心HKG直接起飞！电信/联通用户设置SJC,LAX！&lt;/p&gt;&#xA;&lt;p&gt;实测使用了优选的ip之后，速度直接起飞！真的有用&lt;/p&gt;&#xA;&lt;p&gt;v2rayn上面的address填入优选的ip地址即可&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;img src=&#34;https://haha077.github.io/blog/image-20250708150018657-1751958525790-1.png&#34; alt=&#34;&#34;&gt;&#xA;&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nic.eu.org注册域名与绑定cloudflare dns解析</title>
+      <link>https://haha077.github.io/blog/posts/nic.eu.org%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D%E4%B8%8E%E7%BB%91%E5%AE%9Acloudflare-dns%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Thu, 03 Jul 2025 04:27:59 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/nic.eu.org%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D%E4%B8%8E%E7%BB%91%E5%AE%9Acloudflare-dns%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;p&gt;1：注册账号&lt;/p&gt;&#xA;&lt;p&gt;2：登录，左上角new domain进入注册域名&lt;/p&gt;&#xA;&lt;p&gt;3：&#xA;  &lt;img src=&#34;https://haha077.github.io/blog/image-20250703152231793.png&#34; alt=&#34;image-20250703152231793&#34;&gt;&#xA;&#xA;填入自己需要的，点击回车确认是否被注册&lt;/p&gt;&#xA;&lt;p&gt;4：添加ns服务器&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;img src=&#34;https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg&#34; alt=&#34;免费申请注册eu.org二级域名&#34;&gt;&#xA;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;登录cloudflare，把刚才那个需要注册的域名添加到cf的站点上，把cf的ns服务器填写到https://nic.eu.org/的name1和name2那里，然后可以提交submit注册了，像下面这样就是提交成功的&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;img src=&#34;https://haha077.github.io/blog/image-20250703151231291.png&#34; alt=&#34;image-20250703151231291&#34;&gt;&#xA;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;5：接下来就是耐心等待cf的邮件确认和nic的审核。通常nic审核会比较久……&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux系统开启ssh</title>
+      <link>https://haha077.github.io/blog/posts/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%90%AFssh/</link>
+      <pubDate>Wed, 02 Jul 2025 00:01:45 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%90%AFssh/</guid>
+      <description>&lt;p&gt;如果提示访问被拒绝&lt;/p&gt;&#xA;&lt;p&gt;sudo nano /etc/ssh/sshd_config&lt;/p&gt;&#xA;&lt;p&gt;确保以下几项&lt;/p&gt;&#xA;&lt;p&gt;PubkeyAuthentication yes   # 允许公钥认证（默认开启）&#xA;PasswordAuthentication yes  # 允许密码登录（必须设为 yes）&#xA;ChallengeResponseAuthentication yes  # 允许交互式认证（可选）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hugo&#43;github搭建自己的blog</title>
+      <link>https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/</link>
+      <pubDate>Tue, 01 Jul 2025 04:06:44 -0400</pubDate>
+      <guid>https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/</guid>
+      <description>&lt;p&gt;在debian上安装&lt;/p&gt;&#xA;&lt;p&gt;wget &lt;a href=&#34;https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz&#34;&gt;https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz&lt;/a&gt;&#xA;tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz&lt;/p&gt;&#xA;&lt;p&gt;sudo mv hugo /usr/local/bin/&lt;/p&gt;&#xA;&lt;p&gt;hugo version&lt;/p&gt;&#xA;&lt;p&gt;初始化&lt;/p&gt;&#xA;&lt;p&gt;hugo new site blog&#xA;cd blog&lt;/p&gt;&#xA;&lt;p&gt;去hugo官网找一个自己喜欢的theme，然后安装&lt;/p&gt;&#xA;&lt;p&gt;git init  # 如果还没 git init&#xA;git submodule add &lt;a href=&#34;https://github.com/knadh/hugo-ink.git&#34;&gt;https://github.com/knadh/hugo-ink.git&lt;/a&gt; themes/ink&lt;/p&gt;&#xA;&lt;p&gt;配置主题hugo.toml文件&lt;/p&gt;&#xA;&lt;p&gt;baseURL = &amp;ldquo;&lt;a href=&#34;https://haha077.github.io/blog/%22&#34;&gt;https://haha077.github.io/blog/&amp;quot;&lt;/a&gt;&#xA;title = &amp;ldquo;我的博客&amp;rdquo;&#xA;theme = &amp;ldquo;ink&amp;rdquo;&#xA;languageCode = &amp;ldquo;zh-cn&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;paginate = 10&lt;/p&gt;&#xA;&lt;p&gt;[params]&#xA;subtitle = &amp;ldquo;一个极简 Hugo 博客&amp;rdquo;&#xA;author = &amp;ldquo;haha077&amp;rdquo;&#xA;mode = &amp;ldquo;dark&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;写文章&lt;/p&gt;&#xA;&lt;p&gt;hugo new posts/hello.md&lt;/p&gt;&#xA;&lt;p&gt;编辑生成的文件 &lt;code&gt;content/posts/hello.md&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;本地局域网预览写好的文章&lt;/p&gt;&#xA;&lt;p&gt;hugo server -D &amp;ndash;bind 192.168.x.x &amp;ndash;baseURL &lt;a href=&#34;http://192.168.x.x:1313/&#34;&gt;http://192.168.x.x:1313/&lt;/a&gt; &amp;ndash;appendPort=false&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TWRP 模式下无法充电</title>
+      <link>https://haha077.github.io/blog/posts/twrp%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%97%A0%E6%B3%95%E5%85%85%E7%94%B5/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://haha077.github.io/blog/posts/twrp%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%97%A0%E6%B3%95%E5%85%85%E7%94%B5/</guid>
+      <description>&lt;p&gt;nexus5x下亲测twrp模式下无法充电&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

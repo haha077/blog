@@ -1,0 +1,19 @@
+baseURL = "https://haha077.github.io/blog/"
+title = "Haha's Blog"
+theme = "ink-free"
+languageCode = "zh-cn"
+publishDir = "docs"
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  subtitle = "勤思、反思、三思；勤动、无为、恬淡"
+  author = "haha077"
+  mode = "auto"  # 可选: light / dark / auto
+  avatar = "/blog/avatar.png"
+
+[outputs]
+  home = ["HTML", "JSON"]
+
+  

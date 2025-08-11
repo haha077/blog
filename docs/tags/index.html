@@ -1,0 +1,196 @@
+<!DOCTYPE html> 
+<html>
+
+
+<body>
+	<div class="container wrapper tags">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://haha077.github.io/blog/">
+				<img src="/blog/avatar.png" alt="Haha&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://haha077.github.io/blog/">Haha&#39;s Blog</a></h1>
+	<div class="site-description"><p>勤思、反思、三思；勤动、无为、恬淡</p><nav class="nav social">
+			<ul class="flat"><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Tags - Haha&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="alternate" type="application/rss+xml" href="https://haha077.github.io/blog/tags/index.xml" title="Haha's Blog" />
+	
+  <meta itemprop="name" content="Tags"><meta property="og:url" content="https://haha077.github.io/blog/tags/">
+  <meta property="og:site_name" content="Haha&#39;s Blog">
+  <meta property="og:title" content="Tags">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Tags">
+<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
+
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="https://haha077.github.io/blog/css/dark.css" />
+	<script src="https://haha077.github.io/blog/js/main.js"></script>
+</head>
+<div class="dark-toggle-block">
+			<button id="dark-mode-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
+				🌙
+			</button>
+		</div>
+
+		
+
+		<h1 class="page-title">Tags</h1>
+
+		
+		
+		
+		
+		
+
+		
+		<div class="tag-cloud">
+			
+		</div>
+	</div>
+
+	<canvas id="bigbang-canvas" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -1000;
+"></canvas>
+
+<script>
+(() => {
+  const canvas = document.getElementById('bigbang-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * devicePixelRatio;
+    canvas.height = H * devicePixelRatio;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  class Particle {
+    constructor() {
+      this.x = W/2;
+      this.y = H/2;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.radius = Math.random() * 3 + 1;
+      this.speed = Math.random() * 4 + 2;
+      this.angle = Math.random() * Math.PI * 2;
+      this.vx = Math.cos(this.angle) * this.speed;
+      this.vy = Math.sin(this.angle) * this.speed;
+      this.life = 60 + Math.random() * 30;
+      this.alpha = 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life--;
+      this.alpha = this.life / 90;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${hexToRgb(this.color)},${this.alpha.toFixed(2)})`;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex.slice(1), 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `${r},${g},${b}`;
+  }
+
+  function createParticles(num) {
+    for(let i=0; i<num; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach((p, i) => {
+      p.update();
+      p.draw();
+      if (p.life <= 0) particles.splice(i, 1);
+    });
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  
+  setInterval(() => {
+    createParticles(80);
+  }, 10000);
+
+  animate();
+})();
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+    const root = document.documentElement;
+
+    function initDarkMode() {
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        root.classList.add('dark');
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (root.classList.contains('dark')) {
+        root.classList.remove('dark');
+        localStorage.setItem('darkMode', 'disabled');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('darkMode', 'enabled');
+      }
+    });
+
+    initDarkMode();
+  });
+</script>
+
+<div class="footer wrapper">
+	<nav class="nav">
+		<div>1 </div>
+		
+	</nav>
+</div>
+
+</body>
+
+</html>

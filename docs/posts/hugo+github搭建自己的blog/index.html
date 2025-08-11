@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Hugo&#43;github搭建自己的blog - Haha&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="Hugo&#43;github搭建自己的blog">
+  <meta itemprop="description" content="在debian上安装
+wget https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz
+sudo mv hugo /usr/local/bin/
+hugo version
+初始化
+hugo new site blog cd blog
+去hugo官网找一个自己喜欢的theme，然后安装
+git init # 如果还没 git init git submodule add https://github.com/knadh/hugo-ink.git themes/ink
+配置主题hugo.toml文件
+baseURL = “https://haha077.github.io/blog/&#34; title = “我的博客” theme = “ink” languageCode = “zh-cn”
+paginate = 10
+[params] subtitle = “一个极简 Hugo 博客” author = “haha077” mode = “dark”
+写文章
+hugo new posts/hello.md
+编辑生成的文件 content/posts/hello.md
+本地局域网预览写好的文章
+hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
+  <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
+  <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
+  <meta itemprop="wordCount" content="527"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
+  <meta property="og:site_name" content="Haha&#39;s Blog">
+  <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
+  <meta property="og:description" content="在debian上安装
+wget https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz
+sudo mv hugo /usr/local/bin/
+hugo version
+初始化
+hugo new site blog cd blog
+去hugo官网找一个自己喜欢的theme，然后安装
+git init # 如果还没 git init git submodule add https://github.com/knadh/hugo-ink.git themes/ink
+配置主题hugo.toml文件
+baseURL = “https://haha077.github.io/blog/&#34; title = “我的博客” theme = “ink” languageCode = “zh-cn”
+paginate = 10
+[params] subtitle = “一个极简 Hugo 博客” author = “haha077” mode = “dark”
+写文章
+hugo new posts/hello.md
+编辑生成的文件 content/posts/hello.md
+本地局域网预览写好的文章
+hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-01T04:06:44-04:00">
+    <meta property="article:modified_time" content="2025-07-01T04:06:44-04:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hugo&#43;github搭建自己的blog">
+  <meta name="twitter:description" content="在debian上安装
+wget https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz
+sudo mv hugo /usr/local/bin/
+hugo version
+初始化
+hugo new site blog cd blog
+去hugo官网找一个自己喜欢的theme，然后安装
+git init # 如果还没 git init git submodule add https://github.com/knadh/hugo-ink.git themes/ink
+配置主题hugo.toml文件
+baseURL = “https://haha077.github.io/blog/&#34; title = “我的博客” theme = “ink” languageCode = “zh-cn”
+paginate = 10
+[params] subtitle = “一个极简 Hugo 博客” author = “haha077” mode = “dark”
+写文章
+hugo new posts/hello.md
+编辑生成的文件 content/posts/hello.md
+本地局域网预览写好的文章
+hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
+<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
+
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="https://haha077.github.io/blog/css/dark.css" />
+	<script src="https://haha077.github.io/blog/js/main.js"></script>
+</head>
+<div class="dark-toggle-block">
+			<button id="dark-mode-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
+				🌙
+			</button>
+		</div>
+
+<body>
+
+
+	
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://haha077.github.io/blog/">
+				<img src="/blog/avatar.png" alt="Haha&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://haha077.github.io/blog/">Haha&#39;s Blog</a></h1>
+	<div class="site-description"><p>勤思、反思、三思；勤动、无为、恬淡</p><nav class="nav social">
+			<ul class="flat"><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+    <div class="post-header">
+    
+    <div class="meta">
+        <div class="date">
+            <span class="day">01</span>
+            <span class="rest">Jul 2025</span>
+        </div>
+    </div>
+    
+    <div class="matter">
+        <h1 class="title">Hugo&#43;github搭建自己的blog</h1>
+    </div>
+</div>
+
+
+    
+    
+    <p>在debian上安装</p>
+<p>wget <a href="https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz">https://github.com/gohugoio/hugo/releases/download/v0.125.6/hugo_extended_0.125.6_Linux-64bit.tar.gz</a>
+tar -xvzf hugo_extended_0.125.6_Linux-64bit.tar.gz</p>
+<p>sudo mv hugo /usr/local/bin/</p>
+<p>hugo version</p>
+<p>初始化</p>
+<p>hugo new site blog
+cd blog</p>
+<p>去hugo官网找一个自己喜欢的theme，然后安装</p>
+<p>git init  # 如果还没 git init
+git submodule add <a href="https://github.com/knadh/hugo-ink.git">https://github.com/knadh/hugo-ink.git</a> themes/ink</p>
+<p>配置主题hugo.toml文件</p>
+<p>baseURL = &ldquo;<a href="https://haha077.github.io/blog/%22">https://haha077.github.io/blog/&quot;</a>
+title = &ldquo;我的博客&rdquo;
+theme = &ldquo;ink&rdquo;
+languageCode = &ldquo;zh-cn&rdquo;</p>
+<p>paginate = 10</p>
+<p>[params]
+subtitle = &ldquo;一个极简 Hugo 博客&rdquo;
+author = &ldquo;haha077&rdquo;
+mode = &ldquo;dark&rdquo;</p>
+<p>写文章</p>
+<p>hugo new posts/hello.md</p>
+<p>编辑生成的文件 <code>content/posts/hello.md</code></p>
+<p>本地局域网预览写好的文章</p>
+<p>hugo server -D &ndash;bind 192.168.x.x &ndash;baseURL <a href="http://192.168.x.x:1313/">http://192.168.x.x:1313/</a> &ndash;appendPort=false</p>
+<p>预览没问题开始生成静态网页</p>
+<p>hugo</p>
+<h3 id="如果还是失败推荐直接使用-ssh永久免密码">如果还是失败：推荐直接使用 SSH（永久免密码）</h3>
+<ol>
+<li>生成 SSH 密钥：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+ssh-keygen -t ed25519 -C &#34;haha077@github.com&#34;
+</code></pre><p>一路回车。生成后查看公钥：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+cat ~/.ssh/id_ed25519.pub
+</code></pre><ol>
+<li>复制输出的公钥内容</li>
+<li>打开 GitHub → <a href="https://github.com/settings/ssh/new">SSH settings</a> → 添加公钥
+填入刚复制的公钥，起个名字</li>
+<li>然后切换远程地址为 SSH：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+git remote set-url origin git@github.com:haha077/blog.git
+</code></pre><ol>
+<li>再次 push：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+git push -u origin main
+</code></pre><p>✅ 成功，不再需要用户名密码！</p>
+<p>自动化部署方案</p>
+<h2 id="-总结你的三种选择">✅ 总结：你的三种选择</h2>
+<table>
+  <thead>
+      <tr>
+          <th>方式</th>
+          <th>分支</th>
+          <th>结构清晰</th>
+          <th>推荐度</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>main + docs/</code></td>
+          <td>1 个分支</td>
+          <td>✅</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>Hugo 输出到 <code>docs/</code>，最省事</td>
+      </tr>
+      <tr>
+          <td><code>main + gh-pages</code></td>
+          <td>2 个分支</td>
+          <td>✅✅</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>代码/页面分离，自动部署</td>
+      </tr>
+      <tr>
+          <td><code>main</code> 根目录混合</td>
+          <td>1 个分支</td>
+          <td>❌</td>
+          <td>⭐</td>
+          <td>不推荐，文件混乱</td>
+      </tr>
+  </tbody>
+</table>
+<p>我选择第一种</p>
+<h2 id="-第一步修改-hugo-配置文件">✅ 第一步：修改 Hugo 配置文件</h2>
+<p>编辑 <code>hugo.toml</code> 或 <code>config.toml</code>，添加或修改以下内容：</p>
+<pre tabindex="0"><code>toml复制代码baseURL = &#34;https://haha077.github.io/blog/&#34;
+publishDir = &#34;docs&#34;
+</code></pre><blockquote>
+<p>👆 如果你用的是 <code>hugo.yaml</code>，请改写成：</p>
+<pre tabindex="0"><code>yaml复制代码baseURL: &#34;https://haha077.github.io/blog/&#34;
+publishDir: &#34;docs&#34;
+</code></pre></blockquote>
+<hr>
+<h2 id="-第二步重新构建网站输出到-docs">✅ 第二步：重新构建网站输出到 <code>docs/</code></h2>
+<pre tabindex="0"><code>bash复制代码cd ~/blog
+hugo
+</code></pre><p>这会把博客的静态页面输出到 <code>docs/</code> 文件夹。</p>
+<hr>
+<h2 id="-第三步提交-docs-到-main-分支">✅ 第三步：提交 <code>docs/</code> 到 main 分支</h2>
+<pre tabindex="0"><code>bash复制代码git add docs
+git commit -m &#34;构建 Hugo 博客到 docs 文件夹，用于 GitHub Pages&#34;
+git push
+</code></pre><hr>
+<h2 id="-第四步在-github-设置-pages-发布路径">✅ 第四步：在 GitHub 设置 Pages 发布路径</h2>
+<ol>
+<li>打开仓库的页面：
+👉 <a href="https://github.com/haha077/blog/settings/pages">https://github.com/haha077/blog/settings/pages</a></li>
+<li>设置：
+<ul>
+<li><strong>Source</strong>: <code>Deploy from branch</code></li>
+<li><strong>Branch</strong>: <code>main</code></li>
+<li><strong>Folder</strong>: <code>/docs</code></li>
+</ul>
+</li>
+<li>保存（Save）</li>
+</ol>
+<hr>
+<h2 id="-第五步访问你的博客">✅ 第五步：访问你的博客</h2>
+<p>几分钟后生效，打开：</p>
+<p>👉 <a href="https://haha077.github.io/blog/">https://haha077.github.io/blog/</a></p>
+<p>你应该就能看到 Hugo 生成的博客页面了 🎉</p>
+<p>后续新增文章</p>
+<h3 id="step-1创建新文章">Step 1：创建新文章</h3>
+<p>在博客根目录执行：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo new posts/twrp无法充电.md
+</code></pre><p>这会自动在 <code>content/posts/</code> 下创建一个 Markdown 文件，例如：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+content/posts/twrp无法充电.md
+</code></pre><hr>
+<h3 id="step-2编辑文章内容">Step 2：编辑文章内容</h3>
+<p>打开刚生成的文件：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+nano content/posts/twrp无法充电.md
+</code></pre><p>默认内容像这样：</p>
+<pre tabindex="0"><code>markdown复制代码---
+title: &#34;TWRP 模式无法充电&#34;
+date: 2025-07-01T10:00:00+08:00
+draft: true
+---
+
+在 Nexus 5X 上测试，TWRP 模式下无法充电……
+</code></pre><p>你可以：</p>
+<ul>
+<li>修改 <code>title</code> 和 <code>date</code></li>
+<li>删除或保留 <code>draft: true</code>（草稿状态不会被发布）</li>
+<li>填写正文内容</li>
+</ul>
+<hr>
+<h3 id="step-3去掉草稿标记发布用">Step 3：去掉草稿标记（发布用）</h3>
+<p>将：</p>
+<pre tabindex="0"><code>yaml
+
+
+复制代码
+draft: true
+</code></pre><p>改为：</p>
+<pre tabindex="0"><code>yaml
+
+
+复制代码
+draft: false
+</code></pre><p>或者直接删除这一行，Hugo 默认会发布。</p>
+<hr>
+<h3 id="step-4重新构建博客">Step 4：重新构建博客</h3>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo    # 会输出到 docs/
+</code></pre><h3 id="step-5推送到-github发布">Step 5：推送到 GitHub（发布）</h3>
+<pre tabindex="0"><code>bash复制代码git add .
+git commit -m &#34;新增文章：TWRP 模式无法充电&#34;
+git push
+</code></pre><hr>
+<h2 id="-几分钟后访问你的博客">✅ 几分钟后访问你的博客：</h2>
+<p>👉 <a href="https://haha077.github.io/blog/">https://haha077.github.io/blog/</a></p>
+<p>即可看到刚发布的文章！</p>
+<p>快速在另外一台，比如Windows电脑上同步hugo项目，写blog</p>
+<h2 id="-一次性准备步骤在新电脑上操作">✅ 一次性准备步骤（在新电脑上操作）</h2>
+<h3 id="step-1安装-hugo">Step 1：安装 Hugo</h3>
+<ol>
+<li>下载 Hugo 可执行文件：
+👉 <a href="https://github.com/gohugoio/hugo/releases">https://github.com/gohugoio/hugo/releases</a></li>
+<li>选择 <code>hugo_extended_X.X.X_windows-amd64.zip</code>（不要选不带 extended 的）</li>
+<li>解压后，把 <code>hugo.exe</code> 放入任意路径（建议加入系统环境变量）</li>
+<li>打开命令行（CMD / PowerShell），验证安装：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo version
+</code></pre><hr>
+<h3 id="step-2安装-git如未安装">Step 2：安装 Git（如未安装）</h3>
+<p>👉 <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
+<hr>
+<h3 id="step-3克隆你的博客仓库">Step 3：克隆你的博客仓库</h3>
+<p>打开 PowerShell 或 CMD，执行：</p>
+<pre tabindex="0"><code>bash复制代码git clone https://github.com/haha077/blog.git
+cd blog
+</code></pre><blockquote>
+<p>📦 这一步会下载你博客的全部源码（含 <code>docs/</code> 输出目录）</p></blockquote>
+<hr>
+<h2 id="-每次写博客时的流程可复用">✅ 每次写博客时的流程（可复用）</h2>
+<ol>
+<li>进入博客目录：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+cd blog
+</code></pre><ol>
+<li>创建新文章：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo new posts/你的文章标题.md
+</code></pre><ol>
+<li>编辑文章（可用 VSCode、Notepad++、Typora 等 Markdown 工具）</li>
+</ol>
+<p>文件在：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+content/posts/你的文章标题.md
+</code></pre><ol>
+<li>构建站点：</li>
+</ol>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo
+</code></pre><p>这会输出到 <code>docs/</code> 文件夹</p>
+<ol>
+<li>推送到 GitHub：</li>
+</ol>
+<pre tabindex="0"><code>git add .
+git commit -m &#34;新增文章：XXX&#34;
+git push
+</code></pre><ol>
+<li>等几分钟，访问博客查看：</li>
+</ol>
+<p>👉 <code>https://haha077.github.io/blog/</code></p>
+<p>写好的文章，如需要修改，操作如下：</p>
+<p>你可以像编辑本地文档一样修改已发布的 Hugo 博客文章，<strong>操作流程非常简单</strong>：</p>
+<hr>
+<h2 id="-修改已发布文章的完整流程">✅ 修改已发布文章的完整流程</h2>
+<h3 id="-打开你博客的本地项目目录">① 打开你博客的本地项目目录</h3>
+<p>例如：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+cd ~/blog
+</code></pre><p>或在 Windows 上双击打开你的 <code>blog/</code> 文件夹。</p>
+<hr>
+<h3 id="-找到你要修改的文章文件">② 找到你要修改的文章文件</h3>
+<p>路径通常是：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+content/posts/xxx.md
+</code></pre><p>例如你要修改这篇文章：</p>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+content/posts/twrp无法充电.md
+</code></pre><hr>
+<h3 id="-修改-markdown-内容">③ 修改 Markdown 内容</h3>
+<p>用你喜欢的编辑器打开修改（例如：VSCode、Typora、Notepad++ 等）
+修改完成后保存。</p>
+<hr>
+<h3 id="-重新生成静态网页">④ 重新生成静态网页</h3>
+<pre tabindex="0"><code>bash
+
+
+复制代码
+hugo
+</code></pre><p>这一步会把新内容重新输出到 <code>docs/</code>（如果你使用的是 <code>publishDir = &quot;docs&quot;</code> 模式）</p>
+<hr>
+<h3 id="-推送到-github-发布">⑤ 推送到 GitHub 发布</h3>
+<pre tabindex="0"><code>bash复制代码
+git add .
+git commit -m &#34;修改文章：TWRP 无法充电&#34;
+git push
+</code></pre><p>几分钟后，GitHub Pages 会自动刷新部署，浏览器访问：</p>
+<p>👉 <code>https://haha077.github.io/blog/posts/twrp无法充电/</code></p>
+<p>即可看到修改后的内容！</p>
+<p>++++++++++++++</p>
+<p>markdown插入图片，本地与服务器同步显示（虚拟机版本）</p>
+<p><a href="https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg">https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg</a>这样就能显示</p>
+<p>但是./blog/static/image-20250708150018657-1751958525790-1.png这样就无法显示，只需定义好对应关系就行</p>
+<p>1：首先是检查hugo.toml文件</p>
+<p>在 <code>toml</code> 中添加或修改这一行：</p>
+<pre tabindex="0"><code>toml
+
+
+复制代码
+baseURL = &#34;https://haha077.github.io/blog/&#34;
+</code></pre><p>2：✅ 正确图片引用方式（不需要写 static）</p>
+<p>你的 Hugo 项目结构像这样：</p>
+<pre tabindex="0"><code>arduino复制代码blog/
+├── static/
+│   └── image-xxx.png
+├── content/
+│   └── posts/
+│       └── your-post.md
+</code></pre><p><strong>在 Markdown 中你应该这样引用</strong>：</p>
+<pre tabindex="0"><code>markdown
+
+
+复制代码
+![示意图](/blog/image-20250708150018657-1751958525790-1.png)
+</code></pre><h3 id="-不能写成">❗ 不能写成：</h3>
+<pre tabindex="0"><code>markdown复制代码![×](/blog/static/image-2025xxxx.png) ❌
+![×](./blog/static/xxxx.png) ❌
+</code></pre><p>
+  <img src="/blog/image-20250718173932985.png" alt="image-20250718173932985">
+
+</p>
+<p>偏好设置的图片路径要设置为virtualbox和debian的共享文件夹的挂载路径，注意debian要打通和宿主机的文件夹共享，需要安装要virtualbox的增强包才行哦</p>
+<p>
+  <img src="/blog/image-20250718174340680.png" alt="image-20250718174340680">
+
+</p>
+<p>然后再手动修改（）的图片路径格式为/blog/即可</p>
+<p>这样git push后，就能正常显示图片了</p>
+
+    <hr class="footer-separator" />
+<div class="tags">
+    
+    
+    
+</div>
+
+
+
+<div class="back">
+    <a href="https://haha077.github.io/blog/"><span aria-hidden="true">← Back</span></a>
+</div>
+
+
+<div class="back">
+    
+</div>
+
+</div>
+
+	</div>
+	
+	<div class="container wrapper" style="margin-top: 2em;">
+		<section id="comments">
+			<script src="https://utteranc.es/client.js"
+					repo="haha077/blog"
+					issue-term="pathname"
+					theme="github-light"
+					crossorigin="anonymous"
+					async>
+			</script>
+		</section>
+	</div>
+
+	<canvas id="bigbang-canvas" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -1000;
+"></canvas>
+
+<script>
+(() => {
+  const canvas = document.getElementById('bigbang-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * devicePixelRatio;
+    canvas.height = H * devicePixelRatio;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  class Particle {
+    constructor() {
+      this.x = W/2;
+      this.y = H/2;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.radius = Math.random() * 3 + 1;
+      this.speed = Math.random() * 4 + 2;
+      this.angle = Math.random() * Math.PI * 2;
+      this.vx = Math.cos(this.angle) * this.speed;
+      this.vy = Math.sin(this.angle) * this.speed;
+      this.life = 60 + Math.random() * 30;
+      this.alpha = 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life--;
+      this.alpha = this.life / 90;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${hexToRgb(this.color)},${this.alpha.toFixed(2)})`;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex.slice(1), 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `${r},${g},${b}`;
+  }
+
+  function createParticles(num) {
+    for(let i=0; i<num; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach((p, i) => {
+      p.update();
+      p.draw();
+      if (p.life <= 0) particles.splice(i, 1);
+    });
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  
+  setInterval(() => {
+    createParticles(80);
+  }, 10000);
+
+  animate();
+})();
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+    const root = document.documentElement;
+
+    function initDarkMode() {
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        root.classList.add('dark');
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (root.classList.contains('dark')) {
+        root.classList.remove('dark');
+        localStorage.setItem('darkMode', 'disabled');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('darkMode', 'enabled');
+      }
+    });
+
+    initDarkMode();
+  });
+</script>
+
+<div class="footer wrapper">
+	<nav class="nav">
+		<div>2025 </div>
+		
+	</nav>
+</div>
+
+	
+</body>
+
+</html>

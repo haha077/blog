@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>搜索结果</title>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+</head>
+<body>
+  <h1>搜索结果</h1>
+  <ul id="search-results"></ul>
+
+  <script>
+    // 读取搜索参数
+    const query = new URLSearchParams(window.location.search).get('q');
+    if (!query) {
+      document.getElementById('search-results').innerHTML = "<li>请输入关键词。</li>";
+    } else {
+      fetch("/blog/index.json")
+        .then(res => res.json())
+        .then(data => {
+          const fuse = new Fuse(data, {
+            keys: ["title", "summary", "content"],
+            threshold: 0.3,
+          });
+
+          const results = fuse.search(query);
+
+          if (results.length === 0) {
+            document.getElementById('search-results').innerHTML = "<li>没有找到相关文章。</li>";
+          } else {
+            const html = results.map(r => {
+              return `<li><a href="${r.item.permalink}">${r.item.title}</a></li>`;
+            }).join("");
+            document.getElementById('search-results').innerHTML = html;
+          }
+        });
+    }
+  </script>
+</body>
+</html>
