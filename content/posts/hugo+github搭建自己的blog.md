@@ -340,13 +340,21 @@ cd blog
 
 直接用typroa创建md稳定，开头格式统一为：
 
-`+++
+```
++++
 title = "套 WARP 和 Cloudflare Tunnel 区别"
 draft = false
 date = 2026-02-02
-+++`
++++
+```
 
-md用如果要插入图片，直接把图片上传到图床，然后![img](图片地址)按换个格式插入即可
+md用如果要插入图片，直接把图片上传到图床，
+
+```
+![img](图片地址)
+```
+
+然后按上面格式插入即可
 
 md文档写好之后，放入：C:\Program Files\hugo\blog\content\posts目录
 
@@ -381,8 +389,7 @@ git config --global user.email "your_github_email@example.com"
 
 如果不想每次都手动输入指令，也可以按下面的脚本创建一个.bat
 
-
-
+```
 @echo off
 chcp 65001
 
@@ -416,8 +423,7 @@ git push
 echo.
 echo 博客发布完成！
 pause
-
-
+```
 
 ++++++++++++++
 
@@ -433,9 +439,6 @@ https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg这样就能显示
 
 ```
 toml
-
-
- 
 baseURL = "https://haha077.github.io/blog/"
 ```
 

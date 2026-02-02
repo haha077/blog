@@ -24,7 +24,7 @@ hugo new posts/hello.md
 hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
   <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
-  <meta itemprop="wordCount" content="621"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
+  <meta itemprop="wordCount" content="622"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
   <meta property="og:description" content="在debian上安装
@@ -351,11 +351,14 @@ cd blog
 <h2 id="-每次写博客时的流程可复用">✅ 每次写博客时的流程（可复用）</h2>
 <p>我的github博客是hugo → 生成到 docs/（非**<code>public/</code>**） → git push</p>
 <p>直接用typroa创建md稳定，开头格式统一为：</p>
-<p><code>+++ title = &quot;套 WARP 和 Cloudflare Tunnel 区别&quot; draft = false date = 2026-02-02 +++</code></p>
-<p>md用如果要插入图片，直接把图片上传到图床，然后
-  <img src="%e5%9b%be%e7%89%87%e5%9c%b0%e5%9d%80" alt="img">
-
-按换个格式插入即可</p>
+<pre tabindex="0"><code>+++
+title = &#34;套 WARP 和 Cloudflare Tunnel 区别&#34;
+draft = false
+date = 2026-02-02
++++
+</code></pre><p>md用如果要插入图片，直接把图片上传到图床，</p>
+<pre tabindex="0"><code>![img](图片地址)
+</code></pre><p>然后按上面格式插入即可</p>
 <p>md文档写好之后，放入：C:\Program Files\hugo\blog\content\posts目录</p>
 <p>然后构建站点：</p>
 <pre tabindex="0"><code> hugo
@@ -374,44 +377,46 @@ git config &ndash;global user.email &ldquo;<a href="mailto:your_github_email@exa
 <p>等几分钟，访问博客查看：</p>
 <p>👉 <code>https://haha077.github.io/blog/</code></p>
 <p>如果不想每次都手动输入指令，也可以按下面的脚本创建一个.bat</p>
-<p>@echo off
-chcp 65001</p>
-<p>REM === 路径一定要加引号 ===
-set &ldquo;HUGO_EXE=C:\Program Files\hugo\hugo.exe&rdquo;
-set &ldquo;BLOG_DIR=C:\Program Files\hugo\blog&rdquo;
+<pre tabindex="0"><code>@echo off
+chcp 65001
+
+REM === 路径一定要加引号 ===
+set &#34;HUGO_EXE=C:\Program Files\hugo\hugo.exe&#34;
+set &#34;BLOG_DIR=C:\Program Files\hugo\blog&#34;
 set http_proxy=http://127.0.0.1:10810
-set https_proxy=http://127.0.0.1:10810</p>
-<p>REM === 进入博客目录 ===
-cd /d &ldquo;%BLOG_DIR%&rdquo;
+set https_proxy=http://127.0.0.1:10810
+
+REM === 进入博客目录 ===
+cd /d &#34;%BLOG_DIR%&#34;
 if errorlevel 1 (
-echo 无法进入博客目录
-pause
-exit /b
-)</p>
-<p>REM === 构建 Hugo（输出到 docs） ===
-&ldquo;%HUGO_EXE%&rdquo;
+    echo 无法进入博客目录
+    pause
+    exit /b
+)
+
+REM === 构建 Hugo（输出到 docs） ===
+&#34;%HUGO_EXE%&#34;
 if errorlevel 1 (
-echo Hugo 构建失败
-pause
-exit /b
-)</p>
-<p>REM === Git 提交并推送 ===
+    echo Hugo 构建失败
+    pause
+    exit /b
+)
+
+REM === Git 提交并推送 ===
 git add .
-git commit -m &ldquo;update blog %date% %time%&rdquo;
-git push</p>
-<p>echo.
+git commit -m &#34;update blog %date% %time%&#34;
+git push
+
+echo.
 echo 博客发布完成！
-pause</p>
-<p>++++++++++++++</p>
+pause
+</code></pre><p>++++++++++++++</p>
 <p>markdown插入图片，本地与服务器同步显示（虚拟机版本）</p>
 <p><a href="https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg">https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg</a>这样就能显示</p>
 <p>但是./blog/static/image-20250708150018657-1751958525790-1.png这样就无法显示，只需定义好对应关系就行</p>
 <p>1：首先是检查hugo.toml文件</p>
 <p>在 <code>toml</code> 中添加或修改这一行：</p>
 <pre tabindex="0"><code>toml
-
-
- 
 baseURL = &#34;https://haha077.github.io/blog/&#34;
 </code></pre><p>2：✅ 正确图片引用方式（不需要写 static）</p>
 <p>你的 Hugo 项目结构像这样：</p>
