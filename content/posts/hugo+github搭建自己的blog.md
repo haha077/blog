@@ -303,23 +303,21 @@ git push
 
 1. 下载 Hugo 可执行文件：
     👉 https://github.com/gohugoio/hugo/releases
-2. 选择 `hugo_extended_X.X.X_windows-amd64.zip`（不要选不带 extended 的）
+2. 选择 `hugo_extended_X.X.X_windows-amd64.zip`（不要选不带 extended 的和不要选 withdeploy。）
 3. 解压后，把 `hugo.exe` 放入任意路径（建议加入系统环境变量）
 4. 打开命令行（CMD / PowerShell），验证安装：
 
 ```
- 
-
-
- 
-hugo version
+ hugo version
 ```
 
 ------
 
 ### Step 2：安装 Git（如未安装）
 
-👉 https://git-scm.com/download/win
+👉 https://git-scm.com/download/win #一路next即可
+
+git --version
 
 ------
 
@@ -338,46 +336,26 @@ cd blog
 
 ## ✅ 每次写博客时的流程（可复用）
 
-1. 进入博客目录：
+我的github博客是hugo → 生成到 docs/（非**`public/`**） → git push
+
+直接用typroa创建md稳定，开头格式统一为：
+
+`+++
+title = "套 WARP 和 Cloudflare Tunnel 区别"
+draft = false
+date = 2026-02-02
++++`
+
+md用如果要插入图片，直接把图片上传到图床，然后![img](图片地址)按换个格式插入即可
+
+md文档写好之后，放入：C:\Program Files\hugo\blog\content\posts目录
+
+然后构建站点：
 
 ```
- 
-
-
- 
-cd blog
-```
-
-1. 创建新文章：
-
-```
- 
-
-
- 
-hugo new posts/你的文章标题.md
-```
-
-1. 编辑文章（可用 VSCode、Notepad++、Typora 等 Markdown 工具）
-
-文件在：
-
-```
- 
-
-
- 
-content/posts/你的文章标题.md
-```
-
-1. 构建站点：
-
-```
- 
-
-
- 
-hugo
+ hugo
+ 或者用绝对路径
+ "C:\Program Files\hugo\hugo.exe"
 ```
 
 这会输出到 `docs/` 文件夹
@@ -386,101 +364,58 @@ hugo
 
 ```
 git add .
-git commit -m "新增文章：XXX"
+git commit -m "update blog"
 git push
 ```
 
-1. 等几分钟，访问博客查看：
+另外如果是首次还需要登录授权
+
+git config --global user.name "haha077"
+git config --global user.email "your_github_email@example.com"
+
+等几分钟，访问博客查看：
 
 👉 `https://haha077.github.io/blog/`
 
 
 
+如果不想每次都手动输入指令，也可以按下面的脚本创建一个.bat
 
 
-写好的文章，如需要修改，操作如下：
 
-你可以像编辑本地文档一样修改已发布的 Hugo 博客文章，**操作流程非常简单**：
+@echo off
+chcp 65001
 
-------
+REM === 路径一定要加引号 ===
+set "HUGO_EXE=C:\Program Files\hugo\hugo.exe"
+set "BLOG_DIR=C:\Program Files\hugo\blog"
+set http_proxy=http://127.0.0.1:10810
+set https_proxy=http://127.0.0.1:10810
 
-## ✅ 修改已发布文章的完整流程
+REM === 进入博客目录 ===
+cd /d "%BLOG_DIR%"
+if errorlevel 1 (
+    echo 无法进入博客目录
+    pause
+    exit /b
+)
 
-### ① 打开你博客的本地项目目录
+REM === 构建 Hugo（输出到 docs） ===
+"%HUGO_EXE%"
+if errorlevel 1 (
+    echo Hugo 构建失败
+    pause
+    exit /b
+)
 
-例如：
-
-```
- 
-
-
- 
-cd ~/blog
-```
-
-或在 Windows 上双击打开你的 `blog/` 文件夹。
-
-------
-
-### ② 找到你要修改的文章文件
-
-路径通常是：
-
-```
- 
-
-
- 
-content/posts/xxx.md
-```
-
-例如你要修改这篇文章：
-
-```
- 
-
-
- 
-content/posts/twrp无法充电.md
-```
-
-------
-
-### ③ 修改 Markdown 内容
-
-用你喜欢的编辑器打开修改（例如：VSCode、Typora、Notepad++ 等）
- 修改完成后保存。
-
-------
-
-### ④ 重新生成静态网页
-
-```
- 
-
-
- 
-hugo
-```
-
-这一步会把新内容重新输出到 `docs/`（如果你使用的是 `publishDir = "docs"` 模式）
-
-------
-
-### ⑤ 推送到 GitHub 发布
-
-```
-
+REM === Git 提交并推送 ===
 git add .
-git commit -m "修改文章：TWRP 无法充电"
+git commit -m "update blog %date% %time%"
 git push
-```
 
-几分钟后，GitHub Pages 会自动刷新部署，浏览器访问：
-
-👉 `https://haha077.github.io/blog/posts/twrp无法充电/`
-
-即可看到修改后的内容！
+echo.
+echo 博客发布完成！
+pause
 
 
 

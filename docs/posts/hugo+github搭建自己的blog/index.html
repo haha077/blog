@@ -24,7 +24,7 @@ hugo new posts/hello.md
 hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
   <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
-  <meta itemprop="wordCount" content="571"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
+  <meta itemprop="wordCount" content="621"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
   <meta property="og:description" content="在debian上安装
@@ -330,18 +330,15 @@ git push
 <ol>
 <li>下载 Hugo 可执行文件：
 👉 <a href="https://github.com/gohugoio/hugo/releases">https://github.com/gohugoio/hugo/releases</a></li>
-<li>选择 <code>hugo_extended_X.X.X_windows-amd64.zip</code>（不要选不带 extended 的）</li>
+<li>选择 <code>hugo_extended_X.X.X_windows-amd64.zip</code>（不要选不带 extended 的和不要选 withdeploy。）</li>
 <li>解压后，把 <code>hugo.exe</code> 放入任意路径（建议加入系统环境变量）</li>
 <li>打开命令行（CMD / PowerShell），验证安装：</li>
 </ol>
-<pre tabindex="0"><code> 
-
-
- 
-hugo version
+<pre tabindex="0"><code> hugo version
 </code></pre><hr>
 <h3 id="step-2安装-git如未安装">Step 2：安装 Git（如未安装）</h3>
-<p>👉 <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
+<p>👉 <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> #一路next即可</p>
+<p>git &ndash;version</p>
 <hr>
 <h3 id="step-3克隆你的博客仓库">Step 3：克隆你的博客仓库</h3>
 <p>打开 PowerShell 或 CMD，执行：</p>
@@ -352,97 +349,59 @@ cd blog
 </blockquote>
 <hr>
 <h2 id="-每次写博客时的流程可复用">✅ 每次写博客时的流程（可复用）</h2>
-<ol>
-<li>进入博客目录：</li>
-</ol>
-<pre tabindex="0"><code> 
+<p>我的github博客是hugo → 生成到 docs/（非**<code>public/</code>**） → git push</p>
+<p>直接用typroa创建md稳定，开头格式统一为：</p>
+<p><code>+++ title = &quot;套 WARP 和 Cloudflare Tunnel 区别&quot; draft = false date = 2026-02-02 +++</code></p>
+<p>md用如果要插入图片，直接把图片上传到图床，然后
+  <img src="%e5%9b%be%e7%89%87%e5%9c%b0%e5%9d%80" alt="img">
 
-
- 
-cd blog
-</code></pre><ol>
-<li>创建新文章：</li>
-</ol>
-<pre tabindex="0"><code> 
-
-
- 
-hugo new posts/你的文章标题.md
-</code></pre><ol>
-<li>编辑文章（可用 VSCode、Notepad++、Typora 等 Markdown 工具）</li>
-</ol>
-<p>文件在：</p>
-<pre tabindex="0"><code> 
-
-
- 
-content/posts/你的文章标题.md
-</code></pre><ol>
-<li>构建站点：</li>
-</ol>
-<pre tabindex="0"><code> 
-
-
- 
-hugo
+按换个格式插入即可</p>
+<p>md文档写好之后，放入：C:\Program Files\hugo\blog\content\posts目录</p>
+<p>然后构建站点：</p>
+<pre tabindex="0"><code> hugo
+ 或者用绝对路径
+ &#34;C:\Program Files\hugo\hugo.exe&#34;
 </code></pre><p>这会输出到 <code>docs/</code> 文件夹</p>
 <ol>
 <li>推送到 GitHub：</li>
 </ol>
 <pre tabindex="0"><code>git add .
-git commit -m &#34;新增文章：XXX&#34;
+git commit -m &#34;update blog&#34;
 git push
-</code></pre><ol>
-<li>等几分钟，访问博客查看：</li>
-</ol>
+</code></pre><p>另外如果是首次还需要登录授权</p>
+<p>git config &ndash;global user.name &ldquo;haha077&rdquo;
+git config &ndash;global user.email &ldquo;<a href="mailto:your_github_email@example.com">your_github_email@example.com</a>&rdquo;</p>
+<p>等几分钟，访问博客查看：</p>
 <p>👉 <code>https://haha077.github.io/blog/</code></p>
-<p>写好的文章，如需要修改，操作如下：</p>
-<p>你可以像编辑本地文档一样修改已发布的 Hugo 博客文章，<strong>操作流程非常简单</strong>：</p>
-<hr>
-<h2 id="-修改已发布文章的完整流程">✅ 修改已发布文章的完整流程</h2>
-<h3 id="-打开你博客的本地项目目录">① 打开你博客的本地项目目录</h3>
-<p>例如：</p>
-<pre tabindex="0"><code> 
-
-
- 
-cd ~/blog
-</code></pre><p>或在 Windows 上双击打开你的 <code>blog/</code> 文件夹。</p>
-<hr>
-<h3 id="-找到你要修改的文章文件">② 找到你要修改的文章文件</h3>
-<p>路径通常是：</p>
-<pre tabindex="0"><code> 
-
-
- 
-content/posts/xxx.md
-</code></pre><p>例如你要修改这篇文章：</p>
-<pre tabindex="0"><code> 
-
-
- 
-content/posts/twrp无法充电.md
-</code></pre><hr>
-<h3 id="-修改-markdown-内容">③ 修改 Markdown 内容</h3>
-<p>用你喜欢的编辑器打开修改（例如：VSCode、Typora、Notepad++ 等）
-修改完成后保存。</p>
-<hr>
-<h3 id="-重新生成静态网页">④ 重新生成静态网页</h3>
-<pre tabindex="0"><code> 
-
-
- 
-hugo
-</code></pre><p>这一步会把新内容重新输出到 <code>docs/</code>（如果你使用的是 <code>publishDir = &quot;docs&quot;</code> 模式）</p>
-<hr>
-<h3 id="-推送到-github-发布">⑤ 推送到 GitHub 发布</h3>
-<pre tabindex="0"><code>
+<p>如果不想每次都手动输入指令，也可以按下面的脚本创建一个.bat</p>
+<p>@echo off
+chcp 65001</p>
+<p>REM === 路径一定要加引号 ===
+set &ldquo;HUGO_EXE=C:\Program Files\hugo\hugo.exe&rdquo;
+set &ldquo;BLOG_DIR=C:\Program Files\hugo\blog&rdquo;
+set http_proxy=http://127.0.0.1:10810
+set https_proxy=http://127.0.0.1:10810</p>
+<p>REM === 进入博客目录 ===
+cd /d &ldquo;%BLOG_DIR%&rdquo;
+if errorlevel 1 (
+echo 无法进入博客目录
+pause
+exit /b
+)</p>
+<p>REM === 构建 Hugo（输出到 docs） ===
+&ldquo;%HUGO_EXE%&rdquo;
+if errorlevel 1 (
+echo Hugo 构建失败
+pause
+exit /b
+)</p>
+<p>REM === Git 提交并推送 ===
 git add .
-git commit -m &#34;修改文章：TWRP 无法充电&#34;
-git push
-</code></pre><p>几分钟后，GitHub Pages 会自动刷新部署，浏览器访问：</p>
-<p>👉 <code>https://haha077.github.io/blog/posts/twrp无法充电/</code></p>
-<p>即可看到修改后的内容！</p>
+git commit -m &ldquo;update blog %date% %time%&rdquo;
+git push</p>
+<p>echo.
+echo 博客发布完成！
+pause</p>
 <p>++++++++++++++</p>
 <p>markdown插入图片，本地与服务器同步显示（虚拟机版本）</p>
 <p><a href="https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg">https://haha077.github.io/blog/64eb5aef2743f81.png_e1080.jpg</a>这样就能显示</p>
