@@ -23,7 +23,7 @@ https://gitlab.com/fscarmen/warp  #vps上安装这个项目一键脚本安装
 
 最终完成后，效果如下图：
 
-![image-20260202112722276](C:\Users\Administrator\Documents\image\image-20260202112722276.png)
+![img](https://i.imgur.com/YAn1LCK.png)
 
 | 你的核心目标           | 更合适的方案 |
 | ---------------------- | ------------ |

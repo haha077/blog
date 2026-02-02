@@ -4,6 +4,8 @@ chcp 65001
 REM === 路径一定要加引号 ===
 set "HUGO_EXE=C:\Program Files\hugo\hugo.exe"
 set "BLOG_DIR=C:\Program Files\hugo\blog"
+set http_proxy=http://127.0.0.1:10810
+set https_proxy=http://127.0.0.1:10810
 
 REM === 进入博客目录 ===
 cd /d "%BLOG_DIR%"
