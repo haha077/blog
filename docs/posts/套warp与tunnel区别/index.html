@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>套 WARP 和 Cloudflare Tunnel 区别 - Haha&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="套 WARP 和 Cloudflare Tunnel 区别">
+  <meta itemprop="description" content="https://gitlab.com/fscarmen/warp #vps上安装这个项目一键脚本安装
+wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp; bash menu.sh
+选2 Chinese，然后选13（安装 wireproxy，让 WARP 在本地创建一个 socks5 代理 (bash menu.sh w)
+完成后脚本会自动：
+下载wireproxy二进制（Go编译，无需apt）。 注册WARP账号。 生成WireGuard conf。 启动SOCKS5代理（默认127.0.0.1:40000，或提示端口）。 最后记得直接改Xray config.json的outbounds加socks到这个端口，routing国外走warp（如之前说的）
+最终完成后，效果如下图：
+你的核心目标 更合适的方案 隐藏 VPS 出口 IP WARP 隐藏 VPS 入口 IP Tunnel 抗扫描 / 不暴露端口 Tunnel 减少风控（像普通用户） WARP 稳定性优先 Tunnel 封号风险最低 Tunnel 追求“伪装感” WARP 长期跑 Tunnel 二、本质差异（非常关键） 🟦 WARP 是什么？ “给 VPS 套一个 Cloudflare 的加密出口”
+改变的是 出口 不改变入口 Xray 仍然暴露 443（或被扫） 🟧 Cloudflare Tunnel 是什么？ “让 VPS 主动连 Cloudflare，不开任何公网端口”">
+  <meta itemprop="datePublished" content="2026-02-02T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2026-02-02T00:00:00+00:00">
+  <meta itemprop="wordCount" content="123"><meta property="og:url" content="https://haha077.github.io/blog/posts/%E5%A5%97warp%E4%B8%8Etunnel%E5%8C%BA%E5%88%AB/">
+  <meta property="og:site_name" content="Haha&#39;s Blog">
+  <meta property="og:title" content="套 WARP 和 Cloudflare Tunnel 区别">
+  <meta property="og:description" content="https://gitlab.com/fscarmen/warp #vps上安装这个项目一键脚本安装
+wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp; bash menu.sh
+选2 Chinese，然后选13（安装 wireproxy，让 WARP 在本地创建一个 socks5 代理 (bash menu.sh w)
+完成后脚本会自动：
+下载wireproxy二进制（Go编译，无需apt）。 注册WARP账号。 生成WireGuard conf。 启动SOCKS5代理（默认127.0.0.1:40000，或提示端口）。 最后记得直接改Xray config.json的outbounds加socks到这个端口，routing国外走warp（如之前说的）
+最终完成后，效果如下图：
+你的核心目标 更合适的方案 隐藏 VPS 出口 IP WARP 隐藏 VPS 入口 IP Tunnel 抗扫描 / 不暴露端口 Tunnel 减少风控（像普通用户） WARP 稳定性优先 Tunnel 封号风险最低 Tunnel 追求“伪装感” WARP 长期跑 Tunnel 二、本质差异（非常关键） 🟦 WARP 是什么？ “给 VPS 套一个 Cloudflare 的加密出口”
+改变的是 出口 不改变入口 Xray 仍然暴露 443（或被扫） 🟧 Cloudflare Tunnel 是什么？ “让 VPS 主动连 Cloudflare，不开任何公网端口”">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-02T00:00:00+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="套 WARP 和 Cloudflare Tunnel 区别">
+  <meta name="twitter:description" content="https://gitlab.com/fscarmen/warp #vps上安装这个项目一键脚本安装
+wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp; bash menu.sh
+选2 Chinese，然后选13（安装 wireproxy，让 WARP 在本地创建一个 socks5 代理 (bash menu.sh w)
+完成后脚本会自动：
+下载wireproxy二进制（Go编译，无需apt）。 注册WARP账号。 生成WireGuard conf。 启动SOCKS5代理（默认127.0.0.1:40000，或提示端口）。 最后记得直接改Xray config.json的outbounds加socks到这个端口，routing国外走warp（如之前说的）
+最终完成后，效果如下图：
+你的核心目标 更合适的方案 隐藏 VPS 出口 IP WARP 隐藏 VPS 入口 IP Tunnel 抗扫描 / 不暴露端口 Tunnel 减少风控（像普通用户） WARP 稳定性优先 Tunnel 封号风险最低 Tunnel 追求“伪装感” WARP 长期跑 Tunnel 二、本质差异（非常关键） 🟦 WARP 是什么？ “给 VPS 套一个 Cloudflare 的加密出口”
+改变的是 出口 不改变入口 Xray 仍然暴露 443（或被扫） 🟧 Cloudflare Tunnel 是什么？ “让 VPS 主动连 Cloudflare，不开任何公网端口”">
+<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
+
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="https://haha077.github.io/blog/css/dark.css" />
+	<script src="https://haha077.github.io/blog/js/main.js"></script>
+</head>
+<div class="dark-toggle-block">
+			<button id="dark-mode-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
+				🌙
+			</button>
+		</div>
+
+<body>
+
+
+	
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://haha077.github.io/blog/">
+				<img src="/blog/avatar.png" alt="Haha&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://haha077.github.io/blog/">Haha&#39;s Blog</a></h1>
+	<div class="site-description"><p>勤思、反思、三思；勤动、无为、恬淡</p><nav class="nav social">
+			<ul class="flat"><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+    <div class="post-header">
+    
+    <div class="meta">
+        <div class="date">
+            <span class="day">02</span>
+            <span class="rest">Feb 2026</span>
+        </div>
+    </div>
+    
+    <div class="matter">
+        <h1 class="title">套 WARP 和 Cloudflare Tunnel 区别</h1>
+    </div>
+</div>
+
+
+    
+    
+    <p><a href="https://gitlab.com/fscarmen/warp">https://gitlab.com/fscarmen/warp</a>  #vps上安装这个项目一键脚本安装</p>
+<p><code>wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp; bash menu.sh</code></p>
+<p>选2 Chinese，然后选13（安装 wireproxy，让 WARP 在本地创建一个 socks5 代理 (bash menu.sh w)</p>
+<p>完成后脚本会自动：</p>
+<ul>
+<li>下载wireproxy二进制（Go编译，无需apt）。</li>
+<li>注册WARP账号。</li>
+<li>生成WireGuard conf。</li>
+<li>启动SOCKS5代理（默认127.0.0.1:40000，或提示端口）。</li>
+</ul>
+<p>最后记得直接改Xray config.json的outbounds加socks到这个端口，routing国外走warp（如之前说的）</p>
+<p>最终完成后，效果如下图：</p>
+<p>
+  <img src="C:%5cUsers%5cAdministrator%5cDocuments%5cimage%5cimage-20260202112722276.png" alt="image-20260202112722276">
+
+</p>
+<table>
+  <thead>
+      <tr>
+          <th>你的核心目标</th>
+          <th>更合适的方案</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>隐藏 VPS 出口 IP</td>
+          <td><strong>WARP</strong></td>
+      </tr>
+      <tr>
+          <td>隐藏 VPS 入口 IP</td>
+          <td><strong>Tunnel</strong></td>
+      </tr>
+      <tr>
+          <td>抗扫描 / 不暴露端口</td>
+          <td><strong>Tunnel</strong></td>
+      </tr>
+      <tr>
+          <td>减少风控（像普通用户）</td>
+          <td><strong>WARP</strong></td>
+      </tr>
+      <tr>
+          <td>稳定性优先</td>
+          <td><strong>Tunnel</strong></td>
+      </tr>
+      <tr>
+          <td>封号风险最低</td>
+          <td><strong>Tunnel</strong></td>
+      </tr>
+      <tr>
+          <td>追求“伪装感”</td>
+          <td><strong>WARP</strong></td>
+      </tr>
+      <tr>
+          <td>长期跑</td>
+          <td><strong>Tunnel</strong></td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="二本质差异非常关键">二、本质差异（非常关键）</h1>
+<h3 id="-warp-是什么">🟦 WARP 是什么？</h3>
+<blockquote>
+<p><strong>“给 VPS 套一个 Cloudflare 的加密出口”</strong></p>
+</blockquote>
+<ul>
+<li>改变的是 <strong>出口</strong></li>
+<li>不改变入口</li>
+<li>Xray 仍然暴露 443（或被扫）</li>
+</ul>
+<h3 id="-cloudflare-tunnel-是什么">🟧 Cloudflare Tunnel 是什么？</h3>
+<blockquote>
+<p><strong>“让 VPS 主动连 Cloudflare，不开任何公网端口”</strong></p>
+</blockquote>
+<ul>
+<li>改变的是 <strong>入口</strong></li>
+<li>出口仍然是 VPS（除非你再套 WARP）</li>
+</ul>
+<h1 id="三结构对比你一眼就懂">三、结构对比（你一眼就懂）</h1>
+<h3 id="-套-warp">① 套 WARP</h3>
+<pre tabindex="0"><code>你
+ ↓
+Xray（Reality / XHTTP）
+ ↓
+VPS
+ ↓
+WARP
+ ↓
+目标网站（Cloudflare IP）
+</code></pre><ul>
+<li>IP 查询：Cloudflare</li>
+<li>VPS 真实 IP：<strong>隐藏</strong></li>
+<li>端口：<strong>暴露</strong></li>
+</ul>
+<hr>
+<h3 id="-cloudflare-tunnel">② Cloudflare Tunnel</h3>
+<pre tabindex="0"><code>你
+ ↓
+Cloudflare
+ ↓
+Tunnel
+ ↓
+Xray（127.0.0.1）
+ ↓
+目标网站（VPS IP）
+</code></pre><ul>
+<li>IP 查询：VPS</li>
+<li>VPS 真实 IP：<strong>不暴露入口</strong></li>
+<li>端口：<strong>0 暴露</strong></li>
+</ul>
+
+    <hr class="footer-separator" />
+<div class="tags">
+    
+    
+    
+</div>
+
+
+
+<div class="back">
+    <a href="https://haha077.github.io/blog/"><span aria-hidden="true">← Back</span></a>
+</div>
+
+
+<div class="back">
+    
+</div>
+
+</div>
+
+	</div>
+	
+	<div class="container wrapper" style="margin-top: 2em;">
+		<section id="comments">
+			<script src="https://utteranc.es/client.js"
+					repo="haha077/blog"
+					issue-term="pathname"
+					theme="github-light"
+					crossorigin="anonymous"
+					async>
+			</script>
+		</section>
+	</div>
+
+	<canvas id="bigbang-canvas" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -1000;
+"></canvas>
+
+<script>
+(() => {
+  const canvas = document.getElementById('bigbang-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * devicePixelRatio;
+    canvas.height = H * devicePixelRatio;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  class Particle {
+    constructor() {
+      this.x = W/2;
+      this.y = H/2;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.radius = Math.random() * 3 + 1;
+      this.speed = Math.random() * 4 + 2;
+      this.angle = Math.random() * Math.PI * 2;
+      this.vx = Math.cos(this.angle) * this.speed;
+      this.vy = Math.sin(this.angle) * this.speed;
+      this.life = 60 + Math.random() * 30;
+      this.alpha = 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life--;
+      this.alpha = this.life / 90;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${hexToRgb(this.color)},${this.alpha.toFixed(2)})`;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex.slice(1), 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `${r},${g},${b}`;
+  }
+
+  function createParticles(num) {
+    for(let i=0; i<num; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach((p, i) => {
+      p.update();
+      p.draw();
+      if (p.life <= 0) particles.splice(i, 1);
+    });
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  
+  setInterval(() => {
+    createParticles(80);
+  }, 10000);
+
+  animate();
+})();
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+    const root = document.documentElement;
+
+    function initDarkMode() {
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        root.classList.add('dark');
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (root.classList.contains('dark')) {
+        root.classList.remove('dark');
+        localStorage.setItem('darkMode', 'disabled');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('darkMode', 'enabled');
+      }
+    });
+
+    initDarkMode();
+  });
+</script>
+
+<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026 </div>
+		
+	</nav>
+</div>
+
+	
+</body>
+
+</html>

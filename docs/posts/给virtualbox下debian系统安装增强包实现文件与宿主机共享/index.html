@@ -7,7 +7,7 @@
   <meta itemprop="name" content="给virtualbox下debian系统安装增强包实现文件与宿主机共享">
   <meta itemprop="description" content="在 Debian 系统中安装 VirtualBox 增强功能（Guest Additions），可以带来如下好处：
 自动调整分辨率 剪贴板共享（主机与虚拟机之间） 拖放文件支持 更好的鼠标集成 共享文件夹功能 ✅ 1. 安装依赖包 打开虚拟机中的终端，运行：
-bash复制代码sudo apt update sudo apt install build-essential dkms linux-headers-$(uname -r) ✅ 2. 插入 Guest Additions 光盘 在 VirtualBox 菜单栏中（虚拟机运行时）：
+bash复制代码sudo apt updatesudo apt install build-essential dkms linux-headers-$(uname -r) ✅ 2. 插入 Guest Additions 光盘 在 VirtualBox 菜单栏中（虚拟机运行时）：
 设备（Devices） &gt; 安装增强功能（Insert Guest Additions CD Image）
 在纯命令行下，输入
 lsblk
@@ -15,7 +15,7 @@ ls /media
 ls /media/$USER
 验证后，一般从输出可以看出：
 虚拟光驱设备 /dev/sr0 已存在，大小为 58.5M，说明增强功能镜像已经成功加载。 但 没有自动挂载到 /media/ 下任何位置（/media/debian 目录不存在），所以你看到 cdrom0 是空的。 ✅ 解决方法：手动挂载增强功能光盘 请按以下步骤操作：
-🔧 Step 1: 创建挂载点 bash 复制代码 sudo mkdir -p /mnt/cdrom 🔧 Step 2: 挂载 CD 镜像 bash 复制代码 sudo mount /dev/sr0 /mnt/cdrom 如果提示只读文件系统，可忽略。">
+🔧 Step 1: 创建挂载点 bash复制代码sudo mkdir -p /mnt/cdrom 🔧 Step 2: 挂载 CD 镜像 bash复制代码sudo mount /dev/sr0 /mnt/cdrom 如果提示只读文件系统，可忽略。">
   <meta itemprop="datePublished" content="2025-07-11T04:20:23-04:00">
   <meta itemprop="dateModified" content="2025-07-11T04:20:23-04:00">
   <meta itemprop="wordCount" content="117"><meta property="og:url" content="https://haha077.github.io/blog/posts/%E7%BB%99virtualbox%E4%B8%8Bdebian%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%A2%9E%E5%BC%BA%E5%8C%85%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB/">
@@ -23,7 +23,7 @@ ls /media/$USER
   <meta property="og:title" content="给virtualbox下debian系统安装增强包实现文件与宿主机共享">
   <meta property="og:description" content="在 Debian 系统中安装 VirtualBox 增强功能（Guest Additions），可以带来如下好处：
 自动调整分辨率 剪贴板共享（主机与虚拟机之间） 拖放文件支持 更好的鼠标集成 共享文件夹功能 ✅ 1. 安装依赖包 打开虚拟机中的终端，运行：
-bash复制代码sudo apt update sudo apt install build-essential dkms linux-headers-$(uname -r) ✅ 2. 插入 Guest Additions 光盘 在 VirtualBox 菜单栏中（虚拟机运行时）：
+bash复制代码sudo apt updatesudo apt install build-essential dkms linux-headers-$(uname -r) ✅ 2. 插入 Guest Additions 光盘 在 VirtualBox 菜单栏中（虚拟机运行时）：
 设备（Devices） &gt; 安装增强功能（Insert Guest Additions CD Image）
 在纯命令行下，输入
 lsblk
@@ -31,7 +31,7 @@ ls /media
 ls /media/$USER
 验证后，一般从输出可以看出：
 虚拟光驱设备 /dev/sr0 已存在，大小为 58.5M，说明增强功能镜像已经成功加载。 但 没有自动挂载到 /media/ 下任何位置（/media/debian 目录不存在），所以你看到 cdrom0 是空的。 ✅ 解决方法：手动挂载增强功能光盘 请按以下步骤操作：
-🔧 Step 1: 创建挂载点 bash 复制代码 sudo mkdir -p /mnt/cdrom 🔧 Step 2: 挂载 CD 镜像 bash 复制代码 sudo mount /dev/sr0 /mnt/cdrom 如果提示只读文件系统，可忽略。">
+🔧 Step 1: 创建挂载点 bash复制代码sudo mkdir -p /mnt/cdrom 🔧 Step 2: 挂载 CD 镜像 bash复制代码sudo mount /dev/sr0 /mnt/cdrom 如果提示只读文件系统，可忽略。">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -42,7 +42,7 @@ ls /media/$USER
   <meta name="twitter:title" content="给virtualbox下debian系统安装增强包实现文件与宿主机共享">
   <meta name="twitter:description" content="在 Debian 系统中安装 VirtualBox 增强功能（Guest Additions），可以带来如下好处：
 自动调整分辨率 剪贴板共享（主机与虚拟机之间） 拖放文件支持 更好的鼠标集成 共享文件夹功能 ✅ 1. 安装依赖包 打开虚拟机中的终端，运行：
-bash复制代码sudo apt update sudo apt install build-essential dkms linux-headers-$(uname -r) ✅ 2. 插入 Guest Additions 光盘 在 VirtualBox 菜单栏中（虚拟机运行时）：
+bash复制代码sudo apt updatesudo apt install build-essential dkms linux-headers-$(uname -r) ✅ 2. 插入 Guest Additions 光盘 在 VirtualBox 菜单栏中（虚拟机运行时）：
 设备（Devices） &gt; 安装增强功能（Insert Guest Additions CD Image）
 在纯命令行下，输入
 lsblk
@@ -50,7 +50,7 @@ ls /media
 ls /media/$USER
 验证后，一般从输出可以看出：
 虚拟光驱设备 /dev/sr0 已存在，大小为 58.5M，说明增强功能镜像已经成功加载。 但 没有自动挂载到 /media/ 下任何位置（/media/debian 目录不存在），所以你看到 cdrom0 是空的。 ✅ 解决方法：手动挂载增强功能光盘 请按以下步骤操作：
-🔧 Step 1: 创建挂载点 bash 复制代码 sudo mkdir -p /mnt/cdrom 🔧 Step 2: 挂载 CD 镜像 bash 复制代码 sudo mount /dev/sr0 /mnt/cdrom 如果提示只读文件系统，可忽略。">
+🔧 Step 1: 创建挂载点 bash复制代码sudo mkdir -p /mnt/cdrom 🔧 Step 2: 挂载 CD 镜像 bash复制代码sudo mount /dev/sr0 /mnt/cdrom 如果提示只读文件系统，可忽略。">
 <link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
 
@@ -124,7 +124,8 @@ sudo apt install build-essential dkms linux-headers-$(uname -r)
 <h3 id="-2-插入-guest-additions-光盘">✅ 2. 插入 Guest Additions 光盘</h3>
 <p>在 VirtualBox 菜单栏中（<strong>虚拟机运行时</strong>）：</p>
 <blockquote>
-<p>设备（Devices） &gt; 安装增强功能（Insert Guest Additions CD Image）</p></blockquote>
+<p>设备（Devices） &gt; 安装增强功能（Insert Guest Additions CD Image）</p>
+</blockquote>
 <p>在纯命令行下，输入</p>
 <p>lsblk</p>
 <p>ls /media</p>
