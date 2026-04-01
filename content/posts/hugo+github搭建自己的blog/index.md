@@ -87,20 +87,12 @@ cat ~/.ssh/id_ed25519.pub
 3. 然后切换远程地址为 SSH：
 
 ```
- 
-
-
- 
 git remote set-url origin git@github.com:haha077/blog.git
 ```
 
 1. 再次 push：
 
 ```
- 
-
-
- 
 git push -u origin main
 ```
 
@@ -188,20 +180,12 @@ git push
 在博客根目录执行：
 
 ```
- 
-
-
- 
 hugo new posts/twrp无法充电.md
 ```
 
 这会自动在 `content/posts/` 下创建一个 Markdown 文件，例如：
 
 ```
- 
-
-
- 
 content/posts/twrp无法充电.md
 ```
 
@@ -212,10 +196,6 @@ content/posts/twrp无法充电.md
 打开刚生成的文件：
 
 ```
- 
-
-
- 
 nano content/posts/twrp无法充电.md
 ```
 
@@ -244,20 +224,12 @@ draft: true
 将：
 
 ```
-yaml
-
-
- 
 draft: true
 ```
 
 改为：
 
 ```
-yaml
-
-
- 
 draft: false
 ```
 
@@ -268,10 +240,6 @@ draft: false
 ### Step 4：重新构建博客
 
 ```
- 
-
-
- 
 hugo    # 会输出到 docs/
 ```
 
@@ -342,10 +310,17 @@ cd blog
 
 `hugo new posts/你的标题/index.md`
 
+
+
 content/posts/
+
 └── 张雪的故事有感/                 ← 文件夹名（建议用英文或日期+标题）
-    ├── index.md                     ← 文章正文必须叫这个名字！
-    └── 微信图片_2026-04-01_153032_351.jpg   ← 图片直接放这里（或建 images/ 子文件夹）
+
+​    ├── index.md                     ← 文章正文必须叫这个名字！
+
+​    └── 微信图片_2026-04-01_153032_351.jpg   ← 图片直接放这里（或建 images/ 子文件夹）
+
+
 
 然后用typora编辑就行（编辑完之后记得把draft的值改为false）
 

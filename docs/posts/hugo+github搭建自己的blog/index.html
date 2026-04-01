@@ -169,19 +169,11 @@ cat ~/.ssh/id_ed25519.pub
 填入刚复制的公钥，起个名字</li>
 <li>然后切换远程地址为 SSH：</li>
 </ol>
-<pre tabindex="0"><code> 
-
-
- 
-git remote set-url origin git@github.com:haha077/blog.git
+<pre tabindex="0"><code>git remote set-url origin git@github.com:haha077/blog.git
 </code></pre><ol>
 <li>再次 push：</li>
 </ol>
-<pre tabindex="0"><code> 
-
-
- 
-git push -u origin main
+<pre tabindex="0"><code>git push -u origin main
 </code></pre><p>✅ 成功，不再需要用户名密码！</p>
 <p>自动化部署方案</p>
 <h2 id="-总结你的三种选择">✅ 总结：你的三种选择</h2>
@@ -261,25 +253,13 @@ git push
 <p>后续新增文章</p>
 <h3 id="step-1创建新文章">Step 1：创建新文章</h3>
 <p>在博客根目录执行：</p>
-<pre tabindex="0"><code> 
-
-
- 
-hugo new posts/twrp无法充电.md
+<pre tabindex="0"><code>hugo new posts/twrp无法充电.md
 </code></pre><p>这会自动在 <code>content/posts/</code> 下创建一个 Markdown 文件，例如：</p>
-<pre tabindex="0"><code> 
-
-
- 
-content/posts/twrp无法充电.md
+<pre tabindex="0"><code>content/posts/twrp无法充电.md
 </code></pre><hr>
 <h3 id="step-2编辑文章内容">Step 2：编辑文章内容</h3>
 <p>打开刚生成的文件：</p>
-<pre tabindex="0"><code> 
-
-
- 
-nano content/posts/twrp无法充电.md
+<pre tabindex="0"><code>nano content/posts/twrp无法充电.md
 </code></pre><p>默认内容像这样：</p>
 <pre tabindex="0"><code>markdown ---
 title: &#34;TWRP 模式无法充电&#34;
@@ -297,25 +277,13 @@ draft: true
 <hr>
 <h3 id="step-3去掉草稿标记发布用">Step 3：去掉草稿标记（发布用）</h3>
 <p>将：</p>
-<pre tabindex="0"><code>yaml
-
-
- 
-draft: true
+<pre tabindex="0"><code>draft: true
 </code></pre><p>改为：</p>
-<pre tabindex="0"><code>yaml
-
-
- 
-draft: false
+<pre tabindex="0"><code>draft: false
 </code></pre><p>或者直接删除这一行，Hugo 默认会发布。</p>
 <hr>
 <h3 id="step-4重新构建博客">Step 4：重新构建博客</h3>
-<pre tabindex="0"><code> 
-
-
- 
-hugo    # 会输出到 docs/
+<pre tabindex="0"><code>hugo    # 会输出到 docs/
 </code></pre><h3 id="step-5推送到-github发布">Step 5：推送到 GitHub（发布）</h3>
 <pre tabindex="0"><code>git add .
 git commit -m &#34;新增文章：TWRP 模式无法充电&#34;
@@ -352,10 +320,10 @@ cd blog
 <p>我的github博客是hugo → 生成到 docs/（非**<code>public/</code>**） → git push</p>
 <p>每次新建文章只需cmd输入指令，使用 Page Bundle（图片和文章放一起）：</p>
 <p><code>hugo new posts/你的标题/index.md</code></p>
-<p>content/posts/
-└── 张雪的故事有感/                 ← 文件夹名（建议用英文或日期+标题）
-├── index.md                     ← 文章正文必须叫这个名字！
-└── 微信图片_2026-04-01_153032_351.jpg   ← 图片直接放这里（或建 images/ 子文件夹）</p>
+<p>content/posts/</p>
+<p>└── 张雪的故事有感/                 ← 文件夹名（建议用英文或日期+标题）</p>
+<p>​    ├── index.md                     ← 文章正文必须叫这个名字！</p>
+<p>​    └── 微信图片_2026-04-01_153032_351.jpg   ← 图片直接放这里（或建 images/ 子文件夹）</p>
 <p>然后用typora编辑就行（编辑完之后记得把draft的值改为false）</p>
 <p>另外typora——文件——偏好设置，要这样设置</p>
 <p>
