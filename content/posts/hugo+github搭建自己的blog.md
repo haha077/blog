@@ -338,19 +338,22 @@ cd blog
 
 我的github博客是hugo → 生成到 docs/（非**`public/`**） → git push
 
-每次新建文章只需cmd输入指令：hugo new posts/你的文章标题.md
+每次新建文章只需cmd输入指令，使用 Page Bundle（图片和文章放一起）：
+
+`hugo new posts/你的标题/index.md`
+
+content/posts/
+└── 张雪的故事有感/                 ← 文件夹名（建议用英文或日期+标题）
+    ├── index.md                     ← 文章正文必须叫这个名字！
+    └── 微信图片_2026-04-01_153032_351.jpg   ← 图片直接放这里（或建 images/ 子文件夹）
 
 然后用typora编辑就行（编辑完之后记得把draft的值改为false）
 
-用如果要插入图片，直接把图片上传到图床，
+另外typora——文件——偏好设置，要这样设置
 
-```
-![img](图片地址)
-```
+![image-20260401155514233](./image-20260401155514233.png)
 
-然后按上面格式插入即可
-
-md文档写好之后，放入：C:\Program Files\hugo\blog\content\posts目录
+要使用./相对路径！
 
 然后构建站点：
 

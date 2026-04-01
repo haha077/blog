@@ -24,7 +24,7 @@ hugo new posts/hello.md
 hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
   <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
-  <meta itemprop="wordCount" content="613"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
+  <meta itemprop="wordCount" content="628"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
   <meta property="og:description" content="在debian上安装
@@ -350,12 +350,19 @@ cd blog
 <hr>
 <h2 id="-每次写博客时的流程可复用">✅ 每次写博客时的流程（可复用）</h2>
 <p>我的github博客是hugo → 生成到 docs/（非**<code>public/</code>**） → git push</p>
-<p>每次新建文章只需cmd输入指令：hugo new posts/你的文章标题.md</p>
+<p>每次新建文章只需cmd输入指令，使用 Page Bundle（图片和文章放一起）：</p>
+<p><code>hugo new posts/你的标题/index.md</code></p>
+<p>content/posts/
+└── 张雪的故事有感/                 ← 文件夹名（建议用英文或日期+标题）
+├── index.md                     ← 文章正文必须叫这个名字！
+└── 微信图片_2026-04-01_153032_351.jpg   ← 图片直接放这里（或建 images/ 子文件夹）</p>
 <p>然后用typora编辑就行（编辑完之后记得把draft的值改为false）</p>
-<p>用如果要插入图片，直接把图片上传到图床，</p>
-<pre tabindex="0"><code>![img](图片地址)
-</code></pre><p>然后按上面格式插入即可</p>
-<p>md文档写好之后，放入：C:\Program Files\hugo\blog\content\posts目录</p>
+<p>另外typora——文件——偏好设置，要这样设置</p>
+<p>
+  <img src="./image-20260401155514233.png" alt="image-20260401155514233">
+
+</p>
+<p>要使用./相对路径！</p>
 <p>然后构建站点：</p>
 <pre tabindex="0"><code> hugo
  或者用绝对路径
