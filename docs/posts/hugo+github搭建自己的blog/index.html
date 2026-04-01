@@ -24,7 +24,7 @@ hugo new posts/hello.md
 hugo server -D –bind 192.168.x.x –baseURL http://192.168.x.x:1313/ –appendPort=false">
   <meta itemprop="datePublished" content="2025-07-01T04:06:44-04:00">
   <meta itemprop="dateModified" content="2025-07-01T04:06:44-04:00">
-  <meta itemprop="wordCount" content="622"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
+  <meta itemprop="wordCount" content="613"><meta property="og:url" content="https://haha077.github.io/blog/posts/hugo&#43;github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84blog/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="Hugo&#43;github搭建自己的blog">
   <meta property="og:description" content="在debian上安装
@@ -331,8 +331,8 @@ git push
 <li>下载 Hugo 可执行文件：
 👉 <a href="https://github.com/gohugoio/hugo/releases">https://github.com/gohugoio/hugo/releases</a></li>
 <li>选择 <code>hugo_extended_X.X.X_windows-amd64.zip</code>（不要选不带 extended 的和不要选 withdeploy。）</li>
-<li>解压后，把 <code>hugo.exe</code> 放入任意路径（建议加入系统环境变量）</li>
-<li>打开命令行（CMD / PowerShell），验证安装：</li>
+<li>解压后，把 <code>hugo.exe</code> 放入C:\Program Files（然后用cmd加入系统路径：setx PATH &ldquo;%PATH%;C:\Program Files\hugo&rdquo;）</li>
+<li>重新打开命令行（CMD / PowerShell），验证安装：</li>
 </ol>
 <pre tabindex="0"><code> hugo version
 </code></pre><hr>
@@ -350,13 +350,9 @@ cd blog
 <hr>
 <h2 id="-每次写博客时的流程可复用">✅ 每次写博客时的流程（可复用）</h2>
 <p>我的github博客是hugo → 生成到 docs/（非**<code>public/</code>**） → git push</p>
-<p>直接用typroa创建md稳定，开头格式统一为：</p>
-<pre tabindex="0"><code>+++
-title = &#34;套 WARP 和 Cloudflare Tunnel 区别&#34;
-draft = false
-date = 2026-02-02
-+++
-</code></pre><p>md用如果要插入图片，直接把图片上传到图床，</p>
+<p>每次新建文章只需cmd输入指令：hugo new posts/你的文章标题.md</p>
+<p>然后用typora编辑就行（编辑完之后记得把draft的值改为false）</p>
+<p>用如果要插入图片，直接把图片上传到图床，</p>
 <pre tabindex="0"><code>![img](图片地址)
 </code></pre><p>然后按上面格式插入即可</p>
 <p>md文档写好之后，放入：C:\Program Files\hugo\blog\content\posts目录</p>

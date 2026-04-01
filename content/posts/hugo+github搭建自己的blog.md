@@ -304,8 +304,8 @@ git push
 1. 下载 Hugo 可执行文件：
     👉 https://github.com/gohugoio/hugo/releases
 2. 选择 `hugo_extended_X.X.X_windows-amd64.zip`（不要选不带 extended 的和不要选 withdeploy。）
-3. 解压后，把 `hugo.exe` 放入任意路径（建议加入系统环境变量）
-4. 打开命令行（CMD / PowerShell），验证安装：
+3. 解压后，把 `hugo.exe` 放入C:\Program Files（然后用cmd加入系统路径：setx PATH "%PATH%;C:\Program Files\hugo"）
+4. 重新打开命令行（CMD / PowerShell），验证安装：
 
 ```
  hugo version
@@ -338,17 +338,11 @@ cd blog
 
 我的github博客是hugo → 生成到 docs/（非**`public/`**） → git push
 
-直接用typroa创建md稳定，开头格式统一为：
+每次新建文章只需cmd输入指令：hugo new posts/你的文章标题.md
 
-```
-+++
-title = "套 WARP 和 Cloudflare Tunnel 区别"
-draft = false
-date = 2026-02-02
-+++
-```
+然后用typora编辑就行（编辑完之后记得把draft的值改为false）
 
-md用如果要插入图片，直接把图片上传到图床，
+用如果要插入图片，直接把图片上传到图床，
 
 ```
 ![img](图片地址)
