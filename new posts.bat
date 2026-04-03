@@ -1,0 +1,1 @@
+hugo new posts/你的标题/index.md
