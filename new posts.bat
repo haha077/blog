@@ -1,1 +1,1 @@
-hugo new posts/你的标题/index.md
+hugo new posts/haha/index.md

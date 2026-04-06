@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Haha&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Apr 2026 17:01:56 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 19:37:13 +0800</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>热风枪使用心得</title>
+      <link>https://haha077.github.io/blog/posts/%E7%83%AD%E9%A3%8E%E6%9E%AA%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</link>
+      <pubDate>Mon, 06 Apr 2026 19:37:13 +0800</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E7%83%AD%E9%A3%8E%E6%9E%AA%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</guid>
+      <description>&lt;p&gt;1：用热风枪拆芯片，元件焊脚加点焊油，温度调节到350（大部分的电子元件耐热最高也是350°左右，热风枪吹的速度越快越好！避免元件和焊盘长时间受热损坏），风速3档（风速越大火力越猛！如果芯片已坏本身就要更换，可以调节到400），大芯片可以不装罩子，出风口越大越好！然后最重要的就是高度要保持在5mm，这样很快就能拆下；&lt;/p&gt;&#xA;&lt;p&gt;2：更换新的芯片，温度350°，涂抹薄薄的锡浆（千万不要涂多，否则吹后会连锡），风嘴根据芯片大小，尽量用大嘴；风速2.5-3，摆好芯片，保持1cm高度加焊；焊好后检查引脚，有连锡的，需要用烙铁配合嘻嘻线拖掉连锡&lt;/p&gt;</description>
+    </item>
     <item>
       <title>ch341a编程器使用</title>
       <link>https://haha077.github.io/blog/posts/ch341a%E7%BC%96%E7%A8%8B%E5%99%A8%E4%BD%BF%E7%94%A8/</link>
