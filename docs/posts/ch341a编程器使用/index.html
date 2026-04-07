@@ -13,14 +13,15 @@
 二：软件部分 夹好之后，直接把ch341a通过usb接口插电脑，然后打开NeoProgrammer开始刷，如果是初次的话，需要Windows设备管理器硬件那里添加好驱动（NeoProgrammer文件夹里面有驱动文件）
 操作流程（通用）：
 插入编程器 → 打开软件 → 点击检测
-选择芯片型号：W25Q128FV 或 W25Q128FVSG（FVSG 通常兼容 FV，注意型号一定要搞错，对应自己购买的具体型号！）
-先 Detect / 读取 ID 确认识别正确。
+选择芯片型号：W25Q128FV（后面的SG 是指封装工艺，FV是基础系列，所以选择FV就行，注意型号一定要搞错，对应自己购买的具体型号！）
+先 Detect / 读取 ID 确认识别正确（如无需4这步也可以省略）。
 Read 全片备份（不是重要芯片这步可以省略）。
-擦除 → “文件——打开自己下载好需要刷的bin文件”——写入新固件 → Verify 校验。
+“文件——打开自己下载好需要刷的bin文件”——“擦除”——“写入/编程 IC”
+如果写入失败，表示没夹紧，拔掉重新夹紧后重复上面步骤直到成功为止
 一切搞定之后，拔出ch341a，然后松开夹子即可">
   <meta itemprop="datePublished" content="2026-04-03T17:01:56+08:00">
   <meta itemprop="dateModified" content="2026-04-03T17:01:56+08:00">
-  <meta itemprop="wordCount" content="39"><meta property="og:url" content="https://haha077.github.io/blog/posts/ch341a%E7%BC%96%E7%A8%8B%E5%99%A8%E4%BD%BF%E7%94%A8/">
+  <meta itemprop="wordCount" content="33"><meta property="og:url" content="https://haha077.github.io/blog/posts/ch341a%E7%BC%96%E7%A8%8B%E5%99%A8%E4%BD%BF%E7%94%A8/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="ch341a编程器使用">
   <meta property="og:description" content="一：硬件部分 首先确定本次要刷的芯片是属于24还是25的，ch341插座分为24和25部分
@@ -31,10 +32,11 @@ Read 全片备份（不是重要芯片这步可以省略）。
 二：软件部分 夹好之后，直接把ch341a通过usb接口插电脑，然后打开NeoProgrammer开始刷，如果是初次的话，需要Windows设备管理器硬件那里添加好驱动（NeoProgrammer文件夹里面有驱动文件）
 操作流程（通用）：
 插入编程器 → 打开软件 → 点击检测
-选择芯片型号：W25Q128FV 或 W25Q128FVSG（FVSG 通常兼容 FV，注意型号一定要搞错，对应自己购买的具体型号！）
-先 Detect / 读取 ID 确认识别正确。
+选择芯片型号：W25Q128FV（后面的SG 是指封装工艺，FV是基础系列，所以选择FV就行，注意型号一定要搞错，对应自己购买的具体型号！）
+先 Detect / 读取 ID 确认识别正确（如无需4这步也可以省略）。
 Read 全片备份（不是重要芯片这步可以省略）。
-擦除 → “文件——打开自己下载好需要刷的bin文件”——写入新固件 → Verify 校验。
+“文件——打开自己下载好需要刷的bin文件”——“擦除”——“写入/编程 IC”
+如果写入失败，表示没夹紧，拔掉重新夹紧后重复上面步骤直到成功为止
 一切搞定之后，拔出ch341a，然后松开夹子即可">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
@@ -52,10 +54,11 @@ Read 全片备份（不是重要芯片这步可以省略）。
 二：软件部分 夹好之后，直接把ch341a通过usb接口插电脑，然后打开NeoProgrammer开始刷，如果是初次的话，需要Windows设备管理器硬件那里添加好驱动（NeoProgrammer文件夹里面有驱动文件）
 操作流程（通用）：
 插入编程器 → 打开软件 → 点击检测
-选择芯片型号：W25Q128FV 或 W25Q128FVSG（FVSG 通常兼容 FV，注意型号一定要搞错，对应自己购买的具体型号！）
-先 Detect / 读取 ID 确认识别正确。
+选择芯片型号：W25Q128FV（后面的SG 是指封装工艺，FV是基础系列，所以选择FV就行，注意型号一定要搞错，对应自己购买的具体型号！）
+先 Detect / 读取 ID 确认识别正确（如无需4这步也可以省略）。
 Read 全片备份（不是重要芯片这步可以省略）。
-擦除 → “文件——打开自己下载好需要刷的bin文件”——写入新固件 → Verify 校验。
+“文件——打开自己下载好需要刷的bin文件”——“擦除”——“写入/编程 IC”
+如果写入失败，表示没夹紧，拔掉重新夹紧后重复上面步骤直到成功为止
 一切搞定之后，拔出ch341a，然后松开夹子即可">
 <link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
@@ -135,23 +138,28 @@ Read 全片备份（不是重要芯片这步可以省略）。
 <li>
 <p>插入编程器 → 打开软件 → 点击检测</p>
 <p>
-  <img src="./image-20260403171657399.png" alt="image-20260403171657399">
+  <img src="./image-20260407170547191.png" alt="image-20260407170547191">
 
 </p>
 </li>
 <li>
-<p>选择芯片型号：<strong>W25Q128FV</strong> 或 <strong>W25Q128FVSG</strong>（FVSG 通常兼容 FV，注意型号一定要搞错，对应自己购买的具体型号！）</p>
+<p>选择芯片型号：<strong>W25Q128FV</strong>（后面的SG 是指封装工艺，FV是基础系列，所以选择FV就行，注意型号一定要搞错，对应自己购买的具体型号！）</p>
 </li>
 <li>
-<p>先 <strong>Detect / 读取 ID</strong> 确认识别正确。</p>
+<p>先 <strong>Detect / 读取 ID</strong> 确认识别正确（如无需4这步也可以省略）。</p>
 </li>
 <li>
 <p><strong>Read</strong> 全片备份（不是重要芯片这步可以省略）。</p>
 </li>
 <li>
-<p>擦除 → “文件——打开自己下载好需要刷的bin文件”——写入新固件 → <strong>Verify</strong> 校验。</p>
+<p>“文件——打开自己下载好需要刷的bin文件”——“擦除”——“写入/编程 IC”</p>
+<p>
+  <img src="./image-20260407171002880.png" alt="image-20260407171002880">
+
+</p>
 </li>
 </ol>
+<p>如果写入失败，表示没夹紧，拔掉重新夹紧后重复上面步骤直到成功为止</p>
 <p>一切搞定之后，拔出ch341a，然后松开夹子即可</p>
 
     <hr class="footer-separator" />
