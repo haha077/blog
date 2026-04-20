@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2** - Haha&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
+  <meta itemprop="description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
+上行 (Inbound/Upload Path)：指客户端 -&gt; 服务器的请求。 这个阶段的核心任务是**“掩护”**。你需要让防火墙觉得你是在访问一个合法的网站。 CDN 方案：由于流量先经过 Cloudflare 等大厂节点，防火墙看到的是你和合法的 CDN 节点在通信，隐蔽性极高。 下行 (Outbound/Download Path)：指服务器 -&gt; 客户端的响应。 这个阶段的核心任务是**“速度”**。 REALITY 方案：它是直连方案，不经过中转，因此没有 CDN 带来的高延迟和限速问题，能够跑满你的 VPS 带宽。 逻辑总结：这种“分流”做法是试图结合 CDN 的抗封锁性（上行隐藏）和 REALITY 的极速表现（下行直连）。
+3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
+  <meta itemprop="datePublished" content="2026-04-20T14:29:06+08:00">
+  <meta itemprop="dateModified" content="2026-04-20T14:29:06+08:00">
+  <meta itemprop="wordCount" content="529"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
+  <meta property="og:site_name" content="Haha&#39;s Blog">
+  <meta property="og:title" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
+  <meta property="og:description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
+上行 (Inbound/Upload Path)：指客户端 -&gt; 服务器的请求。 这个阶段的核心任务是**“掩护”**。你需要让防火墙觉得你是在访问一个合法的网站。 CDN 方案：由于流量先经过 Cloudflare 等大厂节点，防火墙看到的是你和合法的 CDN 节点在通信，隐蔽性极高。 下行 (Outbound/Download Path)：指服务器 -&gt; 客户端的响应。 这个阶段的核心任务是**“速度”**。 REALITY 方案：它是直连方案，不经过中转，因此没有 CDN 带来的高延迟和限速问题，能够跑满你的 VPS 带宽。 逻辑总结：这种“分流”做法是试图结合 CDN 的抗封锁性（上行隐藏）和 REALITY 的极速表现（下行直连）。
+3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-04-20T14:29:06+08:00">
+    <meta property="article:modified_time" content="2026-04-20T14:29:06+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
+  <meta name="twitter:description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
+上行 (Inbound/Upload Path)：指客户端 -&gt; 服务器的请求。 这个阶段的核心任务是**“掩护”**。你需要让防火墙觉得你是在访问一个合法的网站。 CDN 方案：由于流量先经过 Cloudflare 等大厂节点，防火墙看到的是你和合法的 CDN 节点在通信，隐蔽性极高。 下行 (Outbound/Download Path)：指服务器 -&gt; 客户端的响应。 这个阶段的核心任务是**“速度”**。 REALITY 方案：它是直连方案，不经过中转，因此没有 CDN 带来的高延迟和限速问题，能够跑满你的 VPS 带宽。 逻辑总结：这种“分流”做法是试图结合 CDN 的抗封锁性（上行隐藏）和 REALITY 的极速表现（下行直连）。
+3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
+<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
+
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="https://haha077.github.io/blog/css/dark.css" />
+	<script src="https://haha077.github.io/blog/js/main.js"></script>
+</head>
+<div class="dark-toggle-block">
+			<button id="dark-mode-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
+				🌙
+			</button>
+		</div>
+
+<body>
+
+
+	
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://haha077.github.io/blog/">
+				<img src="/blog/avatar.png" alt="Haha&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://haha077.github.io/blog/">Haha&#39;s Blog</a></h1>
+	<div class="site-description"><p>勤思、反思、三思；勤动、无为、恬淡</p><nav class="nav social">
+			<ul class="flat"><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+    <div class="post-header">
+    
+    <div class="meta">
+        <div class="date">
+            <span class="day">20</span>
+            <span class="rest">Apr 2026</span>
+        </div>
+    </div>
+    
+    <div class="matter">
+        <h1 class="title">**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**</h1>
+    </div>
+</div>
+
+
+    
+    
+    <p>上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指<strong>数据包往返的路径（通道）选择</strong>。</p>
+<ul>
+<li><strong>上行 (Inbound/Upload Path)</strong>：指<strong>客户端 -&gt; 服务器</strong>的请求。
+<ul>
+<li>这个阶段的核心任务是**“掩护”**。你需要让防火墙觉得你是在访问一个合法的网站。</li>
+<li><strong>CDN 方案</strong>：由于流量先经过 Cloudflare 等大厂节点，防火墙看到的是你和合法的 CDN 节点在通信，隐蔽性极高。</li>
+</ul>
+</li>
+<li><strong>下行 (Outbound/Download Path)</strong>：指<strong>服务器 -&gt; 客户端</strong>的响应。
+<ul>
+<li>这个阶段的核心任务是**“速度”**。</li>
+<li><strong>REALITY 方案</strong>：它是直连方案，不经过中转，因此没有 CDN 带来的高延迟和限速问题，能够跑满你的 VPS 带宽。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>逻辑总结</strong>：这种“分流”做法是试图结合 CDN 的<strong>抗封锁性</strong>（上行隐藏）和 REALITY 的<strong>极速表现</strong>（下行直连）。</p>
+</blockquote>
+<h3 id="3-种方案对比表">3 种方案对比表</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>VLESS + XHTTP + TLS + CDN</strong></th>
+          <th><strong>VLESS + Reality + TLS</strong></th>
+          <th><strong>Hysteria2 (UDP-based)</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>核心传输</strong></td>
+          <td>HTTP 报文分段 (XHTTP)</td>
+          <td>TLS 握手借用 (Reality)</td>
+          <td>QUIC / UDP 暴力重传</td>
+      </tr>
+      <tr>
+          <td><strong>伪装等级</strong></td>
+          <td><strong>极高</strong>（伪装成正常的 HTTP 请求）</td>
+          <td><strong>天花板</strong>（扫描者看到的是大厂官网）</td>
+          <td>中（明显的 UDP 流量）</td>
+      </tr>
+      <tr>
+          <td><strong>抗封锁性</strong></td>
+          <td><strong>最强</strong>（CDN 隐藏 IP + HTTP 混淆）</td>
+          <td>优秀（靠“像”真实网站逃避检测）</td>
+          <td>一般（靠“变”和“快”硬刚）</td>
+      </tr>
+      <tr>
+          <td><strong>连接速度</strong></td>
+          <td>较慢（CDN 转发有损耗）</td>
+          <td>快（接近直连）</td>
+          <td><strong>极快</strong>（丢包环境下表现最佳）</td>
+      </tr>
+      <tr>
+          <td><strong>配置难度</strong></td>
+          <td>复杂（需域名、证书、CDN 接入）</td>
+          <td>中等（需配置 SNI 和短 ID）</td>
+          <td>简单（通常只需密码和证书）</td>
+      </tr>
+      <tr>
+          <td><strong>主要用途</strong></td>
+          <td><strong>IP 已被封</strong>或敏感期“续命”</td>
+          <td>长期主力使用，防检测首选</td>
+          <td>垃圾线路或高峰期抢带宽神器</td>
+      </tr>
+      <tr>
+          <td><strong>缺点</strong></td>
+          <td>经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别</td>
+          <td>不是最强，但也不是最差</td>
+          <td><strong>容易被 QoS</strong>：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。<!-- raw HTML omitted --><strong>特征明显</strong>：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。</td>
+      </tr>
+  </tbody>
+</table>
+<p>虽然 <strong>CDN</strong>（内容分发网络）和 <strong>WARP</strong>（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的<strong>位置</strong>和<strong>作用</strong>完全相反。</p>
+<p>简单来说：<strong>CDN 保护的是“服务器”，而 WARP 保护的是“出口”。</strong></p>
+<hr>
+<h3 id="核心区别对照表">核心区别对照表</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>CDN (如 Cloudflare CDN)</strong></th>
+          <th><strong>WARP (Cloudflare WARP)</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>位置</strong></td>
+          <td>位于 <strong>VPS 之前</strong> (前置)</td>
+          <td>位于 <strong>VPS 之后</strong> (后置)</td>
+      </tr>
+      <tr>
+          <td><strong>主要目的</strong></td>
+          <td>隐藏 VPS 真实 IP，防止 VPS 被封或被攻击</td>
+          <td>隐藏 VPS 原始出口，解锁流媒体或防止被封</td>
+      </tr>
+      <tr>
+          <td><strong>保护对象</strong></td>
+          <td>保护你的<strong>服务器</strong>不被防火墙发现</td>
+          <td>保护你的<strong>访问目标</strong>（如 Google/Netflix）不识别你</td>
+      </tr>
+      <tr>
+          <td><strong>流量方向</strong></td>
+          <td>客户端→<strong>CDN</strong> → VPS</td>
+          <td>VPS →<strong>WARP</strong> →目标网站</td>
+      </tr>
+      <tr>
+          <td><strong>对速度影响</strong></td>
+          <td>通常会增加延迟（需中转）</td>
+          <td>几乎无损，甚至能优化 VPS 到目标的路由</td>
+      </tr>
+  </tbody>
+</table>
+<p>另外<strong>CDN 的本质是中间人</strong>：目前绝大多数主流 CDN（如 Cloudflare 的免费版）主要针对 <strong>HTTP/TCP</strong> 流量进行加速和转发。而<strong>Hysteria2 的灵魂是 UDP</strong>：它之所以快，是因为它基于 QUIC 协议，不使用 TCP 那种死板的“确认-等待”机制。所以如果用Hysteria2 方案，就无法套cdn，不然就等于自废武功目前2026年4月20日还是<strong>Hysteria2 + 端口跳跃</strong>（物理躲避）</p>
+<h3 id="进阶玩法上行vless--reality下行hysteria2warp">进阶玩法（上行VLESS + Reality；下行Hysteria2+warp）</h3>
+<p>可以在 v2rayN 中同时保留这两个节点：</p>
+<ol>
+<li><strong>作为主力的下行工具</strong>：使用你现在的 <strong>Hysteria2</strong>。设置 v2rayN 路由，将大流量域名（YouTube, Netflix）强制走这个节点。</li>
+<li><strong>作为主力的上行工具</strong>：使用 <strong>VLESS + Reality</strong>。将一些对稳定性要求极高的域名（如 GitHub, OpenAI, 银行后台）走这个节点。</li>
+</ol>
+<p>通过 v2rayN 的<strong>路由功能</strong>实现<strong>按需分流</strong>。理论上应该可以，未实际验证。配置比较复杂……</p>
+<hr>
+<h4 id="实践vps手搓hysteria2端口跳跃warp">实践vps手搓Hysteria2+端口跳跃+warp</h4>
+<p>需要域名（二级域名也行）1个，托管到cloudflare，dns解析vps的ip，关闭小云朵；ssl完全（严格）</p>
+<p>
+  <img src="./image-20260420152301149.png" alt="image-20260420152301149">
+
+</p>
+<p><strong>ACME 自动化</strong>：建议使用 <code>acme.sh</code> 配合 DNS 验证自动更新证书，否则证书过期会导致连接瞬间中断。</p>
+<p><strong>操作步骤：</strong></p>
+<ol>
+<li>
+<p><strong>安装 acme.sh:</strong></p>
+<p>Bash</p>
+<pre tabindex="0"><code>curl https://get.acme.sh | sh
+</code></pre></li>
+<li>
+<p><strong>申请证书（以 Cloudflare DNS 为例）:</strong></p>
+<p>Bash</p>
+<pre tabindex="0"><code>export CF_Email=&#34;你的邮箱&#34;
+export CF_Key=&#34;你的API密钥&#34;
+~/.acme.sh/acme.sh --issue --dns dns_cf -d 你的域名
+</code></pre></li>
+<li>
+<p><strong>安装证书到 Hysteria 目录：</strong></p>
+<p>Bash</p>
+<pre tabindex="0"><code>~/.acme.sh/acme.sh --install-cert -d 你的域名 \
+--key-file       /etc/hysteria/private.key  \
+--fullchain-file /etc/hysteria/fullchain.cer \
+--reloadcmd     &#34;systemctl restart hysteria2&#34;
+</code></pre><p><em>这样每当证书更新，Hysteria 都会自动重启加载新证书。</em></p>
+</li>
+</ol>
+<h5 id="安装hy2脚本">安装hy2脚本</h5>
+<p>bash &lt;(curl -fsSL <a href="https://get.hy2.sh/">https://get.hy2.sh/</a>)</p>
+<p>配置文件 (<code>/etc/hysteria/config.yaml</code>)：</p>
+<pre tabindex="0"><code>listen: :443
+
+tls:
+  cert: /etc/hysteria/fullchain.cer
+  key: /etc/hysteria/private.key
+
+auth:
+  type: password
+  password: &#34;密码&#34;
+
+masquerade:
+  type: proxy
+  proxy:
+    url: https://www.ucla.edu
+    rewriteHost: true
+
+quic:
+  initStreamReceiveWindow: 8388608
+  initConnReceiveWindow: 20971520
+  hopInterval: 30s
+  ignoreClientBandwidth: true
+
+outbounds:
+  - name: warp
+    type: socks5
+    socks5:
+      addr: 127.0.0.1:40000
+
+acl:
+  inline:
+    - direct(geoip:private)
+    - direct(geoip:cn)
+    - direct(geosite:cn)
+    - warp(all)
+</code></pre><p><strong>启动 Hy2</strong>：</p>
+<pre tabindex="0"><code>systemctl enable hysteria-server.service
+systemctl restart hysteria-server.service
+</code></pre><p><strong>检查状态</strong>：</p>
+<pre tabindex="0"><code>systemctl status hysteria-server.service
+</code></pre><p>如果显示 <code>active (running)</code>，说明配置成功。</p>
+<h3 id="客户端-v2rayn-配置对齐">客户端 v2rayN 配置对齐</h3>
+<p>Hy2 官方版在 v2rayN 中的配置非常简单：</p>
+<ol>
+<li>
+<p><strong>服务器类型</strong>：选择 <strong>Hysteria2</strong>。</p>
+</li>
+<li>
+<p><strong>地址/端口</strong>：你的域名 / 443。</p>
+</li>
+<li>
+<p><strong>认证</strong>：填写你在 <code>password</code> 处设置的密码。</p>
+</li>
+<li>
+<p><strong>TLS/SNI</strong>：开启 TLS，SNI 填写你的域名。</p>
+</li>
+<li>
+<p><strong>重要（带宽优化）</strong>： 在客户端设置里找到 <code>Upstream/Downstream</code>（上行/下行）：</p>
+<ul>
+<li><strong>Down (下行)</strong>: 填写 <code>100 Mbps</code>（根据你 VPS 的标称带宽填）。</li>
+<li><strong>Up (上行)</strong>: 填写 <code>20 Mbps</code>。</li>
+</ul>
+<blockquote>
+<p><strong>原理</strong>：Hysteria2 会根据这两个数值主动控制发包节奏。填入合理的数值可以有效防止运营商对 UDP 流量进行惩罚性限速。</p>
+</blockquote>
+</li>
+</ol>
+<p>
+  <img src="./image-20260420153002803.png" alt="image-20260420153002803">
+
+</p>
+<p>
+  <img src="./image-20260420154505174.png" alt="image-20260420154505174">
+
+</p>
+<p>记得关闭分片，hy2不用这个；路由模式默认下面这样即可</p>
+<p>
+  <img src="./image-20260420154603153.png" alt="image-20260420154603153">
+
+</p>
+<h4 id="安装warp">安装warp</h4>
+<h6 id="获取-warp-账号的关键参数">获取 WARP 账号的关键参数</h6>
+<p>你需要获取四个核心参数：<code>PrivateKey</code>、<code>Address</code> (v4和v6)、<code>Reserved</code> 值以及 <code>PublicKey</code>。</p>
+<p>目前最简单且推荐的方法是使用自动化脚本生成。在你的 VPS 上执行以下命令（选择其中一种即可）：</p>
+<h6 id="方法-a使用单行脚本推荐">方法 A：使用单行脚本（推荐）</h6>
+<p>Bash</p>
+<pre tabindex="0"><code>wget -N https://gitlab.com/fscarmen/warp/-/raw/main/api.sh &amp;&amp; bash api.sh
+</code></pre><ul>
+<li>运行后按照提示选择“注册账号”。</li>
+<li>脚本会直接输出包含 <code>private_key</code> 和 <code>reserved</code> (通常是三个数字，如 <code>[123, 45, 67]</code>) 的信息。</li>
+<li><strong>注意</strong>：<code>Reserved</code> 值非常关键，如果填错，你的流量可能无法被 Cloudflare 正确识别。</li>
+</ul>
+<p><strong>运行脚本</strong>：<code>wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp; bash menu.sh</code></p>
+<p><strong>选择模式</strong>：选择 <strong>“为已有的 WireGuard 客户端添加 ”</strong> 或者 <strong>“安装 WARP Go”</strong>。</p>
+<p><strong>分流设置</strong>：选 <strong>“Socks5 代理模式”</strong>，端口设为 <code>40000</code>。</p>
+<p><strong>IP 选择</strong>：选 <strong>“双栈”</strong>。</p>
+<h3 id="手动开启端口转发确保客户端能连上">手动开启端口转发（确保客户端能连上）</h3>
+<p>直接在终端执行这两行，这不需要安装任何包，立即生效：</p>
+<p>Bash</p>
+<pre tabindex="0"><code># 核心：将 20000-30000 的流量转发到 443 端口
+iptables -t nat -A PREROUTING -p udp --dport 20000:30000 -j REDIRECT --to-ports 443
+
+# 放行 443 端口
+iptables -I INPUT -p udp --dport 443 -j ACCEPT
+
+#老debian10可能需要更换源才能安装下面的
+sed -i &#39;s/deb.debian.org/archive.debian.org/g&#39; /etc/apt/sources.list
+sed -i &#39;s/security.debian.org/archive.debian.org/g&#39; /etc/apt/sources.list
+sed -i &#39;/stretch-updates/d&#39; /etc/apt/sources.list
+
+apt update &amp;&amp; apt install iptables-persistent -y
+netfilter-persistent save
+
+iptables -t nat -L PREROUTING -n -v --line-numbers #检查是否成功
+</code></pre><h3 id="系统内核优化-debianlinux">系统内核优化 (Debian/Linux)</h3>
+<p>既然你在 Debian 环境下运行，务必开启 <strong>BBR</strong> 以及优化 UDP 缓冲区，否则 Hysteria 的性能会受限于系统底层。</p>
+<p>在 <code>/etc/sysctl.conf</code> 中添加：</p>
+<p>Bash</p>
+<pre tabindex="0"><code># 开启 BBR
+net.core.default_qdisc = fq
+net.ipv4.tcp_congestion_control = bbr
+
+# 增加 UDP 缓冲区大小，防止高并发时丢包
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+</code></pre><p>执行 <code>sysctl -p</code> 生效。</p>
+<h3 id="配置好之后客户端进行网页检测最直观">配置好之后客户端进行网页检测（最直观）</h3>
+<p>在连接节点的状态下，打开浏览器访问 Cloudflare 官方的调试界面： <strong>👉 <a href="https://www.cloudflare.com/cdn-cgi/trace">https://www.cloudflare.com/cdn-cgi/trace</a></strong></p>
+<pre tabindex="0"><code>ip=cloudflare的ip
+warp=on
+</code></pre><p>表示成功</p>
+
+    <hr class="footer-separator" />
+<div class="tags">
+    
+    
+    
+</div>
+
+
+
+<div class="back">
+    <a href="https://haha077.github.io/blog/"><span aria-hidden="true">← Back</span></a>
+</div>
+
+
+<div class="back">
+    
+</div>
+
+</div>
+
+	</div>
+	
+	<div class="container wrapper" style="margin-top: 2em;">
+		<section id="comments">
+			<script src="https://utteranc.es/client.js"
+					repo="haha077/blog"
+					issue-term="pathname"
+					theme="github-light"
+					crossorigin="anonymous"
+					async>
+			</script>
+		</section>
+	</div>
+
+	<canvas id="bigbang-canvas" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -1000;
+"></canvas>
+
+<script>
+(() => {
+  const canvas = document.getElementById('bigbang-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * devicePixelRatio;
+    canvas.height = H * devicePixelRatio;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  class Particle {
+    constructor() {
+      this.x = W/2;
+      this.y = H/2;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.radius = Math.random() * 3 + 1;
+      this.speed = Math.random() * 4 + 2;
+      this.angle = Math.random() * Math.PI * 2;
+      this.vx = Math.cos(this.angle) * this.speed;
+      this.vy = Math.sin(this.angle) * this.speed;
+      this.life = 60 + Math.random() * 30;
+      this.alpha = 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life--;
+      this.alpha = this.life / 90;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${hexToRgb(this.color)},${this.alpha.toFixed(2)})`;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex.slice(1), 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `${r},${g},${b}`;
+  }
+
+  function createParticles(num) {
+    for(let i=0; i<num; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach((p, i) => {
+      p.update();
+      p.draw();
+      if (p.life <= 0) particles.splice(i, 1);
+    });
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  
+  setInterval(() => {
+    createParticles(80);
+  }, 10000);
+
+  animate();
+})();
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+    const root = document.documentElement;
+
+    function initDarkMode() {
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        root.classList.add('dark');
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (root.classList.contains('dark')) {
+        root.classList.remove('dark');
+        localStorage.setItem('darkMode', 'disabled');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('darkMode', 'enabled');
+      }
+    });
+
+    initDarkMode();
+  });
+</script>
+
+<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026 </div>
+		
+	</nav>
+</div>
+
+	
+</body>
+
+</html>

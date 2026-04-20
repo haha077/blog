@@ -21,6 +21,22 @@ https://gitlab.com/fscarmen/warp  #vps上安装这个项目一键脚本安装
 
 最后记得直接改Xray config.json的outbounds加socks到这个端口，routing国外走warp（如之前说的）
 
+### 1. 什么是“双栈” (Dual Stack)？
+
+简单来说，**双栈就是同时拥有 IPv4 和 IPv6 地址。**
+
+- **只选 IPv4**：你的 VPS 访问外网时，看起来只有一个 WARP 的 IPv4 地址。如果目标网站只支持 IPv6，你就无法访问。
+- **双栈 (IPv4 + IPv6)**：你的 VPS 同时获得一个 WARP 的 IPv4 和一个 IPv6。
+  - **优势**：你可以访问纯 IPv6 的资源（比如某些教育网资源、特定的 PT 站），更重要的是，它可以完美**解锁 Netflix/ChatGPT**。这些服务有时会检查你的 IPv6 地址来判断你的真实位置，双栈的伪装效果更好。
+
+------
+
+### 2. 应该怎么选？
+
+**强烈建议选：双栈 (Dual Stack)**。
+
+即使你的 RackNerd VPS 原生只有 IPv4，WARP 也能为你虚拟出一个 IPv6 隧道。这对于绕过 Google 验证码和解除流媒体锁区非常有帮助。
+
 最终完成后，效果如下图：
 
 ![img](https://i.imgur.com/YAn1LCK.png)
