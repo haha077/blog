@@ -51,6 +51,7 @@
 	{{- range .Site.Params.customJS }}
 	<script src="{{ $.Site.BaseURL }}{{ . }}"></script>{{- end }}
 	{{- end }}
+	<link rel="stylesheet" href="/css/custom.css">
 </head>
 <div class="dark-toggle-block">
 			<button id="dark-mode-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
