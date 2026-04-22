@@ -7,15 +7,17 @@
   <meta itemprop="name" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
   <meta itemprop="description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
 上行 (Inbound/Upload Path)：指客户端 -&gt; 服务器的请求。 这个阶段的核心任务是**“掩护”**。你需要让防火墙觉得你是在访问一个合法的网站。 CDN 方案：由于流量先经过 Cloudflare 等大厂节点，防火墙看到的是你和合法的 CDN 节点在通信，隐蔽性极高。 下行 (Outbound/Download Path)：指服务器 -&gt; 客户端的响应。 这个阶段的核心任务是**“速度”**。 REALITY 方案：它是直连方案，不经过中转，因此没有 CDN 带来的高延迟和限速问题，能够跑满你的 VPS 带宽。 逻辑总结：这种“分流”做法是试图结合 CDN 的抗封锁性（上行隐藏）和 REALITY 的极速表现（下行直连）。
-3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
+3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。
+特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
   <meta itemprop="datePublished" content="2026-04-20T14:29:06+08:00">
   <meta itemprop="dateModified" content="2026-04-20T14:29:06+08:00">
-  <meta itemprop="wordCount" content="529"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
+  <meta itemprop="wordCount" content="530"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
   <meta property="og:description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
 上行 (Inbound/Upload Path)：指客户端 -&gt; 服务器的请求。 这个阶段的核心任务是**“掩护”**。你需要让防火墙觉得你是在访问一个合法的网站。 CDN 方案：由于流量先经过 Cloudflare 等大厂节点，防火墙看到的是你和合法的 CDN 节点在通信，隐蔽性极高。 下行 (Outbound/Download Path)：指服务器 -&gt; 客户端的响应。 这个阶段的核心任务是**“速度”**。 REALITY 方案：它是直连方案，不经过中转，因此没有 CDN 带来的高延迟和限速问题，能够跑满你的 VPS 带宽。 逻辑总结：这种“分流”做法是试图结合 CDN 的抗封锁性（上行隐藏）和 REALITY 的极速表现（下行直连）。
-3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
+3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。
+特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -26,13 +28,15 @@
   <meta name="twitter:title" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
   <meta name="twitter:description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
 上行 (Inbound/Upload Path)：指客户端 -&gt; 服务器的请求。 这个阶段的核心任务是**“掩护”**。你需要让防火墙觉得你是在访问一个合法的网站。 CDN 方案：由于流量先经过 Cloudflare 等大厂节点，防火墙看到的是你和合法的 CDN 节点在通信，隐蔽性极高。 下行 (Outbound/Download Path)：指服务器 -&gt; 客户端的响应。 这个阶段的核心任务是**“速度”**。 REALITY 方案：它是直连方案，不经过中转，因此没有 CDN 带来的高延迟和限速问题，能够跑满你的 VPS 带宽。 逻辑总结：这种“分流”做法是试图结合 CDN 的抗封锁性（上行隐藏）和 REALITY 的极速表现（下行直连）。
-3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
+3 种方案对比表 特性 VLESS &#43; XHTTP &#43; TLS &#43; CDN VLESS &#43; Reality &#43; TLS Hysteria2 (UDP-based) 核心传输 HTTP 报文分段 (XHTTP) TLS 握手借用 (Reality) QUIC / UDP 暴力重传 伪装等级 极高（伪装成正常的 HTTP 请求） 天花板（扫描者看到的是大厂官网） 中（明显的 UDP 流量） 抗封锁性 最强（CDN 隐藏 IP &#43; HTTP 混淆） 优秀（靠“像”真实网站逃避检测） 一般（靠“变”和“快”硬刚） 连接速度 较慢（CDN 转发有损耗） 快（接近直连） 极快（丢包环境下表现最佳） 配置难度 复杂（需域名、证书、CDN 接入） 中等（需配置 SNI 和短 ID） 简单（通常只需密码和证书） 主要用途 IP 已被封或敏感期“续命” 长期主力使用，防检测首选 垃圾线路或高峰期抢带宽神器 缺点 经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别 不是最强，但也不是最差 容易被 QoS：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。
+特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
 <link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
 
 	<link id="dark-scheme" rel="stylesheet" type="text/css" href="https://haha077.github.io/blog/css/dark.css" />
 	<script src="https://haha077.github.io/blog/js/main.js"></script>
 	<link rel="stylesheet" href="/css/custom.css">
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <div class="dark-toggle-block">
 			<button id="dark-mode-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
@@ -154,7 +158,7 @@
           <td><strong>缺点</strong></td>
           <td>经过CDN中转，哪怕是优选ip，也经过多一道中转，游戏用户基本告别</td>
           <td>不是最强，但也不是最差</td>
-          <td><strong>容易被 QoS</strong>：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。<!-- raw HTML omitted --><strong>特征明显</strong>：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。</td>
+          <td><strong>容易被 QoS</strong>：部分省份的运营商对 UDP 流量极度反感，识别出大流量 UDP 会直接断流或限速。<br /><strong>特征明显</strong>：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。</td>
       </tr>
   </tbody>
 </table>
