@@ -11,7 +11,7 @@
 特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
   <meta itemprop="datePublished" content="2026-04-20T14:29:06+08:00">
   <meta itemprop="dateModified" content="2026-04-20T14:29:06+08:00">
-  <meta itemprop="wordCount" content="1031"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
+  <meta itemprop="wordCount" content="1021"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
   <meta property="og:description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
@@ -222,19 +222,16 @@
 <ol>
 <li>
 <p><strong>安装 acme.sh:</strong></p>
-<p>Bash</p>
 <pre tabindex="0"><code>curl https://get.acme.sh | sh
 </code></pre></li>
 <li>
 <p><strong>申请证书（以 Cloudflare DNS 为例）:</strong></p>
-<p>Bash</p>
 <pre tabindex="0"><code>export CF_Email=&#34;你的邮箱&#34;
 export CF_Key=&#34;你的API密钥&#34;
 ~/.acme.sh/acme.sh --issue --dns dns_cf -d 你的域名
 </code></pre></li>
 <li>
 <p><strong>安装证书到 Hysteria 目录：</strong></p>
-<p>Bash</p>
 <pre tabindex="0"><code>~/.acme.sh/acme.sh --install-cert -d 你的域名 \
 --key-file       /etc/hysteria/private.key  \
 --fullchain-file /etc/hysteria/fullchain.cer \
@@ -243,7 +240,7 @@ export CF_Key=&#34;你的API密钥&#34;
 </li>
 </ol>
 <h5 id="安装hy2脚本">安装hy2脚本</h5>
-<p>bash &lt;(curl -fsSL <a href="https://get.hy2.sh/">https://get.hy2.sh/</a>)</p>
+<p>&lt;(curl -fsSL <a href="https://get.hy2.sh/">https://get.hy2.sh/</a>)</p>
 <p>配置文件 (<code>/etc/hysteria/config.yaml</code>)：</p>
 <pre tabindex="0"><code>listen: :443
 
@@ -329,20 +326,18 @@ systemctl restart hysteria-server.service
 <p>你需要获取四个核心参数：<code>PrivateKey</code>、<code>Address</code> (v4和v6)、<code>Reserved</code> 值以及 <code>PublicKey</code>。</p>
 <p>目前最简单且推荐的方法是使用自动化脚本生成。在你的 VPS 上执行以下命令（选择其中一种即可）：</p>
 <h6 id="方法-a使用单行脚本推荐">方法 A：使用单行脚本（推荐）</h6>
-<p>Bash</p>
-<pre tabindex="0"><code>wget -N https://gitlab.com/fscarmen/warp/-/raw/main/api.sh &amp;&amp; bash api.sh
+<pre tabindex="0"><code>wget -N https://gitlab.com/fscarmen/warp/-/raw/main/api.sh &amp;&amp;  api.sh
 </code></pre><ul>
 <li>运行后按照提示选择“注册账号”。</li>
 <li>脚本会直接输出包含 <code>private_key</code> 和 <code>reserved</code> (通常是三个数字，如 <code>[123, 45, 67]</code>) 的信息。</li>
 <li><strong>注意</strong>：<code>Reserved</code> 值非常关键，如果填错，你的流量可能无法被 Cloudflare 正确识别。</li>
 </ul>
-<p><strong>运行脚本</strong>：<code>wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp; bash menu.sh</code></p>
+<p><strong>运行脚本</strong>：<code>wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp;  menu.sh</code></p>
 <p><strong>选择模式</strong>：选择 <strong>“为已有的 WireGuard 客户端添加 ”</strong> 或者 <strong>“安装 WARP Go”</strong>。</p>
 <p><strong>分流设置</strong>：选 <strong>“Socks5 代理模式”</strong>，端口设为 <code>40000</code>。</p>
 <p><strong>IP 选择</strong>：选 <strong>“双栈”</strong>。</p>
 <h3 id="手动开启端口转发确保客户端能连上">手动开启端口转发（确保客户端能连上）</h3>
 <p>直接在终端执行这两行，这不需要安装任何包，立即生效：</p>
-<p>Bash</p>
 <pre tabindex="0"><code># 核心：将 20000-30000 的流量转发到 443 端口
 iptables -t nat -A PREROUTING -p udp --dport 20000:30000 -j REDIRECT --to-ports 443
 
@@ -361,7 +356,6 @@ iptables -t nat -L PREROUTING -n -v --line-numbers #检查是否成功
 </code></pre><h3 id="系统内核优化-debianlinux">系统内核优化 (Debian/Linux)</h3>
 <p>既然你在 Debian 环境下运行，务必开启 <strong>BBR</strong> 以及优化 UDP 缓冲区，否则 Hysteria 的性能会受限于系统底层。</p>
 <p>在 <code>/etc/sysctl.conf</code> 中添加：</p>
-<p>Bash</p>
 <pre tabindex="0"><code># 开启 BBR
 net.core.default_qdisc = fq
 net.ipv4.tcp_congestion_control = bbr
@@ -432,7 +426,6 @@ netfilter-persistent save
 </code></pre><p>安装完成后，配置文件路径通常为：<code>/etc/sing-box/config.json</code></p>
 <h3 id="第二步生成必备密钥">第二步：生成必备密钥</h3>
 <p>Reality 需要一对 <strong>椭圆曲线公私钥</strong>。</p>
-<p>Bash</p>
 <pre tabindex="0"><code># 生成 Reality 密钥对
 sing-box generate reality-keypair
 # 它会输出 Private Key (私钥) 和 Public Key (公钥)
@@ -485,7 +478,7 @@ sing-box generate rand --hex 8
         &#34;172.16.0.2/32&#34;,
         &#34;warp获取到的那个ipv6地址/128&#34;
       ],
-      &#34;private_key&#34;: &#34;用warp那个bash api.sh -r生成的那个同上面hy2&#34;,
+      &#34;private_key&#34;: &#34;用warp那个 api.sh -r生成的那个同上面hy2&#34;,
       &#34;mtu&#34;: 1280,
       &#34;peers&#34;: [
         {

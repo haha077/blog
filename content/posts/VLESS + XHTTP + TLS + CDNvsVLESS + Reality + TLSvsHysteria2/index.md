@@ -69,7 +69,7 @@ title = '**VLESS + XHTTP + TLS + CDN**vs**VLESS + Reality + TLS**vs**Hysteria2**
 
 1. **安装 acme.sh:**
 
-   Bash
+   
 
    ```
    curl https://get.acme.sh | sh
@@ -77,7 +77,7 @@ title = '**VLESS + XHTTP + TLS + CDN**vs**VLESS + Reality + TLS**vs**Hysteria2**
 
 2. **申请证书（以 Cloudflare DNS 为例）:**
 
-   Bash
+   
 
    ```
    export CF_Email="你的邮箱"
@@ -87,7 +87,7 @@ title = '**VLESS + XHTTP + TLS + CDN**vs**VLESS + Reality + TLS**vs**Hysteria2**
 
 3. **安装证书到 Hysteria 目录：**
 
-   Bash
+   
 
    ```
    ~/.acme.sh/acme.sh --install-cert -d 你的域名 \
@@ -100,7 +100,7 @@ title = '**VLESS + XHTTP + TLS + CDN**vs**VLESS + Reality + TLS**vs**Hysteria2**
 
 ##### 安装hy2脚本
 
-bash <(curl -fsSL https://get.hy2.sh/)
+ <(curl -fsSL https://get.hy2.sh/)
 
 配置文件 (`/etc/hysteria/config.yaml`)：
 
@@ -193,17 +193,17 @@ Hy2 官方版在 v2rayN 中的配置非常简单：
 
 ###### 方法 A：使用单行脚本（推荐）
 
-Bash
+
 
 ```
-wget -N https://gitlab.com/fscarmen/warp/-/raw/main/api.sh && bash api.sh
+wget -N https://gitlab.com/fscarmen/warp/-/raw/main/api.sh &&  api.sh
 ```
 
 - 运行后按照提示选择“注册账号”。
 - 脚本会直接输出包含 `private_key` 和 `reserved` (通常是三个数字，如 `[123, 45, 67]`) 的信息。
 - **注意**：`Reserved` 值非常关键，如果填错，你的流量可能无法被 Cloudflare 正确识别。
 
-**运行脚本**：`wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh && bash menu.sh`
+**运行脚本**：`wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &&  menu.sh`
 
 **选择模式**：选择 **“为已有的 WireGuard 客户端添加 ”** 或者 **“安装 WARP Go”**。
 
@@ -215,7 +215,7 @@ wget -N https://gitlab.com/fscarmen/warp/-/raw/main/api.sh && bash api.sh
 
 直接在终端执行这两行，这不需要安装任何包，立即生效：
 
-Bash
+
 
 ```
 # 核心：将 20000-30000 的流量转发到 443 端口
@@ -241,7 +241,7 @@ iptables -t nat -L PREROUTING -n -v --line-numbers #检查是否成功
 
 在 `/etc/sysctl.conf` 中添加：
 
-Bash
+
 
 ```
 # 开启 BBR
@@ -314,7 +314,7 @@ curl -fsSL https://sing-box.app/install.sh | sh
 
 Reality 需要一对 **椭圆曲线公私钥**。
 
-Bash
+
 
 ```
 # 生成 Reality 密钥对
@@ -375,7 +375,7 @@ sing-box generate rand --hex 8
         "172.16.0.2/32",
         "warp获取到的那个ipv6地址/128"
       ],
-      "private_key": "用warp那个bash api.sh -r生成的那个同上面hy2",
+      "private_key": "用warp那个 api.sh -r生成的那个同上面hy2",
       "mtu": 1280,
       "peers": [
         {
