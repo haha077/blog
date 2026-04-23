@@ -33,3 +33,8 @@ img {
 .highlight > div::before {
   display: none !important;
 }
+
+.chroma .lntable::before,
+.chroma::before {
+  display: none !important;
+}
