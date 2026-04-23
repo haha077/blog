@@ -265,3 +265,290 @@ warp=on
 ```
 
 表示成功
+
+
+
+删除hy2，电信网对udp宽容点，广电网udp被封太严重了，实际测试下来速度非常慢！
+
+```
+systemctl stop hysteria-server.service
+systemctl disable hysteria-server.service
+rm -f /usr/local/bin/hysteria
+rm -rf /etc/hysteria
+rm -f /etc/systemd/system/hysteria2.service
+systemctl daemon-reload
+iptables -t nat -D PREROUTING -p udp --dport 20000:30000 -j REDIRECT --to-ports 443
+iptables -D INPUT -p udp --dport 443 -j ACCEPT
+netfilter-persistent save
+```
+
+------
+
+# 改用VLESS + Reality + 内置 WARP方案
+
+### 1，vps端内核确定
+
+| **特性**           | **Xray-core**                       | **Sing-box**                      |
+| ------------------ | ----------------------------------- | --------------------------------- |
+| **Reality 兼容性** | 原生首发，最稳定                    | 完美支持                          |
+| **WARP 集成方式**  | 通过 Outbound 配合 Wireguard 二进制 | 原生内置 Wireguard 模块，效率更高 |
+| **历史**           | 老                                  | 新                                |
+| **资源消耗**       | 较低                                | 极低                              |
+| **分流灵活性**     | 优秀                                | 极致（支持脚本化逻辑）            |
+
+综上所述，vps端决定采用singbox内核，注意vps端和客户端是不同的，客户端用v2rayn的xray内核就行了
+
+## 2，安装singbox
+
+https://sing-box.sagernet.org/installation/package-manager/
+
+官方说明文档
+
+```
+curl -fsSL https://sing-box.app/install.sh | sh
+```
+
+安装完成后，配置文件路径通常为：`/etc/sing-box/config.json`
+
+### 第二步：生成必备密钥
+
+Reality 需要一对 **椭圆曲线公私钥**。
+
+Bash
+
+```
+# 生成 Reality 密钥对
+sing-box generate reality-keypair
+# 它会输出 Private Key (私钥) 和 Public Key (公钥)
+# 另外生成一个 UUID 作为用户 ID
+sing-box generate uuid
+# 生成一个 Short ID（16位十六进制，如 62eb1d...）
+sing-box generate rand --hex 8
+```
+
+**请记录下这四个值，下面的config填入配置。**
+
+### 第三步：编写配置文件
+
+清空 `/etc/sing-box/config.json`，参考以下模板进行修改。
+
+```
+{
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-warp",
+        "type": "https",
+        "server": "1.1.1.1",
+        "server_port": 443,
+        "tls": {
+          "enabled": true,
+          "server_name": "cloudflare-dns.com"
+        },
+        "detour": "warp-out"
+      },
+      {
+        "tag": "dns-direct",
+        "type": "udp",
+        "server": "8.8.8.8",
+        "server_port": 53
+      }
+    ],
+    "rules": [
+      {
+        "rule_set": "geosite-cn",
+        "action": "route",
+        "server": "dns-direct"
+      }
+    ],
+    "final": "dns-warp"
+  },
+"endpoints": [
+    {
+      "type": "wireguard",
+      "tag": "warp-out",
+      "address": [
+        "172.16.0.2/32",
+        "warp获取到的那个ipv6地址/128"
+      ],
+      "private_key": "用warp那个bash api.sh -r生成的那个同上面hy2",
+      "mtu": 1280,
+      "peers": [
+        {
+          "address": "162.159.192.1",
+          "port": 2408,
+          "public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+          "allowed_ips": [
+            "0.0.0.0/0",
+            "::/0"
+          ],
+          "reserved": [warp的那个]
+        }
+      ],
+      "domain_resolver": "dns-direct"
+    }
+  ],
+  "inbounds": [
+    {
+      "type": "vless",
+      "tag": "vless-in",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [
+        {
+          "uuid": "获取到的那个uuid",
+          "flow": "xtls-rprx-vision"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "www.apple.com",
+        "reality": {
+          "enabled": true,
+          "handshake": {
+            "server": "www.apple.com",
+            "server_port": 443
+          },
+          "private_key": "sing-box generate reality-keypair生成的那个",
+          "short_id": [
+            "sing-box generate rand --hex 8生成的那个"
+          ]
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "rule_set": [
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "direct"
+      }
+    ],
+    "rules": [
+      {
+        "ip_is_private": true,
+        "action": "route",
+        "outbound": "block"
+      },
+      {
+        "rule_set": ["geoip-cn", "geosite-cn"],
+        "action": "route",
+        "outbound": "direct"
+      }
+    ],
+    "final": "warp-out",
+    "default_domain_resolver": "dns-direct",
+    "auto_detect_interface": true
+  }
+}
+```
+
+### 第四步：启动与检查
+
+1. **验证配置语法**： `sing-box check -c /etc/sing-box/config.json`
+2. **启动服务**： `systemctl enable --now sing-box`
+3. **查看状态**： `systemctl status sing-box`
+
+如果后续有修改配置，修改完后
+
+```
+systemctl restart sing-box
+```
+
+### 第五步：客户端v2rayn添加节点
+
+###### 1. 基础信息填写
+
+打开 v2rayN，点击 **“服务器”** -> **“添加 [VLESS] 服务器”**：
+
+- **别名**：自定义（例如：Racknerd-Reality）
+- **地址 (Address)**：填入你 VPS 的 **IP 地址**
+- **端口 (Port)**：`443`（需与服务端 inbound 端口一致）
+- **用户 ID (UUID)**：填入你在 `config.json` 中配置的那个 UUID
+- **流控 (flow)**：选择 **`xtls-rprx-vision`**（这是 Reality 的标配）
+
+------
+
+###### 2. 传输层与 Reality 关键配置
+
+这是最核心的部分，请切换到下方的 **“传输设置 (Transport)”** 栏目：
+
+- **传输协议**：选择 `tcp`
+- **伪装类型**：选择 `none`
+- **底层传输安全 (Stream Security)**：**必须选择 `reality`**
+
+此时会弹出 Reality 的专用输入框：
+
+- **SNI (Server Name)**：填入你服务端配置的域名（如 `www.microsoft.com`）
+
+- **Fingerprint (指纹)**：建议选择 **`chrome`**
+
+- **PublicKey (公钥)**：填入你服务端 `private_key` 对应的 **`public_key`**（注意：不是私钥，是配套生成的公钥）
+
+- **ShortId**：填入服务端 `short_id` 列表中的其中一个（例如 `你的ShortID`）
+
+- **SpiderX**：留空即可
+
+  ![image-20260423144938173](./image-20260423144938173.png)
+
+v2rayN 节点编辑界面的以下设置：
+
+| **设置项**          | **建议值**         | **原因**                             |
+| ------------------- | ------------------ | ------------------------------------ |
+| **流控 (Flow)**     | `xtls-rprx-vision` | **必须开启**，Reality 的核心安全特性 |
+| **Mux 多路复用**    | `关闭 / 不勾选`    | 避免干扰 Vision 流控，提高隐蔽性     |
+| **分片 (Fragment)** | `关闭`             | Reality 已足够隐蔽，无需额外干扰     |
+| **跳过证书验证**    | `false` (不勾选)   | Reality 不需要跳过验证，保持安全     |
+
+### 第六步：优化
+
+###### 1. 开启 BBR 加速 (必做)
+
+BBR 是 Google 开发的拥塞控制算法，能显著提升高延迟、丢包环境下的带宽利用率。这个同hy2上面的配置
+
+###### 2. 优化系统文件句柄限制
+
+在高并发连接时，Linux 默认的限制可能会导致掉线。
+
+- 编辑文件：`nano /etc/security/limits.conf`
+
+- 在末尾添加：
+
+  ```
+  * soft nofile 51200
+  * hard nofile 51200
+  ```
+
+###### 3. 检查系统时间同步
+
+Reality 协议对时间非常敏感，时间偏移超过 30 秒可能导致连接失败。
+
+```
+timedatectl set-ntp true
+date  # 确认时间是否与当前北京时间一致（UTC+8）
+```
+

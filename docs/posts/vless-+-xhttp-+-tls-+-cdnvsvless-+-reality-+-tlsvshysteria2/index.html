@@ -11,7 +11,7 @@
 特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
   <meta itemprop="datePublished" content="2026-04-20T14:29:06+08:00">
   <meta itemprop="dateModified" content="2026-04-20T14:29:06+08:00">
-  <meta itemprop="wordCount" content="530"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
+  <meta itemprop="wordCount" content="1031"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
   <meta property="og:description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
@@ -375,7 +375,306 @@ net.core.wmem_max = 16777216
 <pre tabindex="0"><code>ip=cloudflare的ip
 warp=on
 </code></pre><p>表示成功</p>
+<p>删除hy2，电信网对udp宽容点，广电网udp被封太严重了，实际测试下来速度非常慢！</p>
+<pre tabindex="0"><code>systemctl stop hysteria-server.service
+systemctl disable hysteria-server.service
+rm -f /usr/local/bin/hysteria
+rm -rf /etc/hysteria
+rm -f /etc/systemd/system/hysteria2.service
+systemctl daemon-reload
+iptables -t nat -D PREROUTING -p udp --dport 20000:30000 -j REDIRECT --to-ports 443
+iptables -D INPUT -p udp --dport 443 -j ACCEPT
+netfilter-persistent save
+</code></pre><hr>
+<h1 id="改用vless--reality--内置-warp方案">改用VLESS + Reality + 内置 WARP方案</h1>
+<h3 id="1vps端内核确定">1，vps端内核确定</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>Xray-core</strong></th>
+          <th><strong>Sing-box</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Reality 兼容性</strong></td>
+          <td>原生首发，最稳定</td>
+          <td>完美支持</td>
+      </tr>
+      <tr>
+          <td><strong>WARP 集成方式</strong></td>
+          <td>通过 Outbound 配合 Wireguard 二进制</td>
+          <td>原生内置 Wireguard 模块，效率更高</td>
+      </tr>
+      <tr>
+          <td><strong>历史</strong></td>
+          <td>老</td>
+          <td>新</td>
+      </tr>
+      <tr>
+          <td><strong>资源消耗</strong></td>
+          <td>较低</td>
+          <td>极低</td>
+      </tr>
+      <tr>
+          <td><strong>分流灵活性</strong></td>
+          <td>优秀</td>
+          <td>极致（支持脚本化逻辑）</td>
+      </tr>
+  </tbody>
+</table>
+<p>综上所述，vps端决定采用singbox内核，注意vps端和客户端是不同的，客户端用v2rayn的xray内核就行了</p>
+<h2 id="2安装singbox">2，安装singbox</h2>
+<p><a href="https://sing-box.sagernet.org/installation/package-manager/">https://sing-box.sagernet.org/installation/package-manager/</a></p>
+<p>官方说明文档</p>
+<pre tabindex="0"><code>curl -fsSL https://sing-box.app/install.sh | sh
+</code></pre><p>安装完成后，配置文件路径通常为：<code>/etc/sing-box/config.json</code></p>
+<h3 id="第二步生成必备密钥">第二步：生成必备密钥</h3>
+<p>Reality 需要一对 <strong>椭圆曲线公私钥</strong>。</p>
+<p>Bash</p>
+<pre tabindex="0"><code># 生成 Reality 密钥对
+sing-box generate reality-keypair
+# 它会输出 Private Key (私钥) 和 Public Key (公钥)
+# 另外生成一个 UUID 作为用户 ID
+sing-box generate uuid
+# 生成一个 Short ID（16位十六进制，如 62eb1d...）
+sing-box generate rand --hex 8
+</code></pre><p><strong>请记录下这四个值，下面的config填入配置。</strong></p>
+<h3 id="第三步编写配置文件">第三步：编写配置文件</h3>
+<p>清空 <code>/etc/sing-box/config.json</code>，参考以下模板进行修改。</p>
+<pre tabindex="0"><code>{
+  &#34;log&#34;: {
+    &#34;level&#34;: &#34;warn&#34;,
+    &#34;timestamp&#34;: true
+  },
+  &#34;dns&#34;: {
+    &#34;servers&#34;: [
+      {
+        &#34;tag&#34;: &#34;dns-warp&#34;,
+        &#34;type&#34;: &#34;https&#34;,
+        &#34;server&#34;: &#34;1.1.1.1&#34;,
+        &#34;server_port&#34;: 443,
+        &#34;tls&#34;: {
+          &#34;enabled&#34;: true,
+          &#34;server_name&#34;: &#34;cloudflare-dns.com&#34;
+        },
+        &#34;detour&#34;: &#34;warp-out&#34;
+      },
+      {
+        &#34;tag&#34;: &#34;dns-direct&#34;,
+        &#34;type&#34;: &#34;udp&#34;,
+        &#34;server&#34;: &#34;8.8.8.8&#34;,
+        &#34;server_port&#34;: 53
+      }
+    ],
+    &#34;rules&#34;: [
+      {
+        &#34;rule_set&#34;: &#34;geosite-cn&#34;,
+        &#34;action&#34;: &#34;route&#34;,
+        &#34;server&#34;: &#34;dns-direct&#34;
+      }
+    ],
+    &#34;final&#34;: &#34;dns-warp&#34;
+  },
+&#34;endpoints&#34;: [
+    {
+      &#34;type&#34;: &#34;wireguard&#34;,
+      &#34;tag&#34;: &#34;warp-out&#34;,
+      &#34;address&#34;: [
+        &#34;172.16.0.2/32&#34;,
+        &#34;warp获取到的那个ipv6地址/128&#34;
+      ],
+      &#34;private_key&#34;: &#34;用warp那个bash api.sh -r生成的那个同上面hy2&#34;,
+      &#34;mtu&#34;: 1280,
+      &#34;peers&#34;: [
+        {
+          &#34;address&#34;: &#34;162.159.192.1&#34;,
+          &#34;port&#34;: 2408,
+          &#34;public_key&#34;: &#34;bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=&#34;,
+          &#34;allowed_ips&#34;: [
+            &#34;0.0.0.0/0&#34;,
+            &#34;::/0&#34;
+          ],
+          &#34;reserved&#34;: [warp的那个]
+        }
+      ],
+      &#34;domain_resolver&#34;: &#34;dns-direct&#34;
+    }
+  ],
+  &#34;inbounds&#34;: [
+    {
+      &#34;type&#34;: &#34;vless&#34;,
+      &#34;tag&#34;: &#34;vless-in&#34;,
+      &#34;listen&#34;: &#34;::&#34;,
+      &#34;listen_port&#34;: 443,
+      &#34;users&#34;: [
+        {
+          &#34;uuid&#34;: &#34;获取到的那个uuid&#34;,
+          &#34;flow&#34;: &#34;xtls-rprx-vision&#34;
+        }
+      ],
+      &#34;tls&#34;: {
+        &#34;enabled&#34;: true,
+        &#34;server_name&#34;: &#34;www.apple.com&#34;,
+        &#34;reality&#34;: {
+          &#34;enabled&#34;: true,
+          &#34;handshake&#34;: {
+            &#34;server&#34;: &#34;www.apple.com&#34;,
+            &#34;server_port&#34;: 443
+          },
+          &#34;private_key&#34;: &#34;sing-box generate reality-keypair生成的那个&#34;,
+          &#34;short_id&#34;: [
+            &#34;sing-box generate rand --hex 8生成的那个&#34;
+          ]
+        }
+      }
+    }
+  ],
+  &#34;outbounds&#34;: [
+    {
+      &#34;type&#34;: &#34;direct&#34;,
+      &#34;tag&#34;: &#34;direct&#34;
+    },
+    {
+      &#34;type&#34;: &#34;block&#34;,
+      &#34;tag&#34;: &#34;block&#34;
+    }
+  ],
+  &#34;route&#34;: {
+    &#34;rule_set&#34;: [
+      {
+        &#34;tag&#34;: &#34;geoip-cn&#34;,
+        &#34;type&#34;: &#34;remote&#34;,
+        &#34;format&#34;: &#34;binary&#34;,
+        &#34;url&#34;: &#34;https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs&#34;,
+        &#34;download_detour&#34;: &#34;direct&#34;
+      },
+      {
+        &#34;tag&#34;: &#34;geosite-cn&#34;,
+        &#34;type&#34;: &#34;remote&#34;,
+        &#34;format&#34;: &#34;binary&#34;,
+        &#34;url&#34;: &#34;https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs&#34;,
+        &#34;download_detour&#34;: &#34;direct&#34;
+      }
+    ],
+    &#34;rules&#34;: [
+      {
+        &#34;ip_is_private&#34;: true,
+        &#34;action&#34;: &#34;route&#34;,
+        &#34;outbound&#34;: &#34;block&#34;
+      },
+      {
+        &#34;rule_set&#34;: [&#34;geoip-cn&#34;, &#34;geosite-cn&#34;],
+        &#34;action&#34;: &#34;route&#34;,
+        &#34;outbound&#34;: &#34;direct&#34;
+      }
+    ],
+    &#34;final&#34;: &#34;warp-out&#34;,
+    &#34;default_domain_resolver&#34;: &#34;dns-direct&#34;,
+    &#34;auto_detect_interface&#34;: true
+  }
+}
+</code></pre><h3 id="第四步启动与检查">第四步：启动与检查</h3>
+<ol>
+<li><strong>验证配置语法</strong>： <code>sing-box check -c /etc/sing-box/config.json</code></li>
+<li><strong>启动服务</strong>： <code>systemctl enable --now sing-box</code></li>
+<li><strong>查看状态</strong>： <code>systemctl status sing-box</code></li>
+</ol>
+<p>如果后续有修改配置，修改完后</p>
+<pre tabindex="0"><code>systemctl restart sing-box
+</code></pre><h3 id="第五步客户端v2rayn添加节点">第五步：客户端v2rayn添加节点</h3>
+<h6 id="1-基础信息填写">1. 基础信息填写</h6>
+<p>打开 v2rayN，点击 <strong>“服务器”</strong> -&gt; <strong>“添加 [VLESS] 服务器”</strong>：</p>
+<ul>
+<li><strong>别名</strong>：自定义（例如：Racknerd-Reality）</li>
+<li><strong>地址 (Address)</strong>：填入你 VPS 的 <strong>IP 地址</strong></li>
+<li><strong>端口 (Port)</strong>：<code>443</code>（需与服务端 inbound 端口一致）</li>
+<li><strong>用户 ID (UUID)</strong>：填入你在 <code>config.json</code> 中配置的那个 UUID</li>
+<li><strong>流控 (flow)</strong>：选择 <strong><code>xtls-rprx-vision</code></strong>（这是 Reality 的标配）</li>
+</ul>
+<hr>
+<h6 id="2-传输层与-reality-关键配置">2. 传输层与 Reality 关键配置</h6>
+<p>这是最核心的部分，请切换到下方的 <strong>“传输设置 (Transport)”</strong> 栏目：</p>
+<ul>
+<li><strong>传输协议</strong>：选择 <code>tcp</code></li>
+<li><strong>伪装类型</strong>：选择 <code>none</code></li>
+<li><strong>底层传输安全 (Stream Security)</strong>：<strong>必须选择 <code>reality</code></strong></li>
+</ul>
+<p>此时会弹出 Reality 的专用输入框：</p>
+<ul>
+<li>
+<p><strong>SNI (Server Name)</strong>：填入你服务端配置的域名（如 <code>www.microsoft.com</code>）</p>
+</li>
+<li>
+<p><strong>Fingerprint (指纹)</strong>：建议选择 <strong><code>chrome</code></strong></p>
+</li>
+<li>
+<p><strong>PublicKey (公钥)</strong>：填入你服务端 <code>private_key</code> 对应的 <strong><code>public_key</code></strong>（注意：不是私钥，是配套生成的公钥）</p>
+</li>
+<li>
+<p><strong>ShortId</strong>：填入服务端 <code>short_id</code> 列表中的其中一个（例如 <code>你的ShortID</code>）</p>
+</li>
+<li>
+<p><strong>SpiderX</strong>：留空即可</p>
+<p>
+  <img src="./image-20260423144938173.png" alt="image-20260423144938173">
 
+</p>
+</li>
+</ul>
+<p>v2rayN 节点编辑界面的以下设置：</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>设置项</strong></th>
+          <th><strong>建议值</strong></th>
+          <th><strong>原因</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>流控 (Flow)</strong></td>
+          <td><code>xtls-rprx-vision</code></td>
+          <td><strong>必须开启</strong>，Reality 的核心安全特性</td>
+      </tr>
+      <tr>
+          <td><strong>Mux 多路复用</strong></td>
+          <td><code>关闭 / 不勾选</code></td>
+          <td>避免干扰 Vision 流控，提高隐蔽性</td>
+      </tr>
+      <tr>
+          <td><strong>分片 (Fragment)</strong></td>
+          <td><code>关闭</code></td>
+          <td>Reality 已足够隐蔽，无需额外干扰</td>
+      </tr>
+      <tr>
+          <td><strong>跳过证书验证</strong></td>
+          <td><code>false</code> (不勾选)</td>
+          <td>Reality 不需要跳过验证，保持安全</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="第六步优化">第六步：优化</h3>
+<h6 id="1-开启-bbr-加速-必做">1. 开启 BBR 加速 (必做)</h6>
+<p>BBR 是 Google 开发的拥塞控制算法，能显著提升高延迟、丢包环境下的带宽利用率。这个同hy2上面的配置</p>
+<h6 id="2-优化系统文件句柄限制">2. 优化系统文件句柄限制</h6>
+<p>在高并发连接时，Linux 默认的限制可能会导致掉线。</p>
+<ul>
+<li>
+<p>编辑文件：<code>nano /etc/security/limits.conf</code></p>
+</li>
+<li>
+<p>在末尾添加：</p>
+<pre tabindex="0"><code>* soft nofile 51200
+* hard nofile 51200
+</code></pre></li>
+</ul>
+<h6 id="3-检查系统时间同步">3. 检查系统时间同步</h6>
+<p>Reality 协议对时间非常敏感，时间偏移超过 30 秒可能导致连接失败。</p>
+<pre tabindex="0"><code>timedatectl set-ntp true
+date  # 确认时间是否与当前北京时间一致（UTC+8）
+</code></pre>
     <hr class="footer-separator" />
 <div class="tags">
     
