@@ -554,3 +554,66 @@ timedatectl set-ntp true
 date  # 确认时间是否与当前北京时间一致（UTC+8）
 ```
 
+------
+
+上面VPS端优化完毕，对于客户端，之前是图省事直接用v2rayn，其实直接裸singbox内核，速度会更快，而且更省内存！v2rayn运行内存占用170m左右，已经相当优秀了，一些开源的singbox-gui工具会去到180m左右；而直接用cmd裸内核运行，内存占用才38m
+
+![image-20260522175633290](./image-20260522175633290.png)
+
+裸内核运行也很简单
+
+![image-20260522175800251](./image-20260522175800251.png)
+
+singbox官方github上下载好Windows版本，解压后，根据自己的节点，借助AI创建好config.json文件然后直接用cmd输入.\sing-box.exe run -c config.json指令运行即可，建议都用tun方式
+
+
+
+### 速度对比
+
+**理论上 TUN 更快**，但实际差距极小，可以忽略不计。
+
+| 对比项     | 系统代理                         | TUN                                   |
+| ---------- | -------------------------------- | ------------------------------------- |
+| 协议栈路径 | 应用 → Winsock → sing-box → 远端 | 应用 → 虚拟网卡驱动 → sing-box → 远端 |
+| 额外开销   | HTTP/SOCKS 协议解析              | 网卡驱动层转发                        |
+| 实际延迟差 | 基准                             | 理论少 1-2ms                          |
+| 吞吐量差   | 基准                             | 几乎相同                              |
+
+### 抓包防护对比
+
+| 对比项                | 系统代理                     | TUN                        |
+| --------------------- | ---------------------------- | -------------------------- |
+| 本机抓包（Wireshark） | 可以抓到进出 7890 端口的流量 | 更难定位，流量在驱动层处理 |
+| 流量特征              | 有明显的 SOCKS/HTTP 代理特征 | 透明转发，无代理协议特征   |
+| 防本地监控软件        | 较弱                         | 较强                       |
+
+ sing-box 需要 **WinTUN 驱动**才能创建虚拟网卡。
+
+### 检查当前错误
+
+先看日志里有没有报错：
+
+```powershell
+cd "C:\Program Files\sing-box"
+sing-box.exe run -c config.json
+```
+
+------
+
+### 安装 WinTUN 驱动
+
+powershell指令：下载 wintun.dll 放到 sing-box 目录：
+
+```powershell
+cd "C:\Program Files\sing-box"
+Invoke-WebRequest -Uri "https://www.wintun.net/builds/wintun-0.14.1.zip" -OutFile wintun.zip
+Expand-Archive wintun.zip -DestinationPath wintun-tmp
+copy "wintun-tmp\wintun\bin\amd64\wintun.dll" "C:\Program Files\sing-box\wintun.dll"
+Remove-Item wintun-tmp, wintun.zip -Recurse
+```
+
+确认文件存在：
+
+```powershell
+ls "C:\Program Files\sing-box\wintun.dll"
+```

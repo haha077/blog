@@ -11,7 +11,7 @@
 特征明显：虽然有跳频和 Padding，但 UDP 协议本身在防火墙眼中就是“高危行为”。 虽然 CDN（内容分发网络）和 WARP（Cloudflare 提供的 VPN 服务）都出自 Cloudflare 这样的大厂，且都涉及 IP 跳转，但它们在网络链路中的位置和作用完全相反。">
   <meta itemprop="datePublished" content="2026-04-20T14:29:06+08:00">
   <meta itemprop="dateModified" content="2026-04-20T14:29:06+08:00">
-  <meta itemprop="wordCount" content="1021"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
+  <meta itemprop="wordCount" content="1122"><meta property="og:url" content="https://haha077.github.io/blog/posts/vless-&#43;-xhttp-&#43;-tls-&#43;-cdnvsvless-&#43;-reality-&#43;-tlsvshysteria2/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="**VLESS &#43; XHTTP &#43; TLS &#43; CDN**vs**VLESS &#43; Reality &#43; TLS**vs**Hysteria2**">
   <meta property="og:description" content="上行cdn，下行reality，这里说的上行和下行是并非指我们常规理解的上传/下载速度，而是指数据包往返的路径（通道）选择。
@@ -671,7 +671,94 @@ sing-box generate rand --hex 8
 <p>Reality 协议对时间非常敏感，时间偏移超过 30 秒可能导致连接失败。</p>
 <pre tabindex="0"><code>timedatectl set-ntp true
 date  # 确认时间是否与当前北京时间一致（UTC+8）
-</code></pre>
+</code></pre><hr>
+<p>上面VPS端优化完毕，对于客户端，之前是图省事直接用v2rayn，其实直接裸singbox内核，速度会更快，而且更省内存！v2rayn运行内存占用170m左右，已经相当优秀了，一些开源的singbox-gui工具会去到180m左右；而直接用cmd裸内核运行，内存占用才38m</p>
+<p>
+  <img src="./image-20260522175633290.png" alt="image-20260522175633290">
+
+</p>
+<p>裸内核运行也很简单</p>
+<p>
+  <img src="./image-20260522175800251.png" alt="image-20260522175800251">
+
+</p>
+<p>singbox官方github上下载好Windows版本，解压后，根据自己的节点，借助AI创建好config.json文件然后直接用cmd输入.\sing-box.exe run -c config.json指令运行即可，建议都用tun方式</p>
+<h3 id="速度对比">速度对比</h3>
+<p><strong>理论上 TUN 更快</strong>，但实际差距极小，可以忽略不计。</p>
+<table>
+  <thead>
+      <tr>
+          <th>对比项</th>
+          <th>系统代理</th>
+          <th>TUN</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>协议栈路径</td>
+          <td>应用 → Winsock → sing-box → 远端</td>
+          <td>应用 → 虚拟网卡驱动 → sing-box → 远端</td>
+      </tr>
+      <tr>
+          <td>额外开销</td>
+          <td>HTTP/SOCKS 协议解析</td>
+          <td>网卡驱动层转发</td>
+      </tr>
+      <tr>
+          <td>实际延迟差</td>
+          <td>基准</td>
+          <td>理论少 1-2ms</td>
+      </tr>
+      <tr>
+          <td>吞吐量差</td>
+          <td>基准</td>
+          <td>几乎相同</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="抓包防护对比">抓包防护对比</h3>
+<table>
+  <thead>
+      <tr>
+          <th>对比项</th>
+          <th>系统代理</th>
+          <th>TUN</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>本机抓包（Wireshark）</td>
+          <td>可以抓到进出 7890 端口的流量</td>
+          <td>更难定位，流量在驱动层处理</td>
+      </tr>
+      <tr>
+          <td>流量特征</td>
+          <td>有明显的 SOCKS/HTTP 代理特征</td>
+          <td>透明转发，无代理协议特征</td>
+      </tr>
+      <tr>
+          <td>防本地监控软件</td>
+          <td>较弱</td>
+          <td>较强</td>
+      </tr>
+  </tbody>
+</table>
+<p>sing-box 需要 <strong>WinTUN 驱动</strong>才能创建虚拟网卡。</p>
+<h3 id="检查当前错误">检查当前错误</h3>
+<p>先看日志里有没有报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd <span style="color:#e6db74">&#34;C:\Program Files\sing-box&#34;</span>
+</span></span><span style="display:flex;"><span>sing-box.exe run -c config.json
+</span></span></code></pre></div><hr>
+<h3 id="安装-wintun-驱动">安装 WinTUN 驱动</h3>
+<p>powershell指令：下载 wintun.dll 放到 sing-box 目录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd <span style="color:#e6db74">&#34;C:\Program Files\sing-box&#34;</span>
+</span></span><span style="display:flex;"><span>Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://www.wintun.net/builds/wintun-0.14.1.zip&#34;</span> -OutFile wintun.zip
+</span></span><span style="display:flex;"><span>Expand-Archive wintun.zip -DestinationPath wintun-tmp
+</span></span><span style="display:flex;"><span>copy <span style="color:#e6db74">&#34;wintun-tmp\wintun\bin\amd64\wintun.dll&#34;</span> <span style="color:#e6db74">&#34;C:\Program Files\sing-box\wintun.dll&#34;</span>
+</span></span><span style="display:flex;"><span>Remove-Item wintun-tmp, wintun.zip -Recurse
+</span></span></code></pre></div><p>确认文件存在：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ls <span style="color:#e6db74">&#34;C:\Program Files\sing-box\wintun.dll&#34;</span>
+</span></span></code></pre></div>
     <hr class="footer-separator" />
 <div class="tags">
     
