@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Haha&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 11 May 2026 11:01:20 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jun 2026 16:45:12 +0800</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自建rustdesk</title>
+      <link>https://haha077.github.io/blog/posts/%E8%87%AA%E5%BB%BArustdesk/</link>
+      <pubDate>Sun, 21 Jun 2026 16:45:12 +0800</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E8%87%AA%E5%BB%BArustdesk/</guid>
+      <description>&lt;h2 id=&#34;服务器端配置&#34;&gt;服务器端配置&lt;/h2&gt;&#xA;&lt;p&gt;1：服务端rustdesk-serv，直接去github根据vps系统下载好对应的文件，给好权限，用systemd方式运行比较稳定，debian配置如下&lt;/p&gt;&#xA;&lt;h4 id=&#34;1-创建-hbbs-服务文件&#34;&gt;1. 创建 hbbs 服务文件&lt;/h4&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo nano /etc/systemd/system/rustdesk-hbbs.service&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;粘贴以下内容（&lt;strong&gt;根据你的实际路径修改&lt;/strong&gt;），默认是21118端口，这里是修改自定义端口版本：&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Unit]&#xD;&#xA;Description=RustDesk ID/Rendezvous Server (hbbs)&#xD;&#xA;After=network-online.target&#xD;&#xA;Wants=network-online.target&#xD;&#xA;&#xD;&#xA;[Service]&#xD;&#xA;Type=simple&#xD;&#xA;User=root&#xD;&#xA;WorkingDirectory=/etc/rustdest&#xD;&#xA;ExecStart=/etc/rustdest/hbbs -p 31116 -r vps-ip或域名:31117&#xD;&#xA;Restart=always&#xD;&#xA;RestartSec=5s&#xD;&#xA;LimitNOFILE=65535&#xD;&#xA;MemoryMax=512M&#xD;&#xA;&#xD;&#xA;[Install]&#xD;&#xA;WantedBy=multi-user.target&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;2-创建-hbbr-服务文件&#34;&gt;2. 创建 hbbr 服务文件&lt;/h4&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo nano /etc/systemd/system/rustdesk-hbbr.service&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;粘贴以下内容：&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Unit]&#xD;&#xA;Description=RustDesk Relay Server (hbbr)&#xD;&#xA;After=network-online.target&#xD;&#xA;Wants=network-online.target&#xD;&#xA;&#xD;&#xA;[Service]&#xD;&#xA;Type=simple&#xD;&#xA;User=root&#xD;&#xA;WorkingDirectory=/etc/rustdest&#xD;&#xA;ExecStart=/etc/rustdest/hbbr -p 31117&#xD;&#xA;Restart=always&#xD;&#xA;RestartSec=5s&#xD;&#xA;LimitNOFILE=65535&#xD;&#xA;&#xD;&#xA;[Install]&#xD;&#xA;WantedBy=multi-user.target&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;3将创建好的文件移动到&#34;&gt;3，将创建好的文件移动到&lt;/h4&gt;&#xA;&lt;p&gt;mv /etc/rustdest/rustdesk-hbbs.service /etc/systemd/system/&lt;/p&gt;&#xA;&lt;p&gt;mv /etc/rustdest/rustdesk-hbbr.service /etc/systemd/system/&lt;/p&gt;&#xA;&lt;p&gt;# 启用并立即启动&lt;/p&gt;&#xA;&lt;p&gt;sudo systemctl enable &amp;ndash;now rustdesk-hbbs&lt;/p&gt;&#xA;&lt;p&gt;sudo systemctl enable &amp;ndash;now rustdesk-hbbr&lt;/p&gt;</description>
+    </item>
     <item>
       <title>净水方案</title>
       <link>https://haha077.github.io/blog/posts/%E5%87%80%E6%B0%B4%E6%96%B9%E6%A1%88/</link>
