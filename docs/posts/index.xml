@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Haha&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 Jul 2026 16:24:26 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2026 15:25:01 +0800</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自制家庭服务器机架防尘罩方案</title>
+      <link>https://haha077.github.io/blog/posts/%E8%87%AA%E5%88%B6%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9C%BA%E6%9E%B6%E9%98%B2%E5%B0%98%E7%BD%A9%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Thu, 23 Jul 2026 15:25:01 +0800</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E8%87%AA%E5%88%B6%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9C%BA%E6%9E%B6%E9%98%B2%E5%B0%98%E7%BD%A9%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;p&gt;生物箱，死贵，而且还需要单独的进风和抽风两台风机，抽风机侧还要加过滤棉；思来想去，发现性价比最高的方案是，直接把整个房间作为生物箱，门作为进出风口，增加过滤网就行，利用自然风进行热交换&lt;/p&gt;&#xA;&lt;p&gt;门处用两层网，一层是蚊帐（32-40目，隔绝大灰尘和蚊虫）二层之前是用无纺布，实测效果不好，一来是大风不起作用，二来是不耐用，现在测试&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;80～100 目尼龙防尘网（黑色更好）&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;推荐 80-120 目左右的尼龙网，最佳平衡是 100 目左右。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;为什么选这个目数&#34;&gt;为什么选这个目数？&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;目数越高&lt;/strong&gt;，网孔越小（防尘越好），但&lt;strong&gt;通风阻力越大&lt;/strong&gt;（影响散热）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;目数越低&lt;/strong&gt;，通风好，但大颗粒灰尘容易通过。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;常见目数对应孔径近似值&#34;&gt;常见目数对应孔径（近似值）：&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;40-60 目&lt;/strong&gt;：孔径 ~0.25-0.4mm，通风优秀，但防尘一般（适合对灰尘不敏感的环境）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;80-100 目&lt;/strong&gt;：孔径 ~0.15-0.2mm，&lt;strong&gt;最推荐的平衡点&lt;/strong&gt;。能挡住大多数可见灰尘、毛发、宠物毛等，同时通风阻力可接受。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;120-160 目&lt;/strong&gt;：孔径 ~0.1-0.125mm，防尘效果更好（挡细小浮尘），但通风会明显变差，有些人反馈“会挡风”，需要更频繁清洗。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;电脑机箱防尘主要对付&lt;strong&gt;可见灰尘 + 毛发 + 部分 PM2.5 级浮尘&lt;/strong&gt;，不需要像工业过滤那么细。很多商业尼龙防尘滤网（包括知名品牌）都采用类似规格，实际使用反馈良好，不会明显导致温度升高&lt;/p&gt;&#xA;&lt;p&gt;&#xD;&#xA;  &lt;img src=&#34;./image-20260723161227839.png&#34; alt=&#34;image-20260723161227839&#34;&gt;&#xD;&#xA;&#xD;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;然后对于极细小的灰尘吸附，必须在机架的底部铺一层地毯！（圈丝地垫地毯最好，但太贵；其次是工业短毛针刺地毯 / 展览地毯，性价比很高，吸尘同时还能防潮）&lt;/p&gt;&#xA;&lt;p&gt;&#xD;&#xA;  &lt;img src=&#34;./image-20260723161329036.png&#34; alt=&#34;image-20260723161329036&#34;&gt;&#xD;&#xA;&#xD;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;如果还需要进一步防尘防护，可以做一个木架，罩上蚊帐，实测40目的蚊帐完全不会影响散热&lt;/p&gt;</description>
+    </item>
     <item>
       <title>家庭服务器ATS-ups方案</title>
       <link>https://haha077.github.io/blog/posts/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8ats-ups%E6%96%B9%E6%A1%88/</link>
