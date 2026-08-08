@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>hp omen 台式外接显卡延长线升级bios注意事项 - Haha&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="hp omen 台式外接显卡延长线升级bios注意事项">
+  <meta itemprop="description" content="1：下载好对应序列号版本的bios文件，我的SSID是886C
+2：直接安装.exe到c盘，安装完后会自动弹出程序界面，选择1直接update，程序会自动在启动盘创建好efi开机引导程序，直接重启后可以自动升级
+3：由于是z590主板，是pcie4.0，而我用的是pcie3.0的延长线外接的显卡，所以刷完bios后，需要把pcie speed从gen4或者auto（默认）改为gen3
+由于hp的bios是封闭式，在官方bios config里面是没有修改的地方，需要从2那里选择3把刷机的bin文件解包出来，然后用专用工具提取出PE32文件
+0x7对应是在这个项目里面Sastep
+里面就是bios的config了，搜索“pcie speed”会发现有4个值
+0x34D、0x34E(我后来用排除法确定这个值是对应我显卡pcie x16那个插槽)、0x34F、0x350都是有auto，gen1-gen4的，这里其中一个对应的显卡pciex16的插槽，另外3个值则是属于PCH
+graph TD;PCH--&gt;pciex1短插槽0x34D假设;PCH--&gt;主板上另外两个M.2固态位0x34f和0x350;四条通道分别改动后的后果 0x34E（CPU‑X16 显卡插槽）
+正是你需要的，强制 Gen3，适配你的 Gen3 显卡延长线，3090 完美点亮；显卡游戏性能损失仅有 1‑3%，日常完全感知不到差距。（如果不改，原来默认是auto，gen4卡从gen3，会黑屏）
+0x34D（PCH 南桥 X1 插槽）
+Z590 南桥通道原生最高只能跑 PCIe3.0，就算 Auto 模式也跑不到 4.0。你手动改成 Gen3 等于维持原有规格，无线网卡、声卡、拓展卡零影响。
+0x34F、0x350（两条 M.2 固态通道）
+其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候可以用usb采集卡外接安卓手机来显示修改bios或者把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1）
+附上RU.EXE修改方法 1：首先进到ru界面，会有个欢迎界面，按“空格”跳过
+2：然后按 alt和=键进入，bios功能菜单
+3：功能菜单翻页是page down键和page up键
+4：找到确定的功能值后，按enter进入到功能修改界面，这个界面下项目值的翻页是ctrl&#43;page down/up
+5：项目值的修改是根据记录好的地址值VarStoreInfo (VarOffset/VarName)定位到修改的项目，然后按enter键，然后直接输入要修改的值，修改好之后再按一下enter。
+6：所有的项目都修改好，最后CTRL&#43;W，写入保存！">
+  <meta itemprop="datePublished" content="2026-08-08T11:30:09+08:00">
+  <meta itemprop="dateModified" content="2026-08-08T11:30:09+08:00">
+  <meta itemprop="wordCount" content="74"><meta property="og:url" content="https://haha077.github.io/blog/posts/hp-omen-%E5%8F%B0%E5%BC%8F%E5%A4%96%E6%8E%A5%E6%98%BE%E5%8D%A1%E5%BB%B6%E9%95%BF%E7%BA%BF%E5%8D%87%E7%BA%A7bios%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+  <meta property="og:site_name" content="Haha&#39;s Blog">
+  <meta property="og:title" content="hp omen 台式外接显卡延长线升级bios注意事项">
+  <meta property="og:description" content="1：下载好对应序列号版本的bios文件，我的SSID是886C
+2：直接安装.exe到c盘，安装完后会自动弹出程序界面，选择1直接update，程序会自动在启动盘创建好efi开机引导程序，直接重启后可以自动升级
+3：由于是z590主板，是pcie4.0，而我用的是pcie3.0的延长线外接的显卡，所以刷完bios后，需要把pcie speed从gen4或者auto（默认）改为gen3
+由于hp的bios是封闭式，在官方bios config里面是没有修改的地方，需要从2那里选择3把刷机的bin文件解包出来，然后用专用工具提取出PE32文件
+0x7对应是在这个项目里面Sastep
+里面就是bios的config了，搜索“pcie speed”会发现有4个值
+0x34D、0x34E(我后来用排除法确定这个值是对应我显卡pcie x16那个插槽)、0x34F、0x350都是有auto，gen1-gen4的，这里其中一个对应的显卡pciex16的插槽，另外3个值则是属于PCH
+graph TD;PCH--&gt;pciex1短插槽0x34D假设;PCH--&gt;主板上另外两个M.2固态位0x34f和0x350;四条通道分别改动后的后果 0x34E（CPU‑X16 显卡插槽）
+正是你需要的，强制 Gen3，适配你的 Gen3 显卡延长线，3090 完美点亮；显卡游戏性能损失仅有 1‑3%，日常完全感知不到差距。（如果不改，原来默认是auto，gen4卡从gen3，会黑屏）
+0x34D（PCH 南桥 X1 插槽）
+Z590 南桥通道原生最高只能跑 PCIe3.0，就算 Auto 模式也跑不到 4.0。你手动改成 Gen3 等于维持原有规格，无线网卡、声卡、拓展卡零影响。
+0x34F、0x350（两条 M.2 固态通道）
+其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候可以用usb采集卡外接安卓手机来显示修改bios或者把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1）
+附上RU.EXE修改方法 1：首先进到ru界面，会有个欢迎界面，按“空格”跳过
+2：然后按 alt和=键进入，bios功能菜单
+3：功能菜单翻页是page down键和page up键
+4：找到确定的功能值后，按enter进入到功能修改界面，这个界面下项目值的翻页是ctrl&#43;page down/up
+5：项目值的修改是根据记录好的地址值VarStoreInfo (VarOffset/VarName)定位到修改的项目，然后按enter键，然后直接输入要修改的值，修改好之后再按一下enter。
+6：所有的项目都修改好，最后CTRL&#43;W，写入保存！">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-08-08T11:30:09+08:00">
+    <meta property="article:modified_time" content="2026-08-08T11:30:09+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hp omen 台式外接显卡延长线升级bios注意事项">
+  <meta name="twitter:description" content="1：下载好对应序列号版本的bios文件，我的SSID是886C
+2：直接安装.exe到c盘，安装完后会自动弹出程序界面，选择1直接update，程序会自动在启动盘创建好efi开机引导程序，直接重启后可以自动升级
+3：由于是z590主板，是pcie4.0，而我用的是pcie3.0的延长线外接的显卡，所以刷完bios后，需要把pcie speed从gen4或者auto（默认）改为gen3
+由于hp的bios是封闭式，在官方bios config里面是没有修改的地方，需要从2那里选择3把刷机的bin文件解包出来，然后用专用工具提取出PE32文件
+0x7对应是在这个项目里面Sastep
+里面就是bios的config了，搜索“pcie speed”会发现有4个值
+0x34D、0x34E(我后来用排除法确定这个值是对应我显卡pcie x16那个插槽)、0x34F、0x350都是有auto，gen1-gen4的，这里其中一个对应的显卡pciex16的插槽，另外3个值则是属于PCH
+graph TD;PCH--&gt;pciex1短插槽0x34D假设;PCH--&gt;主板上另外两个M.2固态位0x34f和0x350;四条通道分别改动后的后果 0x34E（CPU‑X16 显卡插槽）
+正是你需要的，强制 Gen3，适配你的 Gen3 显卡延长线，3090 完美点亮；显卡游戏性能损失仅有 1‑3%，日常完全感知不到差距。（如果不改，原来默认是auto，gen4卡从gen3，会黑屏）
+0x34D（PCH 南桥 X1 插槽）
+Z590 南桥通道原生最高只能跑 PCIe3.0，就算 Auto 模式也跑不到 4.0。你手动改成 Gen3 等于维持原有规格，无线网卡、声卡、拓展卡零影响。
+0x34F、0x350（两条 M.2 固态通道）
+其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候可以用usb采集卡外接安卓手机来显示修改bios或者把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1）
+附上RU.EXE修改方法 1：首先进到ru界面，会有个欢迎界面，按“空格”跳过
+2：然后按 alt和=键进入，bios功能菜单
+3：功能菜单翻页是page down键和page up键
+4：找到确定的功能值后，按enter进入到功能修改界面，这个界面下项目值的翻页是ctrl&#43;page down/up
+5：项目值的修改是根据记录好的地址值VarStoreInfo (VarOffset/VarName)定位到修改的项目，然后按enter键，然后直接输入要修改的值，修改好之后再按一下enter。
+6：所有的项目都修改好，最后CTRL&#43;W，写入保存！">
+<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
+
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="https://haha077.github.io/blog/css/dark.css" />
+	<script src="https://haha077.github.io/blog/js/main.js"></script>
+	<link rel="stylesheet" href="/blog/css/custom.css">
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<div class="dark-toggle-block">
+			<button id="dark-mode-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
+				🌙
+			</button>
+		</div>
+
+<body>
+
+
+	
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://haha077.github.io/blog/">
+				<img src="/blog/avatar.png" alt="Haha&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://haha077.github.io/blog/">Haha&#39;s Blog</a></h1>
+	<div class="site-description"><p>勤思、反思、三思；勤动、无为、恬淡</p><nav class="nav social">
+			<ul class="flat"><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+    <div class="post-header">
+    
+    <div class="meta">
+        <div class="date">
+            <span class="day">08</span>
+            <span class="rest">Aug 2026</span>
+        </div>
+    </div>
+    
+    <div class="matter">
+        <h1 class="title">hp omen 台式外接显卡延长线升级bios注意事项</h1>
+    </div>
+</div>
+
+
+    
+    
+    <p>1：下载好对应序列号版本的bios文件，我的SSID是886C</p>
+<p>2：直接安装.exe到c盘，安装完后会自动弹出程序界面，选择1直接update，程序会自动在启动盘创建好efi开机引导程序，直接重启后可以自动升级</p>
+<p>3：由于是z590主板，是pcie4.0，而我用的是pcie3.0的延长线外接的显卡，所以刷完bios后，需要把pcie speed从gen4或者auto（默认）改为gen3</p>
+<p>由于hp的bios是封闭式，在官方bios config里面是没有修改的地方，需要从2那里选择3把刷机的bin文件解包出来，然后用专用工具提取出PE32文件</p>
+<p>
+  <img src="./image-20260808113647951.png" alt="image-20260808113647951">
+
+</p>
+<p>
+  <img src="./image-20260808115748063.png" alt="image-20260808115748063">
+
+</p>
+<p>0x7对应是在这个项目里面Sastep</p>
+<p>
+  <img src="./wps1.jpg" alt="img">
+
+</p>
+<p>里面就是bios的config了，搜索“pcie speed”会发现有4个值</p>
+<p>0x34D、<strong>0x34E(我后来用排除法确定这个值是对应我显卡pcie x16那个插槽)</strong>、0x34F、0x350都是有auto，gen1-gen4的，这里其中一个对应的显卡pciex16的插槽，另外3个值则是属于PCH</p>
+<pre class="mermaid">graph TD;
+PCH--&gt;pciex1短插槽0x34D假设;
+PCH--&gt;主板上另外两个M.2固态位0x34f和0x350;
+  </pre>
+
+<h2 id="四条通道分别改动后的后果">四条通道分别改动后的后果</h2>
+<ol>
+<li>
+<p><strong>0x34E（CPU‑X16 显卡插槽）</strong></p>
+<p>正是你需要的，强制 Gen3，适配你的 Gen3 显卡延长线，3090 完美点亮；显卡游戏性能损失仅有 1‑3%，日常完全感知不到差距。（如果不改，原来默认是auto，gen4卡从gen3，会黑屏）</p>
+</li>
+<li>
+<p><strong>0x34D（PCH 南桥 X1 插槽）</strong></p>
+<p>Z590 南桥通道<strong>原生最高只能跑 PCIe3.0</strong>，就算 Auto 模式也跑不到 4.0。你手动改成 Gen3 等于维持原有规格，<strong>无线网卡、声卡、拓展卡零影响</strong>。</p>
+</li>
+<li>
+<p><strong>0x34F、0x350（两条 M.2 固态通道）</strong></p>
+</li>
+</ol>
+<ul>
+<li>其中一条是<strong>CPU 直连 M.2（原生 PCIe4.0）</strong>：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩；</li>
+<li>另一条是<strong>PCH 南桥 M.2</strong>：出厂天生就是 Gen3，修改参数没有任何变化。</li>
+</ul>
+<p>所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候可以用usb采集卡外接安卓手机来显示修改bios或者把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1）</p>
+<hr>
+<h3 id="附上ruexe修改方法">附上RU.EXE修改方法</h3>
+<p>1：首先进到ru界面，会有个欢迎界面，按“空格”跳过</p>
+<p>2：然后按 alt和=键进入，bios功能菜单</p>
+<p>3：功能菜单翻页是page down键和page up键</p>
+<p>4：找到确定的功能值后，按enter进入到功能修改界面，这个界面下项目值的翻页是ctrl+page down/up</p>
+<p>5：项目值的修改是根据记录好的地址值VarStoreInfo (VarOffset/VarName)定位到修改的项目，然后按enter键，然后直接输入要修改的值，修改好之后再按一下enter。</p>
+<p>6：所有的项目都修改好，最后CTRL+W，写入保存！</p>
+<p>7：然后alt+q，退出ru</p>
+<p>8：然后返回efi，halt关机，然后再重新开机即可</p>
+<hr>
+<p>HP的bios里面的advance那里的内存超频尽量不要动，这里有个很坑的BUG，你一点进入那里，切换了设置，哪怕最后不保存，也到导致内存的超频参数全部变更，像我这种插满4根内存条的情况，动了变更，很可能会导致白屏，只能拆机清CMOS</p>
+
+    <hr class="footer-separator" />
+<div class="tags">
+    
+    
+    
+</div>
+
+
+
+<div class="back">
+    <a href="https://haha077.github.io/blog/"><span aria-hidden="true">← Back</span></a>
+</div>
+
+
+<div class="back">
+    
+</div>
+
+</div>
+
+	</div>
+	
+	<div class="container wrapper" style="margin-top: 2em;">
+		<section id="comments">
+			<script src="https://utteranc.es/client.js"
+					repo="haha077/blog"
+					issue-term="pathname"
+					theme="github-light"
+					crossorigin="anonymous"
+					async>
+			</script>
+		</section>
+	</div>
+
+	<canvas id="bigbang-canvas" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -1000;
+"></canvas>
+
+<script>
+(() => {
+  const canvas = document.getElementById('bigbang-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * devicePixelRatio;
+    canvas.height = H * devicePixelRatio;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  class Particle {
+    constructor() {
+      this.x = W/2;
+      this.y = H/2;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.radius = Math.random() * 3 + 1;
+      this.speed = Math.random() * 4 + 2;
+      this.angle = Math.random() * Math.PI * 2;
+      this.vx = Math.cos(this.angle) * this.speed;
+      this.vy = Math.sin(this.angle) * this.speed;
+      this.life = 60 + Math.random() * 30;
+      this.alpha = 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life--;
+      this.alpha = this.life / 90;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${hexToRgb(this.color)},${this.alpha.toFixed(2)})`;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex.slice(1), 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `${r},${g},${b}`;
+  }
+
+  function createParticles(num) {
+    for(let i=0; i<num; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach((p, i) => {
+      p.update();
+      p.draw();
+      if (p.life <= 0) particles.splice(i, 1);
+    });
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  
+  setInterval(() => {
+    createParticles(80);
+  }, 10000);
+
+  animate();
+})();
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+    const root = document.documentElement;
+
+    function initDarkMode() {
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        root.classList.add('dark');
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (root.classList.contains('dark')) {
+        root.classList.remove('dark');
+        localStorage.setItem('darkMode', 'disabled');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('darkMode', 'enabled');
+      }
+    });
+
+    initDarkMode();
+  });
+</script>
+
+<div class="footer wrapper">
+	<nav class="nav">
+		<div>2026 </div>
+		
+	</nav>
+</div>
+
+<script type="module">
+	import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs";
+
+	const getMermaidTheme = () => {
+		const savedScheme = localStorage.getItem('scheme');
+		if (savedScheme) {
+			return savedScheme === 'dark' ? 'dark' : 'default';
+		}
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+	};
+
+	mermaid.initialize({
+		startOnLoad: true,
+		theme: getMermaidTheme()
+	});
+
+	const applyTheme = () => {
+		const newTheme = getMermaidTheme();
+		mermaid.initialize({
+			startOnLoad: true,
+			theme: newTheme
+		});
+	};
+
+	window.addEventListener('storage', (event) => {
+		if (event.key === 'scheme') {
+			applyTheme();
+		}
+	});
+
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+</script>
+
+
+	
+</body>
+
+</html>
