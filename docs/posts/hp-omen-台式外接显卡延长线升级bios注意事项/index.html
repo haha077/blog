@@ -17,16 +17,13 @@ graph TD;PCH--&gt;pciex1短插槽0x34D假设;PCH--&gt;主板上另外两个M.2
 0x34D（PCH 南桥 X1 插槽）
 Z590 南桥通道原生最高只能跑 PCIe3.0，就算 Auto 模式也跑不到 4.0。你手动改成 Gen3 等于维持原有规格，无线网卡、声卡、拓展卡零影响。
 0x34F、0x350（两条 M.2 固态通道）
-其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候可以用usb采集卡外接安卓手机来显示修改bios或者把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1）
+其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1），注意这个时候用usb采集卡接手机显示的方案也是行不通的，PCIe Gen4 链路训练失败，显卡在开机 BIOS 阶段就没正常工作，显卡视频口根本没有发出任何画面信号，采集卡输入就是空的，手机这边只会黑屏无信号，看不到 BIOS 界面。
 附上RU.EXE修改方法 1：首先进到ru界面，会有个欢迎界面，按“空格”跳过
 2：然后按 alt和=键进入，bios功能菜单
-3：功能菜单翻页是page down键和page up键
-4：找到确定的功能值后，按enter进入到功能修改界面，这个界面下项目值的翻页是ctrl&#43;page down/up
-5：项目值的修改是根据记录好的地址值VarStoreInfo (VarOffset/VarName)定位到修改的项目，然后按enter键，然后直接输入要修改的值，修改好之后再按一下enter。
-6：所有的项目都修改好，最后CTRL&#43;W，写入保存！">
+3：功能菜单翻页是page down键和page up键">
   <meta itemprop="datePublished" content="2026-08-08T11:30:09+08:00">
   <meta itemprop="dateModified" content="2026-08-08T11:30:09+08:00">
-  <meta itemprop="wordCount" content="74"><meta property="og:url" content="https://haha077.github.io/blog/posts/hp-omen-%E5%8F%B0%E5%BC%8F%E5%A4%96%E6%8E%A5%E6%98%BE%E5%8D%A1%E5%BB%B6%E9%95%BF%E7%BA%BF%E5%8D%87%E7%BA%A7bios%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+  <meta itemprop="wordCount" content="80"><meta property="og:url" content="https://haha077.github.io/blog/posts/hp-omen-%E5%8F%B0%E5%BC%8F%E5%A4%96%E6%8E%A5%E6%98%BE%E5%8D%A1%E5%BB%B6%E9%95%BF%E7%BA%BF%E5%8D%87%E7%BA%A7bios%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
   <meta property="og:site_name" content="Haha&#39;s Blog">
   <meta property="og:title" content="hp omen 台式外接显卡延长线升级bios注意事项">
   <meta property="og:description" content="1：下载好对应序列号版本的bios文件，我的SSID是886C
@@ -41,13 +38,10 @@ graph TD;PCH--&gt;pciex1短插槽0x34D假设;PCH--&gt;主板上另外两个M.2
 0x34D（PCH 南桥 X1 插槽）
 Z590 南桥通道原生最高只能跑 PCIe3.0，就算 Auto 模式也跑不到 4.0。你手动改成 Gen3 等于维持原有规格，无线网卡、声卡、拓展卡零影响。
 0x34F、0x350（两条 M.2 固态通道）
-其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候可以用usb采集卡外接安卓手机来显示修改bios或者把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1）
+其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1），注意这个时候用usb采集卡接手机显示的方案也是行不通的，PCIe Gen4 链路训练失败，显卡在开机 BIOS 阶段就没正常工作，显卡视频口根本没有发出任何画面信号，采集卡输入就是空的，手机这边只会黑屏无信号，看不到 BIOS 界面。
 附上RU.EXE修改方法 1：首先进到ru界面，会有个欢迎界面，按“空格”跳过
 2：然后按 alt和=键进入，bios功能菜单
-3：功能菜单翻页是page down键和page up键
-4：找到确定的功能值后，按enter进入到功能修改界面，这个界面下项目值的翻页是ctrl&#43;page down/up
-5：项目值的修改是根据记录好的地址值VarStoreInfo (VarOffset/VarName)定位到修改的项目，然后按enter键，然后直接输入要修改的值，修改好之后再按一下enter。
-6：所有的项目都修改好，最后CTRL&#43;W，写入保存！">
+3：功能菜单翻页是page down键和page up键">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -68,13 +62,10 @@ graph TD;PCH--&gt;pciex1短插槽0x34D假设;PCH--&gt;主板上另外两个M.2
 0x34D（PCH 南桥 X1 插槽）
 Z590 南桥通道原生最高只能跑 PCIe3.0，就算 Auto 模式也跑不到 4.0。你手动改成 Gen3 等于维持原有规格，无线网卡、声卡、拓展卡零影响。
 0x34F、0x350（两条 M.2 固态通道）
-其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候可以用usb采集卡外接安卓手机来显示修改bios或者把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1）
+其中一条是CPU 直连 M.2（原生 PCIe4.0）：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩； 另一条是PCH 南桥 M.2：出厂天生就是 Gen3，修改参数没有任何变化。 所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1），注意这个时候用usb采集卡接手机显示的方案也是行不通的，PCIe Gen4 链路训练失败，显卡在开机 BIOS 阶段就没正常工作，显卡视频口根本没有发出任何画面信号，采集卡输入就是空的，手机这边只会黑屏无信号，看不到 BIOS 界面。
 附上RU.EXE修改方法 1：首先进到ru界面，会有个欢迎界面，按“空格”跳过
 2：然后按 alt和=键进入，bios功能菜单
-3：功能菜单翻页是page down键和page up键
-4：找到确定的功能值后，按enter进入到功能修改界面，这个界面下项目值的翻页是ctrl&#43;page down/up
-5：项目值的修改是根据记录好的地址值VarStoreInfo (VarOffset/VarName)定位到修改的项目，然后按enter键，然后直接输入要修改的值，修改好之后再按一下enter。
-6：所有的项目都修改好，最后CTRL&#43;W，写入保存！">
+3：功能菜单翻页是page down键和page up键">
 <link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://haha077.github.io/blog/css/main.css" />
 
@@ -176,7 +167,7 @@ PCH--&gt;主板上另外两个M.2固态位0x34f和0x350;
 <li>其中一条是<strong>CPU 直连 M.2（原生 PCIe4.0）</strong>：如果你装了高端 4.0 固态（980Pro、SN850 这类 7000MB/s 级别），会被强制锁在 PCIe3.0，顺序读写上限从 7000MB/s 降到 3500MB/s，速度腰斩；</li>
 <li>另一条是<strong>PCH 南桥 M.2</strong>：出厂天生就是 Gen3，修改参数没有任何变化。</li>
 </ul>
-<p>所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候可以用usb采集卡外接安卓手机来显示修改bios或者把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1）</p>
+<p>所以找出了0x34E后，只改他即可，值从来的00改为03即可；这个需要提前准备好，因为刷完bios后，原来的显示器接rtx3090不会亮屏，这时候把dp从3090拔下转接到3080显卡上也能点亮（我机器的pcie x1插槽有转usb-riser x1），注意这个时候用usb采集卡接手机显示的方案也是行不通的，PCIe Gen4 链路训练失败，显卡在开机 BIOS 阶段就没正常工作，显卡视频口根本没有发出任何画面信号，采集卡输入就是空的，手机这边只会黑屏无信号，看不到 BIOS 界面。</p>
 <hr>
 <h3 id="附上ruexe修改方法">附上RU.EXE修改方法</h3>
 <p>1：首先进到ru界面，会有个欢迎界面，按“空格”跳过</p>
