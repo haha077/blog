@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Haha&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 22 Aug 2026 16:51:24 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 23 Oct 2026 15:45:08 +0800</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows局域网共享设置</title>
+      <link>https://haha077.github.io/blog/posts/windows%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB%E8%AE%BE%E7%BD%AE/</link>
+      <pubDate>Fri, 23 Oct 2026 15:45:08 +0800</pubDate>
+      <guid>https://haha077.github.io/blog/posts/windows%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB%E8%AE%BE%E7%BD%AE/</guid>
+      <description>&lt;p&gt;①右键需要共享的盘或者文件夹 → 属性 → 共享 → 高级共享。&lt;/p&gt;&#xA;&lt;p&gt;勾选“共享此文件夹”。&lt;/p&gt;&#xA;&lt;p&gt;进入“权限”，给用于访问的账户授予读取权限；如果需要写入则授予相应权限。&lt;/p&gt;&#xA;&lt;p&gt;②目标pc尝试访问&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;\\192.168.X.X&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时通常会提示密码或者权限不足拒绝&lt;/p&gt;&#xA;&lt;p&gt;③源电脑上操作：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;打开高级共享设置&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;控制面板 → 网络和 Internet → 网络和共享中心 → 更改高级共享设置。&lt;/p&gt;&#xA;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;关闭密码保护共享&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;展开“所有网络”，找到“密码保护的共享”，选择“关闭密码保护共享”，然后保存更改。&lt;/p&gt;&#xA;&lt;p&gt;3.打开“控制面板 → 网络和共享中心 → 更改高级共享设置”。&lt;/p&gt;&#xA;&lt;p&gt;4.在当前网络配置文件中开启：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;网络发现&lt;/li&gt;&#xA;&lt;li&gt;文件和打印机共享&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在“所有网络”中，可以暂时关闭“密码保护的共享”进行测试。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;④在源电脑设置共享权限&lt;/p&gt;&#xA;&lt;p&gt;假设 LOL 文件夹在源电脑的 &lt;code&gt;H:\LOLBackup\lol&lt;/code&gt;。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;右键 &lt;code&gt;H:\LOLBackup\lol&lt;/code&gt; → 属性 → 共享 → 高级共享。&lt;/li&gt;&#xA;&lt;li&gt;勾选“共享此文件夹”，共享名填写 &lt;code&gt;LOL&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;li&gt;点击“权限”，添加 &lt;code&gt;Everyone&lt;/code&gt;，允许“读取”。&lt;/li&gt;&#xA;&lt;li&gt;再进入“安全”选项卡，点击“编辑” → “添加”，输入 &lt;code&gt;Everyone&lt;/code&gt; → 检查名称 → 确定。&lt;/li&gt;&#xA;&lt;li&gt;在 NTFS 权限中，允许 &lt;code&gt;Everyone&lt;/code&gt; 读取和执行、列出文件夹内容、读取，然后应用。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;注意：共享权限和“安全”选项卡的 NTFS 权限是两套独立权限，两边都必须允许读取。只给共享权限还不够。&lt;/p&gt;&#xA;&lt;p&gt;⑤重复执行②此时应该可以正常访问打开&lt;/p&gt;</description>
+    </item>
     <item>
       <title>PC主板BIOS更新原则</title>
       <link>https://haha077.github.io/blog/posts/%E9%9D%9E%E5%BF%85%E8%A6%81%E4%B8%8D%E6%9B%B4%E6%96%B0bios/</link>
