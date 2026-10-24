@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Haha&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 24 Oct 2026 10:04:52 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 11:27:39 +0800</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用虚拟显示器节省购买显卡欺骗器的钱</title>
+      <link>https://haha077.github.io/blog/posts/%E7%94%A8%E8%99%9A%E6%8B%9F%E6%98%BE%E7%A4%BA%E5%99%A8%E8%8A%82%E7%9C%81%E8%B4%AD%E4%B9%B0%E6%98%BE%E5%8D%A1%E6%AC%BA%E9%AA%97%E5%99%A8%E7%9A%84%E9%92%B1/</link>
+      <pubDate>Sat, 24 Oct 2026 11:27:39 +0800</pubDate>
+      <guid>https://haha077.github.io/blog/posts/%E7%94%A8%E8%99%9A%E6%8B%9F%E6%98%BE%E7%A4%BA%E5%99%A8%E8%8A%82%E7%9C%81%E8%B4%AD%E4%B9%B0%E6%98%BE%E5%8D%A1%E6%AC%BA%E9%AA%97%E5%99%A8%E7%9A%84%E9%92%B1/</guid>
+      <description>&lt;p&gt;由于某些场景，日常server只需要用uu远程访问，不需要接显示器，rtx显卡不接显示器会罢工不工作，以前的做法是购买一个显卡欺骗器，下面是直接通过软件的方案实现无需购买任何多余东西&lt;/p&gt;&#xA;&lt;p&gt;1：安装VDDhttps://github.com/VirtualDrivers/Virtual-Display-Driver&lt;/p&gt;&#xA;&lt;p&gt;2：主板要开启4g enable那个选项&lt;/p&gt;&#xA;&lt;p&gt;一般完成1,2步然后重启后，就能正常工作了，如果不行，再执行下面的3后再重启&lt;/p&gt;&#xA;&lt;p&gt;3：解除 Windows 的多卡资源限制（修改注册表）&lt;/p&gt;&#xA;&lt;p&gt;Windows 偶尔会限制非主显卡（仅用于计算或挖矿/渲染的副卡）加载特定的显示驱动。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;按下 &lt;code&gt;Win + R&lt;/code&gt; 输入 &lt;code&gt;regedit&lt;/code&gt; 打开注册表。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;导航至：&lt;code&gt;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;展开后会看到 &lt;code&gt;0000&lt;/code&gt;、&lt;code&gt;0001&lt;/code&gt;、&lt;code&gt;0002&lt;/code&gt; 等子项，它们分别对应你的 3 张显卡和虚拟显卡。&lt;/p&gt;&#xA;&lt;p&gt;依次点击这些子项，检查右侧的 &lt;code&gt;DriverDesc&lt;/code&gt; 确认对应哪张卡&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;添加强制值&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在右侧的空白处&lt;strong&gt;右键点击&lt;/strong&gt; -&amp;gt; 选择 &lt;strong&gt;新建&lt;/strong&gt; -&amp;gt; 选择 &lt;strong&gt;DWORD (32 位)值&lt;/strong&gt;。&lt;/li&gt;&#xA;&lt;li&gt;将该新建的值重命名为以下常见修复名称（请根据您的驱动说明决定，若为解除副卡显示限制，通常输入）：&#xA;&lt;code&gt;DisplayNotSupported&lt;/code&gt; 或 &lt;code&gt;AdapterType&lt;/code&gt; 或 &lt;code&gt;GridLicensedFeatures&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;双击这个新创建的值，将“数值数据”修改为 &lt;code&gt;0&lt;/code&gt;（有些项目如多卡混合强制渲染则需设为 &lt;code&gt;1&lt;/code&gt;），基数选择 &lt;strong&gt;十六进制&lt;/strong&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;</description>
+    </item>
     <item>
       <title>升级bios注意</title>
       <link>https://haha077.github.io/blog/posts/%E5%8D%87%E7%BA%A7bios%E6%B3%A8%E6%84%8F/</link>
