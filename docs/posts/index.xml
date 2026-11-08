@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Haha&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 30 Oct 2026 17:51:47 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 11:40:57 +0800</lastBuildDate>
     <atom:link href="https://haha077.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>win引导全解</title>
+      <link>https://haha077.github.io/blog/posts/win%E5%BC%95%E5%AF%BC%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Sun, 08 Nov 2026 11:40:57 +0800</pubDate>
+      <guid>https://haha077.github.io/blog/posts/win%E5%BC%95%E5%AF%BC%E5%85%A8%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;一原理与关系诠释&#34;&gt;一：原理与关系诠释&lt;/h1&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;*UEFI 和 Legacy 是主板的两种“底层引导模式”*&lt;/strong&gt;&lt;/em&gt;，它们决定了主板开机后如何识别硬盘并启动操作系统。&lt;/p&gt;&#xA;&lt;p&gt;UEFI 与 Legacy 的核心区别&lt;/p&gt;&#xA;&lt;p&gt;可以用&lt;strong&gt;老式按键机&lt;/strong&gt;与&lt;strong&gt;现代智能机&lt;/strong&gt;来类比它们：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;特性&lt;/th&gt;&#xA;          &lt;th&gt;Legacy (传统模式)&lt;/th&gt;&#xA;          &lt;th&gt;UEFI (现代模式)&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;画面与操作&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;只能显示蓝底白字的简陋 BIOS 界面，只能用键盘操作。&lt;/td&gt;&#xA;          &lt;td&gt;支持高清图形界面，支持&lt;strong&gt;鼠标点击&lt;/strong&gt;，甚至支持中文。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;开机速度&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;strong&gt;慢&lt;/strong&gt;。开机要逐个自检所有硬件，耗时长。&lt;/td&gt;&#xA;          &lt;td&gt;&lt;strong&gt;快&lt;/strong&gt;。支持“秒级”快启，自检与系统引导同步进行。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;搭配的硬盘分区表&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;必须搭配 &lt;strong&gt;MBR&lt;/strong&gt; 格式（最大仅支持 2TB 硬盘，最多 4 个主分区）。&lt;/td&gt;&#xA;          &lt;td&gt;必须搭配 &lt;strong&gt;GPT&lt;/strong&gt; 格式（支持 2TB 以上大硬盘，分区数量几乎无限制）。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;安全机制&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;没有安全验证，容易在开机前被引导区病毒拦截。&lt;/td&gt;&#xA;          &lt;td&gt;带有 &lt;strong&gt;Secure Boot（安全启动）&lt;/strong&gt;，防止恶意软件篡改引导。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;&lt;strong&gt;EFI 是“硬件和主板层面的规范”，而 BCD 是“Windows 操作系统层面的菜单配置数据库”。&lt;/strong&gt; 在现代电脑中，它们是&lt;strong&gt;上下级合作关系&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;[开机] -&amp;gt; 1. 主板加载 UEFI 固件 -&amp;gt; 2. 固件读取硬盘的 ESP 隐藏分区 -&amp;gt; 3. 执行微软的引导程序 (bootmgfw.efi) -&amp;gt; 4. 该程序读取 BCD 菜单 -&amp;gt; 5. 屏幕显示系统选择列表 -&amp;gt; [进入 PE/Windows]&lt;/p&gt;</description>
+    </item>
     <item>
       <title>一根被台风打断的木头如何活出第二世</title>
       <link>https://haha077.github.io/blog/posts/%E4%B8%80%E6%A0%B9%E8%A2%AB%E5%8F%B0%E9%A3%8E%E6%89%93%E6%96%AD%E7%9A%84%E6%9C%A8%E5%A4%B4%E5%A6%82%E4%BD%95%E6%B4%BB%E5%87%BA%E7%AC%AC%E4%BA%8C%E4%B8%96/</link>
